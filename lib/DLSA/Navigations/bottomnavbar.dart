@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
+import 'package:vidyaamrutham/Login/login.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     // Add your pages here
     // Example: HomePage(), ProfilePage(), SettingsPage()
+    DLSADashboard(),LoginPage()
   ];
 
   @override
