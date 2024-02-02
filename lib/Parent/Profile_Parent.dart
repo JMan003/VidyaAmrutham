@@ -31,7 +31,7 @@ class ProfileState extends State<Profile> {
               )),
         ),
         backgroundColor: Color.fromARGB(255, 2, 23, 45),
-        bottomNavigationBar: BottomNavigationBar(items: [
+        bottomNavigationBar: BottomNavigationBar(items: const [
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
@@ -65,7 +65,7 @@ class ProfileState extends State<Profile> {
           child: Column(children: [
             SizedBox(
               height: 77,
-              child: Row(children: [
+              child: Row(children: const [
                 Icon(
                   Icons.man,
                   color: Color.fromRGBO(255, 255, 255, 0.855),

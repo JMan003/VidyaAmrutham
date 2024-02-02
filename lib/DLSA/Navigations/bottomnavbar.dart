@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
+import 'package:vidyaamrutham/DLSA/sample_feature/sample_item_list_view.dart';
+import 'package:vidyaamrutham/Login/login.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -11,6 +14,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     // Add your pages here
     // Example: HomePage(), ProfilePage(), SettingsPage()
+    DLSADashboard(),SampleItemListView()
   ];
 
   @override
@@ -21,6 +25,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
           setState(() {
             _currentIndex = index;
           });
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) =>  _pages[_currentIndex]
+          )
+          );
         },
         items: [
           BottomNavigationBarItem(

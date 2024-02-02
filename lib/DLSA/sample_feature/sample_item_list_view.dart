@@ -19,6 +19,17 @@ class SampleItemListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
         title: const Text('Vidyamruthum'),
         actions: [
           IconButton(
@@ -35,8 +46,8 @@ class SampleItemListView extends StatelessWidget {
       body: ListView(
         children: [
           // User profile icon and name
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -121,7 +132,7 @@ class SampleItemListView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListTile(
-                      title: Text(
+                      title: const Text(
                         'Number of Students',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -141,10 +152,10 @@ class SampleItemListView extends StatelessWidget {
                                 9, // Adjust the width of the circular border as needed
                           ),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(
-                                8.0), // Adjust padding as needed
+                            padding:
+                                EdgeInsets.all(8.0), // Adjust padding as needed
                             child: Text(
                               '99',
                               textAlign: TextAlign.center,
@@ -157,7 +168,7 @@ class SampleItemListView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 8.0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                       //leading:Icon(Icons.star), // Replace with your desired leading icon
                       //trailing: Icon(Icons.arrow_forward), // Replace with your desired trailing icon
                       onTap: () {
@@ -167,14 +178,14 @@ class SampleItemListView extends StatelessWidget {
                   ),
 
                   //Vertical Divider
-                  VerticalDivider(
+                  const VerticalDivider(
                     width: 1,
                     color: Colors.white,
                   ),
 
                   Expanded(
                     child: ListTile(
-                      title: Text(
+                      title: const Text(
                         'Number of Mentors',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -194,10 +205,10 @@ class SampleItemListView extends StatelessWidget {
                                 9, // Adjust the width of the circular border as needed
                           ),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(
-                                8.0), // Adjust padding as needed
+                            padding:
+                                EdgeInsets.all(8.0), // Adjust padding as needed
                             child: Text(
                               '103',
                               textAlign: TextAlign.center,
@@ -210,7 +221,7 @@ class SampleItemListView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 8.0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                       onTap: () {
                         // Handle onTap action
                       },
@@ -222,7 +233,7 @@ class SampleItemListView extends StatelessWidget {
           ),
 
           //Student and Mentor List Card
-          SizedBox(height: 15.0),
+          const SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -233,13 +244,13 @@ class SampleItemListView extends StatelessWidget {
                 ),
                 child: Container(
                   width: 150.0, // Adjust the width of each card as needed
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
                         //add functionality
                       },
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -272,13 +283,13 @@ class SampleItemListView extends StatelessWidget {
                 ),
                 child: Container(
                   width: 150.0, // Adjust the width of each card as needed
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
                         //add functionality
                       },
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
