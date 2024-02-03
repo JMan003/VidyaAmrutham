@@ -20,9 +20,9 @@ class ParentDashboard extends StatelessWidget {
     containerHeight = screenHeight * 0.67;
     double screenWidth = MediaQuery.of(context).size.width;
     innerContainerWidth = screenWidth * 0.75;
-    innerContainerHeight = screenHeight * 0.2;
+    innerContainerHeight = screenHeight * 0.16;
     controllerContainerWidth = screenWidth * 0.85;
-    controllerContainerHeight = screenHeight * 0.28;
+    controllerContainerHeight = screenHeight * 0.27;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,6 +38,13 @@ class ParentDashboard extends StatelessWidget {
           },
         ),
         title: const Text('Vidyaamrutham'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              // Add the required functionality here
+            },
+          ),],
       ),
       body: Column(
         children: [
@@ -145,7 +152,7 @@ class ParentDashboard extends StatelessWidget {
                               )),
                           Padding(
                               padding: const EdgeInsets.only(
-                                top: 20,
+                                top: 10,
                                 left: 20,
                               ),
                               child: Row(
@@ -180,7 +187,7 @@ class ParentDashboard extends StatelessWidget {
                               )),
                           Padding(
                               padding: const EdgeInsets.only(
-                                top: 20,
+                                top: 10,
                                 left: 20,
                               ),
                               child: Row(
@@ -215,7 +222,7 @@ class ParentDashboard extends StatelessWidget {
                               )),
                           Padding(
                               padding: const EdgeInsets.only(
-                                top: 20,
+                                top: 10,
                                 left: 20,
                               ),
                               child: Row(
@@ -254,7 +261,7 @@ class ParentDashboard extends StatelessWidget {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 40, left: 50),
+                  padding: EdgeInsets.only(top: 20, left: 50),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
