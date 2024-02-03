@@ -3,7 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
 import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
-import 'package:vidyaamrutham/Parent/Profile_Parent.dart';
+import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
+import 'package:vidyaamrutham/Parent/ParentProfile.dart';
 
 void main() {
   runApp(Vidyaamrutham());
@@ -15,9 +16,9 @@ class Vidyaamrutham extends StatelessWidget {
     return MaterialApp(
       title: 'TaskAid',
       theme: ThemeData(
-        primaryColor: const Color(0xFF030426), // Adjusted primary color
+        primaryColor: const Color(0x00000001A1C29), // Adjusted primary color
         scaffoldBackgroundColor:
-            const Color(0xFF030426), // Scaffold background color
+            const Color(0x00000001A1C29), // Scaffold background color
         brightness: Brightness.dark, // Use dark theme
 
         hintColor: Colors.blue, // Accent color for text fields
@@ -87,7 +88,7 @@ class _AppLoaderState extends State<AppLoader> {
   choosePage(String role) {
     
     if (role == "parent") {
-      return Profile();
+      return ParentDashboard();
     // } else if (role == "teacher") {
     //   return TeacherDashboardPage();
     // } else if (role == "student") {

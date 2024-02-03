@@ -4,6 +4,7 @@ import '../Navigations/bottomnavbar.dart';
 import '../settings/settings_view.dart';
 
 double? containerHeight, innerContainerWidth, innerContainerHeight;
+int _currentIndex = 0;
 
 /// Displays a list of SampleItems.
 class DLSADashboard extends StatelessWidget {
@@ -129,7 +130,7 @@ class DLSADashboard extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(context),
     );
   }
 }
@@ -180,7 +181,7 @@ Widget buildElevatedListTile() {
                             '99',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Color.fromARGB(255, 255, 255, 255),
                               fontSize:
                                   25, // Customize the text color inside the circular border
                             ),
@@ -340,4 +341,35 @@ Widget buildElevatedListTile() {
       ],
     ),
   );
+}
+
+Widget BottomNavBar(context){
+  return BottomNavigationBar(
+        onTap: (index) {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) =>  DLSADashboard()
+          )
+          );
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Meeting Notes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard_outlined),
+            label: 'Controls',
+          ),
+        ],
+        selectedItemColor: Color.fromARGB(255, 235, 143, 57),
+    );
 }
