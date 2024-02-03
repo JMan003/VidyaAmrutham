@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
 import 'package:vidyaamrutham/DLSA/sample_feature/sample_item_list_view.dart';
+import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -121,7 +124,48 @@ class _LoginPageState extends State<LoginPage> {
         context,
         MaterialPageRoute(builder: (context) => const DLSADashboard()),
       );
-    } else {
+    }
+    else if (usernameController.text == "teacher" &&
+        passwordController.text == "teacher") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SampleItemListView()),
+      );
+    }
+    else if (usernameController.text == "parent" &&
+        passwordController.text == "parent") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ParentDashboard()),
+      );
+    }
+    else if (usernameController.text == "mentor" &&
+        passwordController.text == "mentor") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SampleItemListView()),
+      );
+    }
+    else if (usernameController.text == "student" &&
+        passwordController.text == "student") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SampleItemListView()),
+      );
+    }
+    else {
       showDialog(
           context: context,
           builder: (BuildContext context) {
