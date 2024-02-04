@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/Parent/ParentControls.dart';
+import 'package:vidyaamrutham/Parent/ParentNotes.dart';
 import 'package:vidyaamrutham/Parent/ParentProfile.dart';
+import 'package:vidyaamrutham/components/Drawer.dart';
+
 
 double? containerHeight,
     innerContainerWidth,
@@ -46,6 +50,7 @@ class ParentDashboard extends StatelessWidget {
             },
           ),],
       ),
+      drawer: CommonDrawer(),
       body: Column(
         children: [
           Padding(
@@ -491,10 +496,12 @@ Widget BottomNavBar(context) {
               MaterialPageRoute(builder: (context) => ParentProfile()));
           break;
         case 2:
-          Navigator.pushNamed(context, '/meetingNotes');
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ParentNotes()));
           break;
         case 3:
-          Navigator.pushNamed(context, '/controls');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ParentControls()));
           break;
       }
     },
