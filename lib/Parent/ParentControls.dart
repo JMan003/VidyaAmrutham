@@ -6,7 +6,7 @@ import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 3;
 double? containerHeight, innerContainerWidth, innerContainerHeight;
-
+final String studentName = "";
 class ParentControls extends StatelessWidget {
   const ParentControls({super.key});
 
