@@ -13,6 +13,10 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
+final String studentName = "Student's Name";
+final String studentAdmissionNo = "123456";
+final String studentGrade = "Grade 10";
+final String studentClass = "10 A";
 
 class ParentNotes extends StatefulWidget {
   const ParentNotes({Key? key}) : super(key: key);
@@ -21,29 +25,20 @@ class ParentNotes extends StatefulWidget {
 }
 
 class ProfileState extends State<ParentNotes> {
-
   final myController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    myController.addListener(_saveLatestValue);
+    SharedPreferences.getInstance().then((prefs) {
+      final notes = prefs.getString('notes') ?? '';
+      myController.text = notes;
+    });
   }
 
   @override
   void dispose() {
-    myController.removeListener(_saveLatestValue);
-    myController.dispose();
     super.dispose();
-  }
-
-  _saveLatestValue() {
-    final enteredText = myController.text;
-    // Save enteredText to your storage. For example, to shared preferences or to your database.
-    print("Latest entered text: $enteredText");
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setString('notes', enteredText);
-    });
   }
 
   @override
@@ -95,7 +90,7 @@ class ProfileState extends State<ParentNotes> {
                   studentName,
                   style: const TextStyle(
                       fontSize: 23,
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.bold),
                 )
               ],
@@ -144,38 +139,45 @@ class ProfileState extends State<ParentNotes> {
                 return Column(
                   children: [
                     Container(
-                        width: innerContainerWidth,
-                        height: innerContainerHeight,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFF7F2FA),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          shadows: const [
-                            BoxShadow(
-                              color: Color(0x26000000),
-                              blurRadius: 3,
-                              offset: Offset(0, 1),
-                              spreadRadius: 1,
-                            ),
-                            BoxShadow(
-                              color: Color(0x4C000000),
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
-                              spreadRadius: 0,
-                            )
-                          ],
+                      width: innerContainerWidth,
+                      height: innerContainerHeight,
+                      decoration: ShapeDecoration(
+                        color: const Color(0xFFF7F2FA),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Padding(
+                        shadows: const [
+                          BoxShadow(
+                            color: Color(0x26000000),
+                            blurRadius: 3,
+                            offset: Offset(0, 1),
+                            spreadRadius: 1,
+                          ),
+                          BoxShadow(
+                            color: Color(0x4C000000),
+                            blurRadius: 2,
+                            offset: Offset(0, 1),
+                            spreadRadius: 0,
+                          )
+                        ],
+                      ),
+                      child: Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: TextField(
                             maxLines: null,
                             controller: myController,
                             decoration: const InputDecoration(
                               labelText: 'Enter your text',
+                              border: InputBorder.none,
                             ),
-                          ),
-                        )),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          )),
+                    ),
+                    ElevatedButton(
+                        onPressed: saveText, child: const Text('Save')),
                   ],
                 );
               }),
@@ -183,6 +185,26 @@ class ProfileState extends State<ParentNotes> {
       ]),
       bottomNavigationBar: BottomNavBar(context),
     );
+  }
+
+  void saveText() {
+    final enteredText = myController.text;
+    // Save enteredText to your storage. For example, to shared preferences or to your database.
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('notes', enteredText);
+    });
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: const Text('Saved'),
+      content: const Text('Your notes have been saved.'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    ));
   }
 }
 
@@ -200,8 +222,8 @@ Widget BottomNavBar(context) {
               MaterialPageRoute(builder: (context) => const ParentProfile()));
           break;
         case 2:
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const ParentNotes()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ParentNotes()));
           break;
         case 3:
           Navigator.push(context,
