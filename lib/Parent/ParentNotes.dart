@@ -134,7 +134,7 @@ class ProfileState extends State<ParentNotes> {
                 height: 20,
               ),
               Scrollable(viewportBuilder:
-                  (BuildContext context, ViewportOffset position) {
+                  (BuildContext context, ViewportOffset position) { 
                 // Remove the 'Set<MaterialState> states' parameter
                 return Column(
                   children: [

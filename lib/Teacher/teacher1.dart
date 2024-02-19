@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/Teacher/TeacherAttendanceSelection.dart';
 
 class Teacher1 extends StatefulWidget {
   const Teacher1({super.key});
@@ -64,7 +65,15 @@ class _Teacher1State extends State<Teacher1> {
       ),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const ShapeDecoration(
+          color: Color(0xFFD9D9D9),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(63),
+              topRight: Radius.circular(63),
+            ),
+          ),
+        ),
         child: Column(children: [
           SizedBox(
             height: 50,
@@ -74,6 +83,7 @@ class _Teacher1State extends State<Teacher1> {
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w300,
+              color: Colors.black,
             ),
           ),
           SizedBox(
@@ -85,7 +95,7 @@ class _Teacher1State extends State<Teacher1> {
             decoration: BoxDecoration(
                 color: Color(0xFFF3EDF7),
                 borderRadius: BorderRadius.all(Radius.circular(16)),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(blurRadius: 2, blurStyle: BlurStyle.outer)
                 ]),
             child: Column(
@@ -94,14 +104,22 @@ class _Teacher1State extends State<Teacher1> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TeacherAttendanceSelection()));
+                      },
                       icon: Container(
                         child: Image.asset("assets/images/Attendance.png"),
                       ),
                       iconSize: 60,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                      },
                       icon: Container(
                         child: Image.asset("assets/images/Pass Fail.png"),
                       ),
@@ -118,26 +136,26 @@ class _Teacher1State extends State<Teacher1> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.only(left: 9),
+                      padding: EdgeInsets.only(left: 9),
                       child: Text(
                         "Attendence",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 19),
+                      padding: EdgeInsets.only(right: 19),
                       child: Text(
                         "Result",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 17),
+                      padding: EdgeInsets.only(right: 17),
                       child: Text(
                         "Exams",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     )
                   ],
@@ -169,26 +187,26 @@ class _Teacher1State extends State<Teacher1> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.only(left: 9),
+                      padding: EdgeInsets.only(left: 9),
                       child: Text(
                         "Announcement",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 19),
+                      padding: EdgeInsets.only(right: 19),
                       child: Text(
                         "Assignment",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 17),
+                      padding: EdgeInsets.only(right: 17),
                       child: Text(
                         "Notice\nBoard",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     )
                   ],
@@ -221,26 +239,26 @@ class _Teacher1State extends State<Teacher1> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.only(left: 9),
+                      padding: EdgeInsets.only(left: 9),
                       child: Text(
                         "Grievances",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: 10),
                       child: Text(
                         "Subjects",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 11),
+                      padding: EdgeInsets.only(right: 11),
                       child: Text(
                         "Students",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     )
                   ],
@@ -258,7 +276,7 @@ class _Teacher1State extends State<Teacher1> {
             });
           },
           backgroundColor: Colors.black,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,

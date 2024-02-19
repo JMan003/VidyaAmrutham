@@ -27,7 +27,7 @@ class ProfileState extends State<ParentProfile> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     var data = await http
-        .get(Uri.parse('http://192.168.0.207:3001/parent/student/$username'));
+        .get(Uri.parse('http://192.168.137.34:3001/parent/student/$username'));
     var jsonData = json.decode(data.body);
 
     print(jsonData['result']['name']);

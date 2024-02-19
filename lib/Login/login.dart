@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
 import 'package:vidyaamrutham/DLSA/sample_feature/sample_item_list_view.dart';
 import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
+import 'package:vidyaamrutham/Teacher/teacher1.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -122,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     var password = passwordController.text;
     if(role == 'parent'){
       final response = await http.post(
-          Uri.parse('http://192.168.0.207:3001/parent/login'),
+          Uri.parse('http://192.168.137.34:3001/parent/login'),
           body: {'username': username, 'password': password}); 
       if (response.statusCode == 200) {
         prefs.setString('username', username);
@@ -148,9 +149,37 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     }
+    else if(role == 'teacher'){
+      final response = await http.post(
+          Uri.parse('http://192.168.0.115:3001/teacher/login'),
+          body: {'username': username, 'password': password});
+      if (response.statusCode == 200) {
+        prefs.setString('username', username);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) =>const Teacher1()));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Error"),
+                content: const Text("Invalid username or password"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Close"))
+                ],
+              );
+            });
+      }
+    }
     else if(role == 'student'){
       final response = await http.post(
-          Uri.parse('http://192.168.0.207:3001/student/login'),
+          Uri.parse('http://192.168.0.115:3001/student/login'),
           body: {'username': username, 'password': password}); 
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
