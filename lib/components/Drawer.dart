@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
 
 class CommonDrawer extends StatelessWidget {
@@ -11,14 +10,14 @@ class CommonDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 13, 208, 211),
+            ),
             child: Text('Vidyaamrutham',
                 style: TextStyle(
                     fontSize: 32,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 13, 208, 211),
-            ),
           ),
           ListTile(
             title: const Row(
@@ -43,7 +42,7 @@ class CommonDrawer extends StatelessWidget {
               });
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RoleChoose()),
+                MaterialPageRoute(builder: (context) => const RoleChoose()),
               );
             },
           ),
