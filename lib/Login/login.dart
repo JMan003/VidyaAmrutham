@@ -1,10 +1,12 @@
 import 'dart:math';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
 import 'package:vidyaamrutham/DLSA/sample_feature/sample_item_list_view.dart';
 import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
+import 'package:vidyaamrutham/Mentor/mentor.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -114,67 +116,73 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void userValidation() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String role = prefs.getString('role') ?? '';
-
-    var username = usernameController.text;
-    var password = passwordController.text;
-    if(role == 'parent'){
-      final response = await http.post(
-          Uri.parse('http://192.168.0.207:3001/parent/login'),
-          body: {'username': username, 'password': password}); 
-      if (response.statusCode == 200) {
-        prefs.setString('username', username);
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ParentDashboard()));
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                content: const Text("Invalid username or password"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Close"))
-                ],
-              );
-            });
-      }
+  void userValidation() {
+    if (usernameController.text == "admin" &&
+        passwordController.text == "admin") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const DLSADashboard()),
+      );
     }
-    else if(role == 'student'){
-      final response = await http.post(
-          Uri.parse('http://192.168.0.207:3001/student/login'),
-          body: {'username': username, 'password': password}); 
-      if (response.statusCode == 200) {
-        // ignore: use_build_context_synchronously
-        prefs.setString('username', username);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ParentDashboard()));
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                content: const Text("Invalid username or password"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Close"))
-                ],
-              );
-            });
-      }
+    else if (usernameController.text == "teacher" &&
+        passwordController.text == "teacher") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SampleItemListView()),
+      );
+    }
+    else if (usernameController.text == "parent" &&
+        passwordController.text == "parent") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ParentDashboard()),
+      );
+    }
+    else if (usernameController.text == "mentor" &&
+        passwordController.text == "mentor") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Mentor()),
+      );
+    }
+    else if (usernameController.text == "student" &&
+        passwordController.text == "student") {
+      SharedPreferences.getInstance().then((prefs) {
+        prefs.setString('username', usernameController.text);
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SampleItemListView()),
+      );
+    }
+    else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: const Text("Invalid username or password"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Close"))
+              ],
+            );
+          });
     }
   }
 }
