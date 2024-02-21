@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
@@ -119,12 +119,13 @@ class _LoginPageState extends State<LoginPage> {
   void userValidation() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String role = prefs.getString('role') ?? '';
+    print(role);
 
     var username = usernameController.text;
     var password = passwordController.text;
     if(role == 'parent'){
       final response = await http.post(
-          Uri.parse('http://192.168.137.34:3001/parent/login'),
+          Uri.parse('http://192.168.0.116:3001/parent/login'),
           body: {'username': username, 'password': password}); 
       if (response.statusCode == 200) {
         prefs.setString('username', username);
@@ -152,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
     }
     else if(role == 'teacher'){
       final response = await http.post(
-          Uri.parse('http://192.168.0.115:3001/teacher/login'),
+          Uri.parse('http://192.168.0.116:3001/teacher/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);
@@ -180,13 +181,41 @@ class _LoginPageState extends State<LoginPage> {
     }
     else if(role == 'student'){
       final response = await http.post(
-          Uri.parse('http://192.168.0.115:3001/student/login'),
+          Uri.parse('http://192.168.0.116:3001/student/login'),
           body: {'username': username, 'password': password}); 
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
         prefs.setString('username', username);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ParentDashboard()));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Error"),
+                content: const Text("Invalid username or password"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Close"))
+                ],
+              );
+            });
+      }
+    }
+    else if(role == 'mentor'){
+      final response = await http.post(
+          Uri.parse('http://192.168.0.116:3001/mentor/login'),
+          body: {'username': username, 'password': password});
+      if (response.statusCode == 200) {
+        prefs.setString('username', username);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) =>const Mentor()));
       } else {
         // ignore: use_build_context_synchronously
         showDialog(
