@@ -3,6 +3,9 @@ import 'package:vidyaamrutham/Mentor/pages/home.dart';
 import 'package:vidyaamrutham/Mentor/pages/profile.dart';
 import 'package:vidyaamrutham/Mentor/pages/notes.dart';
 import 'package:vidyaamrutham/Mentor/pages/actions.dart';
+import 'package:vidyaamrutham/components/Drawer.dart';
+
+String mentor_name = "Mentor";
 
 class Mentor extends StatefulWidget {
   const Mentor({Key? key}) : super(key: key);
@@ -21,10 +24,20 @@ class _MentorState extends State<Mentor> {
         preferredSize:
             const Size.fromHeight(120), // Set the desired height here
         child: AppBar(
-          leading: Padding(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
-              ),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: IconButton(
+                    icon: const Icon(Icons.menu),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                ),
+              );
+            },
+          ),
           title: Column(
             children: [
               Padding(
@@ -43,11 +56,10 @@ class _MentorState extends State<Mentor> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Text(
-                      "Meenakshy J",
+                      mentor_name,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w300,
-
                       ),
                     ),
                   )
@@ -57,15 +69,16 @@ class _MentorState extends State<Mentor> {
           ),
           backgroundColor: const Color.fromARGB(255, 13, 15, 31),
           actions: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child:
-                IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child:
+                  IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+            )
+          ],
           toolbarHeight: 150,
         ),
       ),
+      drawer: CommonDrawer(),
       body: <Widget>[
         MentorHome(),
         MentorProfile(),

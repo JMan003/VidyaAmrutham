@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/Mentor/controls/pdf_page.dart';
 
 class MentorActions extends StatelessWidget {
   const MentorActions({Key? key}) : super(key: key);
@@ -137,7 +138,9 @@ class MentorActions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PDFPage()));
+                          },
                           icon: Image.asset("assets/images/Print.png"),
                           iconSize: 60,
                         ),
