@@ -5,8 +5,9 @@ import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
 import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
 import 'package:vidyaamrutham/Parent/ParentProfile.dart';
-import 'package:vidyaamrutham/Teacher/teacher1.dart';
+import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
+import 'package:vidyaamrutham/Teacher/teacher.dart';
 
 void main() {
   runApp(Vidyaamrutham());
@@ -91,7 +92,7 @@ class _AppLoaderState extends State<AppLoader> {
     if (role == "parent") {
       return const ParentDashboard();
     } else if (role == "teacher") {
-      return const Teacher1();
+      return const Teacher();
       // } else if (role == "student") {
       //   return StudentDashboardPage();
     } else if (role == "dlsa") {

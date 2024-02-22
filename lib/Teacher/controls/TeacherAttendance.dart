@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:vidyaamrutham/Teacher/teacher1.dart';
+import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
 class TeacherAttendance extends StatefulWidget {
   final String grade, section;
@@ -20,7 +20,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
 
   Future<Map<String, dynamic>> getStudents() async {
     var response = await http.get(Uri.parse(
-        'http://192.168.0.206:3001/teacher/students/${widget.grade}/${widget.section}'));
+        'http://192.168.1.9:3001/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
   }
 
@@ -118,7 +118,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Teacher1()),
+                            builder: (context) => Teacher1()),
                         (route) => false);
                   },
                   child: const Text('OK'),
@@ -140,7 +140,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Teacher1()),
+                            builder: (context) => Teacher1()),
                         (route) => false);
                   },
                   child: const Text('OK'),
