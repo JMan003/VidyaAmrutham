@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Login/role.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommonDrawer extends StatelessWidget {
   @override
@@ -9,15 +10,40 @@ class CommonDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 13, 208, 211),
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Color.fromARGB(255, 0, 0, 0),
+                  Color.fromARGB(255, 154, 154, 154),
+                ],
+              ),
+              image: DecorationImage(
+                image: AssetImage("assets/images/Teacher student-bro.png"),
+                fit: BoxFit.cover,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 10.0,
+                ),
+              ],
             ),
-            child: Text('Vidyaamrutham',
-                style: TextStyle(
-                    fontSize: 32,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold)),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                "Vidyaamrutham",
+                style: GoogleFonts.lobster(
+                  textStyle: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ),
           ListTile(
             title: const Row(
@@ -30,7 +56,9 @@ class CommonDrawer extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Icon(Icons.logout),
               ],
             ),
@@ -46,6 +74,26 @@ class CommonDrawer extends StatelessWidget {
               );
             },
           ),
+          // ListTile(
+          //   title: const Row(
+          //     children: [
+          //       Padding(
+          //         padding: EdgeInsets.only(left: 8.0),
+          //         child: Text('Settings',
+          //             style: TextStyle(
+          //                 fontSize: 20,
+          //                 color: Colors.white,
+          //                 fontWeight: FontWeight.bold)),
+          //       ),
+          //       SizedBox(
+          //         width: 10,
+          //       ),
+          //       Icon(Icons.settings),
+          //     ],
+          //   ),
+          //   onTap: () {
+          //   },
+          // ),
         ],
       ),
     );

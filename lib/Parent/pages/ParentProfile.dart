@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Parent/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/ParentNotes.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
 import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 1;
@@ -27,7 +27,7 @@ class ProfileState extends State<ParentProfile> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     var data = await http
-        .get(Uri.parse('http://192.168.137.34:3001/parent/student/$username'));
+        .get(Uri.parse('http://192.168.1.9:3001/parent/student/$username'));
     var jsonData = json.decode(data.body);
 
     print(jsonData['result']['name']);
@@ -52,29 +52,6 @@ class ProfileState extends State<ParentProfile> {
     innerContainerHeight = screenHeight * 0.35;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-        title: const Text('Vidyaamrutham'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Add the required functionality here
-            },
-          ),
-        ],
-      ),
-      drawer: CommonDrawer(),
       body: FutureBuilder<Map<String, dynamic>>(
           future: getStudentData(),
           builder: (context, snapshot) {
@@ -423,53 +400,6 @@ class ProfileState extends State<ParentProfile> {
               ],
             );
           }),
-      bottomNavigationBar: BottomNavBar(context),
     );
   }
-}
-
-// ignore: non_constant_identifier_names
-Widget BottomNavBar(context) {
-  return BottomNavigationBar(
-    currentIndex: _selectedIndex,
-    onTap: (index) {
-      switch (index) {
-        case 0:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentDashboard()));
-          break;
-        case 1:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentProfile()));
-          break;
-        case 2:
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const ParentNotes()));
-          break;
-        case 3:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentControls()));
-          break;
-      }
-    },
-    items: const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.book),
-        label: 'Meeting Notes',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.dashboard_outlined),
-        label: 'Controls',
-      ),
-    ],
-    selectedItemColor: const Color.fromARGB(255, 139, 139, 139),
-  );
 }

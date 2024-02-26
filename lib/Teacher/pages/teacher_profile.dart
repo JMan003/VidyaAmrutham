@@ -3,6 +3,7 @@ import 'dart:convert';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 double? containerHeight,
     containerWidth,
@@ -23,9 +24,11 @@ class Teacher4 extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     print(username);
-    var data = await http
-        .get(Uri.parse('http://192.168.1.9:3001/teacher/profile/$username'));
+    String? url = dotenv.env['SERVER'];
+    var data =
+        await http.get(Uri.parse('http://$url/teacher/profile/$username'));
     var jsonData = json.decode(data.body);
+    print(jsonData);
     name = jsonData['result']['name'];
     phoneNumber = jsonData['result']['phone'];
     emailId = jsonData['result']['email'];
@@ -298,11 +301,14 @@ class Teacher4 extends StatelessWidget {
                                   child: Align(
                                     alignment: Alignment.topRight,
                                     child: Text(
-                                      address.length > 10 ? '${address.substring(0, 20)}...' : address,
+                                      address.length > 10
+                                          ? '${address.substring(0, 20)}...'
+                                          : address,
                                       style: const TextStyle(
                                           fontSize: 17,
-                                          color: Color.fromARGB(255, 70, 70, 70)),
-                                          overflow: TextOverflow.ellipsis,
+                                          color:
+                                              Color.fromARGB(255, 70, 70, 70)),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 )),

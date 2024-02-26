@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:vidyaamrutham/Teacher/controls/TeacherAttendanceSelection.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Teacher1 extends StatelessWidget {
+
+  String? url = dotenv.env['SERVER'];
+
   @override
   Widget build(BuildContext context) {
+  print(url);
+
     return Padding(
-      padding: EdgeInsets.only(top: 150),
+      padding: EdgeInsets.only(top: 80),
       child: Container(
         width: double.infinity,
         decoration: const ShapeDecoration(

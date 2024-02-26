@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,8 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    String url = 'http://192.168.129.62:3001/mentor/student/$username';
+    var link = dotenv.env['SERVER'];
+    String url = 'http://$link/mentor/student/$username';
     var data = await http.get(
       Uri.parse(url),
     );

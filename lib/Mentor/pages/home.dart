@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/assignments.dart';
@@ -12,8 +13,9 @@ class MentorHome extends StatelessWidget {
   Future<Map<String, dynamic>> getMentorData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
-    var data = await http
-        .get(Uri.parse('http://192.168.129.62:3001/mentor/student/$username'));
+    var url = dotenv.env['SERVER'];
+    var data =
+        await http.get(Uri.parse('http://$url/mentor/student/$username'));
     var jsonData = json.decode(data.body);
     var count = jsonData['result'][jsonData['result'].length - 1]['COUNT(id)'];
     jsonData['result'].removeLast();

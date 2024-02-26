@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdfWidgets;
 import 'package:printing/printing.dart';
@@ -7,11 +8,12 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PDFPage extends StatelessWidget {
-
   Future<dynamic> fetchContentFromServer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    final response = await http.get(Uri.parse('http://192.168.129.62:3001/mentor/content/$username'));
+    var url = dotenv.env['SERVER'];
+    final response =
+        await http.get(Uri.parse('http://$url/mentor/content/$username'));
     if (response.statusCode == 200) {
       var content = json.decode(response.body)['result'];
       print(content);
@@ -27,7 +29,7 @@ class PDFPage extends StatelessWidget {
     var studentData = content;
     print(studentData);
 
-    for(int i = 0; i < studentData.length; i++){
+    for (int i = 0; i < studentData.length; i++) {
       pdf.addPage(
         pdfWidgets.Page(
           pageFormat: PdfPageFormat.a4,
@@ -62,7 +64,6 @@ class PDFPage extends StatelessWidget {
         ),
       );
     }
-
 
     await Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
       return pdf.save();
