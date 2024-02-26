@@ -1,10 +1,11 @@
 import 'dart:math';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
-import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
+import 'package:vidyaamrutham/DLSA/dlsa.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
+import 'package:vidyaamrutham/Parent/parent.dart';
 import 'package:vidyaamrutham/Teacher/teacher.dart';
 
 class LoginPage extends StatefulWidget {
@@ -115,50 +116,22 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void userValidation() async{
+  void userValidation() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String role = prefs.getString('role') ?? '';
     print(role);
+    String? url = dotenv.env['SERVER'];
 
     var username = usernameController.text;
     var password = passwordController.text;
-    if(role == 'parent'){
-      final response = await http.post(
-          Uri.parse('http://192.168.0.116:3001/parent/login'),
-          body: {'username': username, 'password': password}); 
-      if (response.statusCode == 200) {
-        prefs.setString('username', username);
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ParentDashboard()));
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                content: const Text("Invalid username or password"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Close"))
-                ],
-              );
-            });
-      }
-    }
-    else if(role == 'teacher'){
-      final response = await http.post(
-          Uri.parse('http://192.168.1.9:3001/teacher/login'),
+    if (role == 'parent') {
+      final response = await http.post(Uri.parse('http://$url/parent/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);
         // ignore: use_build_context_synchronously
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) =>const Teacher()));
+            context, MaterialPageRoute(builder: (context) => Parent()));
       } else {
         // ignore: use_build_context_synchronously
         showDialog(
@@ -177,44 +150,92 @@ class _LoginPageState extends State<LoginPage> {
               );
             });
       }
-    }
-    else if(role == 'student'){
-      final response = await http.post(
-          Uri.parse('http://192.168.0.116:3001/student/login'),
-          body: {'username': username, 'password': password}); 
-      if (response.statusCode == 200) {
-        // ignore: use_build_context_synchronously
-        prefs.setString('username', username);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ParentDashboard()));
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                content: const Text("Invalid username or password"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Close"))
-                ],
-              );
-            });
-      }
-    }
-    else if(role == 'mentor'){
-      final response = await http.post(
-          Uri.parse('http://192.168.0.116:3001/mentor/login'),
+    } else if (role == 'teacher') {
+      final response = await http.post(Uri.parse('http://$url/teacher/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);
         // ignore: use_build_context_synchronously
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) =>const Mentor()));
+            context, MaterialPageRoute(builder: (context) => const Teacher()));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Error"),
+                content: const Text("Invalid username or password"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Close"))
+                ],
+              );
+            });
+      }
+    } else if (role == 'student') {
+      final response = await http.post(Uri.parse('http://$url/student/login'),
+          body: {'username': username, 'password': password});
+      if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
+        prefs.setString('username', username);
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => ParentDashboard()));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Error"),
+                content: const Text("Invalid username or password"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Close"))
+                ],
+              );
+            });
+      }
+    } else if (role == 'mentor') {
+      final response = await http.post(Uri.parse('http://$url/mentor/login'),
+          body: {'username': username, 'password': password});
+      if (response.statusCode == 200) {
+        prefs.setString('username', username);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Mentor()));
+      } else {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Error"),
+                content: const Text("Invalid username or password"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Close"))
+                ],
+              );
+            });
+      }
+    } else if (role == 'dlsa') {
+      final response = await http.post(Uri.parse('http://$url/dlsa/login'),
+          body: {'username': username, 'password': password});
+      if (response.statusCode == 200) {
+        prefs.setString('username', username);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const DLSA()));
       } else {
         // ignore: use_build_context_synchronously
         showDialog(

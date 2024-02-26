@@ -21,7 +21,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String studentId = prefs.getString('studentId') ?? '';
     print("Student ID: $studentId");
-    String url = 'http://192.168.0.115:3001/parent/attendance/$studentId';
+    String url = 'http://192.168.1.9:3001/parent/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),
     );
@@ -107,7 +107,9 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                 return const Text('No data');
               }
             } else {
-              return const CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ));

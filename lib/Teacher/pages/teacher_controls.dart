@@ -1,12 +1,16 @@
 import "package:flutter/material.dart";
 import "package:url_launcher/url_launcher.dart";
+import "package:url_launcher/url_launcher_string.dart";
+import "package:vidyaamrutham/Teacher/controls/ContactMentorSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/ContactStudentSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/StudentRegistration.dart";
 
 class Teacher2 extends StatelessWidget {
 
   void _launchDialPadDLSA() async {
-    Uri url = Uri(scheme: 'tel', path: 'tel: 1234567890');
-    if (await canLaunchUrl(url as Uri)) {
-      await launchUrl(url as Uri);
+    final url = "tel:1234567890";
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
     } else {
       throw 'Could not launch $url';
     }
@@ -18,13 +22,13 @@ class Teacher2 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
-          Row(
+          const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 39),
+                padding: EdgeInsets.only(left: 39),
                 child: Text(
                   "Controls",
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w400),
@@ -32,7 +36,7 @@ class Teacher2 extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Center(
@@ -40,10 +44,10 @@ class Teacher2 extends StatelessWidget {
               height: 240,
               width: 323,
               decoration: BoxDecoration(
-                  color: Color(0xFFF3EDF7),
+                  color: const Color(0xFFF3EDF7),
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
-                    BoxShadow(blurRadius: 2, blurStyle: BlurStyle.outer)
+                    const BoxShadow(blurRadius: 2, blurStyle: BlurStyle.outer)
                   ]),
               child: Column(
                 children: [
@@ -51,14 +55,26 @@ class Teacher2 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ContactStudentSelection()));
+                        },
                         icon: Container(
                           child: Image.asset("assets/images/Call.png"),
                         ),
                         iconSize: 60,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ContactMentorSelection()));
+                        },
                         icon: Container(
                           child: Image.asset("assets/images/Call.png"),
                         ),
@@ -75,11 +91,11 @@ class Teacher2 extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 17),
+                        padding: EdgeInsets.only(left: 17),
                         child: Text('Contact\nParent',
                             style:
                                 TextStyle(fontSize: 12, color: Colors.black)),
@@ -87,7 +103,7 @@ class Teacher2 extends StatelessWidget {
                       Text("Contact\nMentor",
                           style: TextStyle(fontSize: 12, color: Colors.black)),
                       Padding(
-                        padding: const EdgeInsets.only(right: 21),
+                        padding: EdgeInsets.only(right: 21),
                         child: Text("Contact\nDLSA",
                             style:
                                 TextStyle(fontSize: 12, color: Colors.black)),
@@ -98,7 +114,13 @@ class Teacher2 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const StudentRegistration()));
+                        },
                         icon: Container(
                           child: Image.asset(
                               "assets/images/Student Registration.png"),
@@ -121,24 +143,24 @@ class Teacher2 extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 17),
+                        padding: EdgeInsets.only(left: 17),
                         child: Text(
                           '\t\t\tAdd\nStudent',
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 13),
+                        padding: EdgeInsets.only(left: 13),
                         child: Text("Remove\nStudent",
                             style:
                                 TextStyle(fontSize: 12, color: Colors.black)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 21),
+                        padding: EdgeInsets.only(right: 21),
                         child: Text("Update\nStudent",
                             style:
                                 TextStyle(fontSize: 12, color: Colors.black)),

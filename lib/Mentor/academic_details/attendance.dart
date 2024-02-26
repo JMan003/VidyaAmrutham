@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -27,7 +28,8 @@ class _MentorAttendanceState extends State<MentorAttendance> {
 
   Future<Map<String, dynamic>> getAttendance() async {
     print("Student ID: $studentId");
-    String url = 'http://192.168.129.62:3001/mentor/attendance/$studentId';
+    var link = dotenv.env['SERVER'];
+    String url = 'http://$link/mentor/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Parent/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/ParentProfile.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
+import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
 import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 2;
@@ -51,50 +51,7 @@ class ProfileState extends State<ParentNotes> {
     innerContainerHeight = screenHeight * 0.35;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-        title: const Text('Vidyaamrutham'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Add the required functionality here
-            },
-          ),
-        ],
-      ),
-      drawer: CommonDrawer(),
       body: Column(children: [
-        Padding(
-            padding: const EdgeInsets.only(top: 50, left: 50),
-            child: Row(
-              children: [
-                const Image(
-                  image: AssetImage('assets/images/34.png'),
-                  width: 60,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  studentName,
-                  style: const TextStyle(
-                      fontSize: 23,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            )),
         Expanded(child: Container()),
         Container(
             height: containerHeight,
@@ -183,7 +140,6 @@ class ProfileState extends State<ParentNotes> {
               }),
             ])),
       ]),
-      bottomNavigationBar: BottomNavBar(context),
     );
   }
 
@@ -206,49 +162,4 @@ class ProfileState extends State<ParentNotes> {
       ],
     ));
   }
-}
-
-Widget BottomNavBar(context) {
-  return BottomNavigationBar(
-    currentIndex: _selectedIndex,
-    onTap: (index) {
-      switch (index) {
-        case 0:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ParentDashboard()));
-          break;
-        case 1:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentProfile()));
-          break;
-        case 2:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentNotes()));
-          break;
-        case 3:
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ParentControls()));
-          break;
-      }
-    },
-    items: const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Profile',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.book),
-        label: 'Notes',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.dashboard_outlined),
-        label: 'Controls',
-      ),
-    ],
-    selectedItemColor: const Color.fromARGB(255, 139, 139, 139),
-  );
 }

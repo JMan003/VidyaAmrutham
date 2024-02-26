@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,8 +15,9 @@ class MentorProfile extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
 
+    var url = dotenv.env['SERVER'];
     var response = await http.get(
-      Uri.parse('http://192.168.129.62:3001/mentor/profile/$username'),
+      Uri.parse('http://$url/mentor/profile/$username'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

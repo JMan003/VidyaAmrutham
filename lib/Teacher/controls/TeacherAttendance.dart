@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
 class TeacherAttendance extends StatefulWidget {
@@ -19,8 +20,9 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
   late Map<String, dynamic> data;
 
   Future<Map<String, dynamic>> getStudents() async {
+    String? url = dotenv.env['SERVER'];
     var response = await http.get(Uri.parse(
-        'http://192.168.1.9:3001/teacher/students/${widget.grade}/${widget.section}'));
+        'http://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
   }
 
@@ -90,7 +92,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
       }
     }
     var response = await http.post(
-      Uri.parse('http://192.168.0.206:3001/teacher/attendance'),
+      Uri.parse('http://192.168.1.9:3001/teacher/attendance'),
       body: json.encode({
         'grade': widget.grade,
         'section': widget.section,

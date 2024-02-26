@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/DLSA/components/dlsaDashboard.dart';
+import 'package:vidyaamrutham/DLSA/dlsa.dart';
 import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
-import 'package:vidyaamrutham/Parent/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/ParentProfile.dart';
-import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
+import 'package:vidyaamrutham/Parent/parent.dart';
 import 'package:vidyaamrutham/Teacher/teacher.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(Vidyaamrutham());
 }
 
@@ -17,7 +17,7 @@ class Vidyaamrutham extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TaskAid',
+      title: 'Vidyaamrutham',
       theme: ThemeData(
         primaryColor: const Color(0x00000001A1C29), // Adjusted primary color
         scaffoldBackgroundColor:
@@ -27,8 +27,8 @@ class Vidyaamrutham extends StatelessWidget {
         hintColor: Colors.blue, // Accent color for text fields
         // To ensure text is visible against the dark background, adjust text colors accordingly
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyText1: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+          bodyText2: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
           // Adjust other text styles as needed
         ),
       ),
@@ -90,13 +90,13 @@ class _AppLoaderState extends State<AppLoader> {
 
   choosePage(String role) {
     if (role == "parent") {
-      return const ParentDashboard();
+      return const Parent();
     } else if (role == "teacher") {
       return const Teacher();
       // } else if (role == "student") {
       //   return StudentDashboardPage();
     } else if (role == "dlsa") {
-      return DLSADashboard();
+      return DLSA();
     } else if (role == "mentor") {
       return const Mentor();
     } else {
