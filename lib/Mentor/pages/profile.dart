@@ -27,7 +27,7 @@ class MentorProfile extends StatelessWidget {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       print('Data: $data');
-      name = data['result']['name'];
+      name = data['result']['mentor_name'];
       email = data['result']['email'];
       phone = data['result']['phone'];
       address = data['result']['address'];

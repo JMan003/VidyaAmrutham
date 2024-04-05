@@ -203,33 +203,40 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'mentor') {
-      final response = await http.post(Uri.parse('http://$url/mentor/login'),
-          body: {'username': username, 'password': password});
-      if (response.statusCode == 200) {
-        prefs.setString('username', username);
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Mentor()));
-      } else {
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error"),
-                content: const Text("Invalid username or password"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Close"))
-                ],
-              );
-            });
+      print('mentor');
+      print(url);
+      print('http://$url/mentor/login');
+      print(username);
+      print(password);
+      try {
+        final response = await http.post(Uri.parse('https://$url/mentor/login'),
+            body: {'username': username, 'password': password});
+        if (response.statusCode == 200) {
+          prefs.setString('username', username);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Mentor()));
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("Error"),
+                  content: Text('Invalid username or password'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Close"))
+                  ],
+                );
+              });
+        }
+      } catch (e) {
+        print('Error: $e');
       }
     } else if (role == 'dlsa') {
-      final response = await http.post(Uri.parse('http://$url/dlsa/login'),
+      final response = await http.post(Uri.parse('https://$url/dlsa/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);

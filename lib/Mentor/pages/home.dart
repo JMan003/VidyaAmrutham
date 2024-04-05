@@ -14,6 +14,10 @@ class MentorHome extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     var url = dotenv.env['SERVER'];
+
+    print(url);
+    print(username);
+
     var data =
         await http.get(Uri.parse('http://$url/mentor/student/$username'));
     var jsonData = json.decode(data.body);
@@ -27,6 +31,7 @@ class MentorHome extends StatelessWidget {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return FutureBuilder<Map<String, dynamic>>(
+      future: getMentorData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
@@ -323,8 +328,7 @@ class MentorHome extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-      },
-      future: getMentorData(),
+      },  
     );
   }
 
