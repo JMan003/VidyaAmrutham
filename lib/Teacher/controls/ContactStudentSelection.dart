@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,8 +15,9 @@ class ContactStudentSelection extends StatefulWidget {
 
 class StudentSelection extends State<ContactStudentSelection> {
   Future<Map<String, dynamic>> getClasses() async {
+    String? url = dotenv.env["SERVER"];
     var response =
-        await http.get(Uri.parse('http://192.168.1.9:3001/teacher/classes'));
+        await http.get(Uri.parse('http://$url/teacher/classes'));
 
     return json.decode(response.body);
   }

@@ -73,14 +73,17 @@ class MentorHome extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               showDialog(
+
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
+                                    backgroundColor: Colors.white,
                                     title: Text(
                                       "Student Details",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20.0,
+                                        color: Color(0xFF514D4D),
                                       ),
                                     ),
                                     content: Container(

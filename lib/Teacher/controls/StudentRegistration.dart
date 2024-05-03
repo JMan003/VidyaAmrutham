@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 class StudentRegistration extends StatefulWidget {
   const StudentRegistration({Key? key}) : super(key: key);
@@ -9,75 +12,175 @@ class StudentRegistration extends StatefulWidget {
 }
 
 class _StudentRegistrationState extends State<StudentRegistration> {
+  TextEditingController dobController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController classController = TextEditingController();
+  TextEditingController divisionController = TextEditingController();
+  TextEditingController rollNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController bloodGroupController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController admissionNumberController = TextEditingController();
+
+  final today = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Student Registration'),
       ),
-      body: Scrollable(
-        viewportBuilder: (BuildContext context, ViewportOffset position) {
-          return Form(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
-              children: <Widget>[
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
                 TextFormField(
+                  controller: nameController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'First Name',
+                    labelText: 'Name',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the name',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: classController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Last Name',
+                    labelText: 'Class',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the class',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: divisionController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Division',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Division',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: rollNumberController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Phone',
+                    labelText: 'Roll Number',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Roll Number',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: addressController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     labelText: 'Address',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the address',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'City',
+                    labelText: 'Date of Birth',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the date of birth',
                   ),
+                  controller: dobController,
+                  onTap: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: today,
+                      firstDate: DateTime(1900),
+                      lastDate: today,
+                    ).then((value) {
+                      dobController.text = value.toString().substring(0, 10);
+                    });
+                  },
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: bloodGroupController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'State',
+                    labelText: 'Blood Group',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Blood Group',
                   ),
                 ),
+                SizedBox(height: 20),
                 TextFormField(
+                  controller: genderController,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Zip',
+                    labelText: 'Gender',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Gender',
                   ),
                 ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: admissionNumberController,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Admission Number',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Admission number',
+                  ),
+                ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
-                    if (Form.of(primaryFocus!.context!)!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
-                    }
+                    registerStudent();
                   },
-                  child: const Text('Submit'),
+                  child: Text('Register'),
                 ),
               ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
+  }
+
+  void registerStudent() async{
+    String? url = dotenv.env['SERVER'];
+
+    var data = {
+      'name': nameController.text,
+      'grade': classController.text,
+      'division': divisionController.text,
+      'rollNumber': rollNumberController.text,
+      'address': addressController.text,
+      'dob': dobController.text,
+      'bloodGroup': bloodGroupController.text,
+      'gender': genderController.text,
+      'admissionNumber': admissionNumberController.text
+    };
+
+    var response = await http
+        .post(Uri.parse('https://${url}/teacher/register/student'), body: data);
+
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Student Registered Successfully'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to register student'),
+        ),
+      );
+    }
   }
 }
