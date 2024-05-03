@@ -1,9 +1,11 @@
 import 'dart:convert';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
+
 
 class ContactMentor extends StatefulWidget {
   var grade;
@@ -18,11 +20,12 @@ class ContactMentor extends StatefulWidget {
 
 class MentorContact extends State<ContactMentor> {
   Future<Map<String, dynamic>> getStudents() async {
+    String? url = dotenv.env['SERVER'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
 
     var response = await http.get(Uri.parse(
-        'http://192.168.1.9:3001/mentor/students/${widget.grade}/${widget.section}'));
+        'http://${url}/mentor/students/${widget.grade}/${widget.section}'));
 
     var data = json.decode(response.body);
     print(data);
@@ -60,8 +63,8 @@ class MentorContact extends State<ContactMentor> {
                                   .toString(),
                               applicationIcon: const Icon(Icons.phone),
                               children: [
-                                Text(data['result'][index]['phone']),
-                                Text(data['result'][index]['mentor_name']),
+                                Text(data['result'][index]['phone'],style: TextStyle(color: Colors.white),),
+                                Text(data['result'][index]['mentor_name'],style: TextStyle(color: Colors.white),),
                                 ElevatedButton(
                                   onPressed: () {
                                     _callMentor(

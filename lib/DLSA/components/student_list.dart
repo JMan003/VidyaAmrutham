@@ -7,7 +7,7 @@ class StudentList extends StatelessWidget {
   Future<Map<String, dynamic>> getStudentList() async {
     try {
       var url = dotenv.env['SERVER'];
-      var response = await http.get(Uri.parse('http://$url/dlsa/student/list'));
+      var response = await http.get(Uri.parse('https://$url/dlsa/student/list'));
 
       if (response.statusCode == 200) {
         return json.decode(response.body);
@@ -53,15 +53,11 @@ class StudentList extends StatelessWidget {
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   Text(
-                                    'Class: ${data['result'][index]['class']}',
+                                    'Class: ${data['result'][index]['class']} ${data['result'][index]['section']}',
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   Text(
-                                    'Section: ${data['result'][index]['section']}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Date of Birth: ${data['result'][index]['dob']}',
+                                    'Date of Birth: ${data['result'][index]['dob'].toString().substring(0, 10)}',
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   Text(

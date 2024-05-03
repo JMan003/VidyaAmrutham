@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Teacher/controls/ContactMentor.dart';
 import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
@@ -14,8 +15,9 @@ class ContactMentorSelection extends StatefulWidget {
 
 class MentorSelection extends State<ContactMentorSelection> {
   Future<Map<String, dynamic>> getClasses() async {
+    String? url = dotenv.env['SERVER'];
     var response =
-        await http.get(Uri.parse('http://192.168.1.9:3001/teacher/classes'));
+        await http.get(Uri.parse('http://${url}/teacher/classes'));
 
     return json.decode(response.body);
   }

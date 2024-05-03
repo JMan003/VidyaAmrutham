@@ -151,7 +151,11 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'teacher') {
-      final response = await http.post(Uri.parse('http://$url/teacher/login'),
+
+      print('https://$url/teacher/login');
+      print(username);
+      print(password);
+      final response = await http.post(Uri.parse('https://$url/teacher/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);
@@ -203,11 +207,6 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'mentor') {
-      print('mentor');
-      print(url);
-      print('http://$url/mentor/login');
-      print(username);
-      print(password);
       try {
         final response = await http.post(Uri.parse('https://$url/mentor/login'),
             body: {'username': username, 'password': password});
