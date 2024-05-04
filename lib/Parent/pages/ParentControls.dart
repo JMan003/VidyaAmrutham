@@ -125,13 +125,6 @@ class ParentControls extends StatelessWidget {
                             );
                           },
                         ),
-                        _buildGridItem(
-                          'Complaints',
-                          'assets/images/Yes Or No.png',
-                          () {
-                            // Add the required functionality here
-                          },
-                        ),
                       ],
                     ),
                   ),
