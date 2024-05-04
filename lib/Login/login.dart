@@ -24,6 +24,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: const Color(0xFF41BB95),
+      ),
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
@@ -125,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
     var username = usernameController.text;
     var password = passwordController.text;
     if (role == 'parent') {
-      final response = await http.post(Uri.parse('http://$url/parent/login'),
+      final response = await http.post(Uri.parse('https://$url/parent/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);
@@ -151,7 +155,6 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'teacher') {
-
       print('https://$url/teacher/login');
       print(username);
       print(password);

@@ -1,19 +1,21 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vidyaamrutham/Teacher/controls/ContactMentor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vidyaamrutham/Teacher/controls/Contact/ContactStudent.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
 
-class ContactMentorSelection extends StatefulWidget {
-  const ContactMentorSelection({Key? key}) : super(key: key);
+class ContactStudentSelection extends StatefulWidget {
+  const ContactStudentSelection({Key? key}) : super(key: key);
   @override
-  State<ContactMentorSelection> createState() => MentorSelection();
+  State<ContactStudentSelection> createState() => StudentSelection();
 }
 
-class MentorSelection extends State<ContactMentorSelection> {
+class StudentSelection extends State<ContactStudentSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = dotenv.env["SERVER"];
     var response =
         await http.get(Uri.parse('http://$url/teacher/classes'));
 
@@ -46,7 +48,7 @@ class MentorSelection extends State<ContactMentorSelection> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ContactMentor(
+                                      builder: (context) => ContactStudent(
                                           grade : data['result'][index]['class'],
                                           section : data['result'][index]['section']
                                         )

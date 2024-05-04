@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,8 +23,9 @@ class ProfileState extends State<ParentProfile> {
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
+    String? url = dotenv.env['SERVER'];
     var data = await http
-        .get(Uri.parse('http://192.168.1.9:3001/parent/student/$username'));
+        .get(Uri.parse('http://$url/parent/student/$username'));
     var jsonData = json.decode(data.body);
 
     print(jsonData['result']['name']);

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vidyaamrutham/DLSA/components/student_list.dart';
-import 'package:vidyaamrutham/Teacher/controls/AnnouncementsPage.dart';
-import 'package:vidyaamrutham/Teacher/controls/AssignmentsView.dart';
+import 'package:vidyaamrutham/Teacher/controls/Announcement/AnnouncementsPage.dart';
+import 'package:vidyaamrutham/Teacher/controls/Assignment/AssignmentsView.dart';
+import 'package:vidyaamrutham/Teacher/controls/Grievances/GrievanceStudentSelection.dart';
 import 'package:vidyaamrutham/Teacher/controls/SubjectsListing.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendanceSelection.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendanceSelection.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vidyaamrutham/Teacher/controls/TeacherExam.dart';
 import 'package:vidyaamrutham/Teacher/controls/TeacherResult.dart';
@@ -190,7 +191,12 @@ class Teacher1 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StudentGrievanceSelection()));
+                      },
                       icon: Container(
                         child: Image.asset("assets/images/Yes Or No.png"),
                       ),

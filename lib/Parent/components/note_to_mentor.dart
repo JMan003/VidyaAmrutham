@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class NoteToMentor extends StatefulWidget {
   const NoteToMentor({Key? key}) : super(key: key);
@@ -9,6 +12,9 @@ class NoteToMentor extends StatefulWidget {
 }
 
 class _NoteToMentorState extends State<NoteToMentor> {
+
+  TextEditingController noteController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +50,36 @@ class _NoteToMentorState extends State<NoteToMentor> {
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(20),
                     child: TextField(
+                      controller: noteController,
                       maxLines: 10,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter your note here',
+                        labelStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
                       ),
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                      if (noteController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please enter a note'),
+                          ),
+                        );
+                        return;
+                      }
+
+                      handleNoteSubmission(noteController.text);
+                      return;
+
+                    },
                     child: const Text('Submit'),
                   ),
                 ],
@@ -65,5 +89,34 @@ class _NoteToMentorState extends State<NoteToMentor> {
         );
       },
     ));
+  }
+  
+  Future<void> handleNoteSubmission(String text) async {
+    String? url = dotenv.env['SERVER'];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var username = prefs.getString('username');
+
+    final response = await http
+        .post(
+          Uri.parse('https://$url/parent/note/mentor'), 
+        body: {
+          'note': text,
+          'username': username,
+        }
+        );
+    
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Note submitted successfully'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to submit note'),
+        ),
+      );
+    }
   }
 }

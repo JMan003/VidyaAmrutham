@@ -24,8 +24,10 @@ class MentorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 13, 15, 31),
       appBar: AppBar(
         title: const Text('Mentor List'),
+        backgroundColor: Color.fromARGB(255, 13, 15, 31),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: getMentorList(),
@@ -37,44 +39,60 @@ class MentorList extends StatelessWidget {
               return ListView.builder(
                 itemCount: data['result'].length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(data['result'][index]['mentor_name']),
-                    subtitle: Text(data['result'][index]['phone']),
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(data['result'][index]['mentor_name']),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Phone Number: ${data['result'][index]['phone']}',
-                                    style: const TextStyle(color: Colors.grey),
+                  return Card(
+                    elevation: 5.0,
+                    //color: Colors.grey[300],
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: ListTile(
+                        title: Text(data['result'][index]['mentor_name'],
+                        //style: TextStyle(color: Colors.black)
+                        ),
+                        subtitle: Text(data['result'][index]['phone'],
+                        //style: TextStyle(color: Colors.black),
+                        ),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text(
+                                      data['result'][index]['mentor_name']),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Phone Number: ${data['result'][index]['phone']}',
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
+                                      Text(
+                                        'Email: ${data['result'][index]['email']}',
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
+                                      Text(
+                                        'Address: ${data['result'][index]['address']}',
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Email: ${data['result'][index]['email']}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Address: ${data['result'][index]['address']}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Close'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          });
-                    },
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Close'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    ),
                   );
                 },
               );

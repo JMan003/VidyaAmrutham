@@ -3,26 +3,27 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudentRegister.dart';
 import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
-class TeacherAttendance extends StatefulWidget {
+class UpdateStudent extends StatefulWidget {
   final String grade, section;
 
-  const TeacherAttendance({Key? key, required this.grade, required this.section})
+  UpdateStudent({Key? key, required this.grade, required this.section})
       : super(key: key);
 
   @override
-  State<TeacherAttendance> createState() => _TeacherAttendanceState();
+  State<UpdateStudent> createState() => UpdateStudentState();
 }
 
-class _TeacherAttendanceState extends State<TeacherAttendance> {
+class UpdateStudentState extends State<UpdateStudent> {
   final Map<String, bool> _attendance = {};
   late Map<String, dynamic> data;
 
   Future<Map<String, dynamic>> getStudents() async {
     String? url = dotenv.env['SERVER'];
     var response = await http.get(Uri.parse(
-        'http://$url/teacher/students/${widget.grade}/${widget.section}'));
+        'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
   }
 
@@ -30,7 +31,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendance'),
+        title: const Text('Update Student'),
       ),
       body: FutureBuilder(
         future: getStudents(),
@@ -51,27 +52,23 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                             title: Text(data['result'][index]['name']),
                             subtitle: Text(
                                 'Roll Number: ${data['result'][index]['roll_no']}'),
-                            trailing: Checkbox(
-                              value: _attendance[
-                                      data['result'][index]['id'].toString()] ??
-                                  false,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  _attendance[data['result'][index]['id']
-                                      .toString()] = (value!);
-                                });
-                              },
-                            ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => UpdateStudentRegistration(
+                                          roll_no: data['result'][index]['username'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
                           );
                         },
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        submitAttendance();
-                      },
-                      child: const Text('Submit'),
-                    )
                   ],
                 );
               });
@@ -91,8 +88,9 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
         _attendance[data['result'][i]['id'].toString()] = false;
       }
     }
+    String? url = dotenv.env['SERVER'];
     var response = await http.post(
-      Uri.parse('http://192.168.1.9:3001/teacher/attendance'),
+      Uri.parse('http://$url/teacher/attendance'),
       body: json.encode({
         'grade': widget.grade,
         'section': widget.section,
