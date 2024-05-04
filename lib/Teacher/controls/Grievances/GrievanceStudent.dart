@@ -61,6 +61,7 @@ class GrievanceStudentState extends State<GrievanceStudent> {
                                       MaterialPageRoute(
                                         builder: (context) => Grievance(
                                           roll_no: data['result'][index]['username'],
+                                          mentor_id : data['result'][index]['mentor_id'],
                                         ),
                                       ),
                                     );
