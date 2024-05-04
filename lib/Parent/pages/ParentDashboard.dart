@@ -4,12 +4,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vidyaamrutham/Parent/components/ExamView.dart';
 import 'package:vidyaamrutham/Parent/components/ParentAttendance.dart';
+import 'package:vidyaamrutham/Parent/components/ResultsView.dart';
 import 'package:vidyaamrutham/Parent/components/achievements.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 double? containerHeight,
     innerContainerWidth,
@@ -32,13 +30,17 @@ class DashboardState extends State<ParentDashboard> {
 
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? url = dotenv.env['SERVER'];
     var username = prefs.getString('username');
     String? url = dotenv.env['SERVER'];
     print(username);
     var data = await http
-        .get(Uri.parse('http://$url/parent/student/$username'));
+        .get(Uri.parse('https://$url/parent/student/$username'));
     print(data.body);
     var jsonData = json.decode(data.body);
+
+    prefs.setString('student_id', jsonData['result']['student_id'].toString());
 
     studentName = jsonData['result']['name'];
     studentAdmissionNo = jsonData['result']['admission_no'].toString();
@@ -351,7 +353,11 @@ class DashboardState extends State<ParentDashboard> {
                                               children: [
                                                 GestureDetector(
                                                   onTap: () {
-                                                    // Add the required functionality here
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const ResultView()));
                                                   },
                                                   child: const Column(
                                                     children: [
@@ -388,7 +394,11 @@ class DashboardState extends State<ParentDashboard> {
                                               children: [
                                                 GestureDetector(
                                                   onTap: () {
-                                                    // Add the required functionality here
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const ExamView()));
                                                   },
                                                   child: const Column(
                                                     children: [

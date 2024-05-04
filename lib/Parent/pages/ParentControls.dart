@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:vidyaamrutham/Parent/components/Announcements.dart';
+import 'package:vidyaamrutham/Parent/components/ContactMentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_mentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_teacher.dart';
 import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
@@ -10,6 +12,7 @@ import 'package:vidyaamrutham/components/Drawer.dart';
 int _selectedIndex = 3;
 double? containerHeight, innerContainerWidth, innerContainerHeight;
 final String studentName = "";
+
 class ParentControls extends StatelessWidget {
   const ParentControls({super.key});
 
@@ -63,258 +66,102 @@ class ParentControls extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
-                  width: innerContainerWidth,
-                  height: innerContainerHeight,
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFF7F2FA),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                  child: Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: MediaQuery.of(context).size.width /
+                          (MediaQuery.of(context).size.height / 2.5),
+                      children: [
+                        _buildGridItem(
+                          'Contact DLSA',
+                          'assets/images/Ask Question.png',
+                          _callDLSA,
+                        ),
+                        _buildGridItem(
+                          'Note to Teacher',
+                          'assets/images/Inscription.png',
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NoteToTeacher(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildGridItem(
+                          'Note to Mentor',
+                          'assets/images/Inscription.png',
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NoteToMentor(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildGridItem(
+                          'Announcements',
+                          'assets/images/Megaphone.png',
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AnnouncementsPage(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildGridItem(
+                          'Meeting Mentor',
+                          'assets/images/Meeting Room.png',
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ContactMentor(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildGridItem(
+                          'Complaints',
+                          'assets/images/Yes Or No.png',
+                          () {
+                            // Add the required functionality here
+                          },
+                        ),
+                      ],
                     ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x26000000),
-                        blurRadius: 3,
-                        offset: Offset(0, 1),
-                        spreadRadius: 1,
-                      ),
-                      BoxShadow(
-                        color: Color(0x4C000000),
-                        blurRadius: 2,
-                        offset: Offset(0, 1),
-                        spreadRadius: 0,
-                      )
-                    ],
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 0,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      _callDLSA();
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Ask Question.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          'Contact DLSA',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 30,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => NoteToTeacher(),
-                                        ),
-                                      );
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Inscription.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          ' Note to\nTeacher',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 30,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => NoteToMentor(),
-                                        ),
-                                      );
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Inscription.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          ' Note to\nMentor',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 0,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Add the required functionality here
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Megaphone.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          'Announcements',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 30,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Add the required functionality here
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Meeting Room.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          'Meeting\n Mentor',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 20,
-                              left: 30,
-                            ),
-                            child: Align(
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Add the required functionality here
-                                    },
-                                    child: const Column(
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/Yes Or No.png'),
-                                          width: 75,
-                                        ),
-                                        Text(
-                                          'Complaints',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromARGB(
-                                                  255, 70, 70, 70)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                )
               ],
             )),
       ]),
     );
   }
 
-  void _callDLSA() async{
+  Widget _buildGridItem(String title, String imagePath, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage(imagePath),
+            width: 75,
+          ),
+          Text(
+            title,
+            style:
+                TextStyle(fontSize: 15, color: Color.fromARGB(255, 70, 70, 70)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _callDLSA() async {
     final phone = 'tel:+919400391522';
     if (await canLaunchUrlString(phone)) {
       await launchUrlString(phone);

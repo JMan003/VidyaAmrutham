@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -19,9 +20,12 @@ class _ParentAttendanceState extends State<ParentAttendance> {
 
   Future<Map<String, dynamic>> getAttendance() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String studentId = prefs.getString('studentId') ?? '';
+    String studentId = prefs.getString('student_id') ?? '';
     print("Student ID: $studentId");
-    String url = 'http://192.168.1.9:3001/parent/attendance/$studentId';
+
+    String? link = dotenv.env['SERVER'];
+
+    String url = 'https://$link/parent/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),
     );
