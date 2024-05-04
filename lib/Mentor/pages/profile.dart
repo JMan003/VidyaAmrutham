@@ -65,21 +65,21 @@ class MentorProfile extends StatelessWidget {
               width: double.infinity,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
                     name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w500,
                       color: Color(0xFF514D4D),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "Personal Information",
                     style: TextStyle(
                       fontSize: 22,
@@ -96,10 +96,10 @@ class MentorProfile extends StatelessWidget {
                         Container(
                           height: 240,
                           width: 320,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xFFF3EDF7),
                             borderRadius: BorderRadius.all(Radius.circular(16)),
-                            boxShadow: const [
+                            boxShadow: [
                               BoxShadow(
                                 color: Color(0x26000000),
                                 blurRadius: 3,
@@ -120,8 +120,8 @@ class MentorProfile extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
+                                  const Padding(
+                                    padding: EdgeInsets.only(
                                         left: 20, top: 40),
                                     child: Text(
                                       "Name :",
@@ -136,7 +136,7 @@ class MentorProfile extends StatelessWidget {
                                         right: 20, top: 40),
                                     child: Text(
                                       name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF9C9898),
                                       ),
@@ -148,8 +148,8 @@ class MentorProfile extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 20),
                                     child: Text(
                                       "Address :",
                                       style: TextStyle(
@@ -162,7 +162,7 @@ class MentorProfile extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 20),
                                     child: Text(
                                       address,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF9C9898),
                                       ),
@@ -174,8 +174,8 @@ class MentorProfile extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 20),
                                     child: Text(
                                       "Email :",
                                       style: TextStyle(
@@ -188,7 +188,7 @@ class MentorProfile extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 20),
                                     child: Text(
                                       email,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF9C9898),
                                       ),
@@ -200,8 +200,8 @@ class MentorProfile extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 20),
                                     child: Text(
                                       "Phone :",
                                       style: TextStyle(
@@ -214,7 +214,7 @@ class MentorProfile extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 20),
                                     child: Text(
                                       phone,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF9C9898),
                                       ),
@@ -226,8 +226,8 @@ class MentorProfile extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 20),
                                     child: Text(
                                       "Gender :",
                                       style: TextStyle(
@@ -240,7 +240,7 @@ class MentorProfile extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 20),
                                     child: Text(
                                       gender,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: Color(0xFF9C9898),
                                       ),

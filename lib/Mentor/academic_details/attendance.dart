@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -90,13 +89,13 @@ class _MentorAttendanceState extends State<MentorAttendance> {
                                           data['result'][index]['date']
                                               .toString()
                                               .substring(0, 10),
-                                          style: TextStyle(color: Colors.black),
+                                          style: const TextStyle(color: Colors.black),
                                         ),
                                       ),
                                       DataCell(
                                         Text(
                                           data['result'][index]['status'],
-                                          style: TextStyle(color: Colors.black),
+                                          style: const TextStyle(color: Colors.black),
                                         ),
                                       ),
                                     ],
@@ -114,7 +113,7 @@ class _MentorAttendanceState extends State<MentorAttendance> {
                 return const Text('No data');
               }
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

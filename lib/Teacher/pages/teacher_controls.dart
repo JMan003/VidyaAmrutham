@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:url_launcher/url_launcher.dart";
 import "package:url_launcher/url_launcher_string.dart";
 import "package:vidyaamrutham/Teacher/controls/Contact/ContactMentorSelection.dart";
 import "package:vidyaamrutham/Teacher/controls/Contact/ContactStudentSelection.dart";
@@ -8,9 +7,11 @@ import "package:vidyaamrutham/Teacher/controls/StudentRegistration.dart";
 import "package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudentSelection.dart";
 
 class Teacher2 extends StatelessWidget {
+  const Teacher2({super.key});
+
 
   void _launchDialPadDLSA() async {
-    final url = "tel:1234567890";
+    const url = "tel:1234567890";
     if (await canLaunchUrlString(url)) {
       await launchUrlString(url);
     } else {
@@ -48,8 +49,8 @@ class Teacher2 extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color(0xFFF3EDF7),
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    const BoxShadow(blurRadius: 2, blurStyle: BlurStyle.outer)
+                  boxShadow: const [
+                    BoxShadow(blurRadius: 2, blurStyle: BlurStyle.outer)
                   ]),
               child: Column(
                 children: [

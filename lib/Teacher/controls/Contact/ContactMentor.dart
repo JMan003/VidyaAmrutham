@@ -25,7 +25,7 @@ class MentorContact extends State<ContactMentor> {
     String username = prefs.getString('username') ?? '';
 
     var response = await http.get(Uri.parse(
-        'http://${url}/mentor/students/${widget.grade}/${widget.section}'));
+        'http://$url/mentor/students/${widget.grade}/${widget.section}'));
 
     var data = json.decode(response.body);
     print(data);
@@ -63,8 +63,8 @@ class MentorContact extends State<ContactMentor> {
                                   .toString(),
                               applicationIcon: const Icon(Icons.phone),
                               children: [
-                                Text(data['result'][index]['phone'],style: TextStyle(color: Colors.white),),
-                                Text(data['result'][index]['mentor_name'],style: TextStyle(color: Colors.white),),
+                                Text(data['result'][index]['phone'],style: const TextStyle(color: Colors.white),),
+                                Text(data['result'][index]['mentor_name'],style: const TextStyle(color: Colors.white),),
                                 ElevatedButton(
                                   onPressed: () {
                                     _callMentor(

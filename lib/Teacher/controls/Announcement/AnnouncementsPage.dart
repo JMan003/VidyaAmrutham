@@ -53,7 +53,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                               'Announced on ${data['result'][index]['date'].toString().substring(0, 10)}',
                               style: const TextStyle(fontSize: 15),
                             ),
-                            trailing: Icon(Icons.delete),
+                            trailing: const Icon(Icons.delete),
                             isThreeLine: true,
                             onTap: () {
                               deleteAnnouncement(data['result'][index]['announcement_id']);

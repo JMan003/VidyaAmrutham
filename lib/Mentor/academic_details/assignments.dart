@@ -12,7 +12,7 @@ class _AssignmentsState extends State<Assignments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assignments'),
+        title: const Text('Assignments'),
       ),
       body: Card(
         child: Column(

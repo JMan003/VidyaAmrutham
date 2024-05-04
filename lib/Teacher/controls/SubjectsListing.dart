@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SubjectsListing extends StatefulWidget {
+  const SubjectsListing({super.key});
+
   @override
   _SubjectsListingState createState() => _SubjectsListingState();
 }

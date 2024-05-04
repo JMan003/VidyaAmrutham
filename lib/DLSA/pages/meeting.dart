@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeetingPage extends StatefulWidget {
+  const MeetingPage({super.key});
+
   @override
   _MeetingPageState createState() => _MeetingPageState();
 }
@@ -16,7 +17,7 @@ class _MeetingPageState extends State<MeetingPage> {
     setState(() {
       notesData.add({'heading': heading, 'note': note});
       notes.add(
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.95,
           child: Card(
             color: const Color(0xFFF3EDF7),
@@ -54,7 +55,7 @@ class _MeetingPageState extends State<MeetingPage> {
         };
       }).toList();
       notes = notesData
-          .map((note) => Container(
+          .map((note) => SizedBox(
               width: MediaQuery.of(context).size.width * 0.95,
               child: Card(
                 color: const Color(0xFFF3EDF7),

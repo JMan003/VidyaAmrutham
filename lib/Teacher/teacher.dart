@@ -44,15 +44,15 @@ class _TeacherState extends State<Teacher> {
           ),
           title: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 0, right: 110),
+              const Padding(
+                padding: EdgeInsets.only(top: 0, right: 110),
                 child: Text("Vidyamrutham"),
               ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: Container(
+                    child: SizedBox(
                         width: 30,
                         height: 30,
                         child: Image.asset("assets/images/3d_avatar_20.png")),
@@ -61,7 +61,7 @@ class _TeacherState extends State<Teacher> {
                     padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Text(
                       Teacher_name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w300,
                       ),
@@ -76,18 +76,18 @@ class _TeacherState extends State<Teacher> {
             Padding(
               padding: const EdgeInsets.only(bottom: 50),
               child:
-                  IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
             )
           ],
           toolbarHeight: 150,
         ),
       ),
-      drawer: CommonDrawer(),
+      drawer: const CommonDrawer(),
       body: <Widget>[
         Teacher1(),
-        Teacher4(),
+        const Teacher4(),
         Teacher3(),
-        Teacher2(),
+        const Teacher2(),
       ][currentPageIndex],
       bottomNavigationBar: MyBottomNavigationBar(
         currentPageIndex: currentPageIndex,

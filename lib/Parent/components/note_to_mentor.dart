@@ -51,7 +51,7 @@ class _NoteToMentorState extends State<NoteToMentor> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20),
                     child: TextField(
                       controller: noteController,
                       maxLines: 10,

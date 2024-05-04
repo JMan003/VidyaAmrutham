@@ -8,6 +8,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PDFPage extends StatelessWidget {
+  const PDFPage({super.key});
+
   Future<dynamic> fetchContentFromServer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
@@ -74,11 +76,11 @@ class PDFPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Generate PDF'),
+        title: const Text('Generate PDF'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('Generate PDF'),
+          child: const Text('Generate PDF'),
           onPressed: () async {
             var content = await fetchContentFromServer();
             await generateAndPreviewPdf(content);
