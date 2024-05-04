@@ -5,24 +5,24 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
-class TeacherAttendance extends StatefulWidget {
+class RemoveStudent extends StatefulWidget {
   final String grade, section;
 
-  TeacherAttendance({Key? key, required this.grade, required this.section})
+  RemoveStudent({Key? key, required this.grade, required this.section})
       : super(key: key);
 
   @override
-  State<TeacherAttendance> createState() => _TeacherAttendanceState();
+  State<RemoveStudent> createState() => RemoveStudentState();
 }
 
-class _TeacherAttendanceState extends State<TeacherAttendance> {
+class RemoveStudentState extends State<RemoveStudent> {
   final Map<String, bool> _attendance = {};
   late Map<String, dynamic> data;
 
   Future<Map<String, dynamic>> getStudents() async {
     String? url = dotenv.env['SERVER'];
     var response = await http.get(Uri.parse(
-        'http://$url/teacher/students/${widget.grade}/${widget.section}'));
+        'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
   }
 
@@ -30,7 +30,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendance'),
+        title: const Text('Student Removal'),
       ),
       body: FutureBuilder(
         future: getStudents(),
@@ -51,27 +51,14 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                             title: Text(data['result'][index]['name']),
                             subtitle: Text(
                                 'Roll Number: ${data['result'][index]['roll_no']}'),
-                            trailing: Checkbox(
-                              value: _attendance[
-                                      data['result'][index]['username'].toString()] ??
-                                  false,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  _attendance[data['result'][index]['username']
-                                      .toString()] = (value!);
-                                });
-                              },
-                            ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {},
+                                ),
                           );
                         },
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        submitAttendance();
-                      },
-                      child: const Text('Submit'),
-                    )
                   ],
                 );
               });
