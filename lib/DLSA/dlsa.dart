@@ -111,6 +111,7 @@ class _DLSAState extends State<DLSA> {
         selectedItemColor: const Color.fromARGB(255, 235, 143, 57),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: false,
+        backgroundColor: Colors.white,
       ), 
       backgroundColor: const Color.fromARGB(255, 13, 15, 31),
     );

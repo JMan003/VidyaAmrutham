@@ -33,6 +33,7 @@ class DashboardState extends State<ParentDashboard> {
 
     String? url = dotenv.env['SERVER'];
     var username = prefs.getString('username');
+    String? url = dotenv.env['SERVER'];
     print(username);
     var data = await http
         .get(Uri.parse('https://$url/parent/student/$username'));

@@ -1,23 +1,24 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Teacher/controls/ContactMentor.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
+import 'package:vidyaamrutham/Teacher/controls/RemoveStudent/RemoveStudent.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class ContactMentorSelection extends StatefulWidget {
-  const ContactMentorSelection({Key? key}) : super(key: key);
+class StudentRemovalSelection extends StatefulWidget {
+  const StudentRemovalSelection({Key? key}) : super(key: key);
   @override
-  State<ContactMentorSelection> createState() => MentorSelection();
+  State<StudentRemovalSelection> createState() => RemoveStudentSelection();
 }
 
-class MentorSelection extends State<ContactMentorSelection> {
+class RemoveStudentSelection extends State<StudentRemovalSelection> {
   Future<Map<String, dynamic>> getClasses() async {
     String? url = dotenv.env['SERVER'];
     var response =
-        await http.get(Uri.parse('http://${url}/teacher/classes'));
+        await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -26,7 +27,7 @@ class MentorSelection extends State<ContactMentorSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Choose Class'),
+          title: const Text('Remove Student'),
         ),
         body: FutureBuilder(
             future: getClasses(),
@@ -48,7 +49,7 @@ class MentorSelection extends State<ContactMentorSelection> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ContactMentor(
+                                      builder: (context) => RemoveStudent(
                                           grade : data['result'][index]['class'],
                                           section : data['result'][index]['section']
                                         )

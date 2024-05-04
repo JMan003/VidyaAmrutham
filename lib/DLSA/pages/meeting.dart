@@ -22,8 +22,8 @@ class _MeetingPageState extends State<MeetingPage> {
             color: const Color(0xFFF3EDF7),
             margin: const EdgeInsets.all(10.0),
             child: ListTile(
-              title:
-                  Text(heading, style: const TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(heading,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(note),
             ),
           ),
@@ -61,8 +61,11 @@ class _MeetingPageState extends State<MeetingPage> {
                 margin: const EdgeInsets.all(10.0),
                 child: ListTile(
                   title: Text(note['heading'] ?? 'No heading',
-                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-                  subtitle: Text(note['note'] ?? 'No note', style: const TextStyle(color: Color.fromARGB(255, 43, 43, 43))),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black)),
+                  subtitle: Text(note['note'] ?? 'No note',
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 43, 43, 43))),
                 ),
               )))
           .toList();
@@ -116,26 +119,27 @@ class _MeetingPageState extends State<MeetingPage> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: const Text('Add Meeting Note'),
-                content: Column(
-                  children: [
-                    TextField(
-                      controller: headingController,
-                      decoration: const InputDecoration(hintText: "Heading"),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      )
-                    ),
-                    TextFormField(
-                      controller: notesController,
-                      minLines: 5,
-                      maxLines: null,
-                      decoration: const InputDecoration(hintText: "Notes"),
-                      style: const TextStyle(
-                        color: Colors.white
+                content: Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: Column(
+                    children: [
+                      TextField(
+                          controller: headingController,
+                          decoration:
+                              const InputDecoration(hintText: "Heading"),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                      TextFormField(
+                        controller: notesController,
+                        minLines: 5,
+                        maxLines: null,
+                        decoration: const InputDecoration(hintText: "Notes"),
+                        style: const TextStyle(color: Colors.white),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 actions: [
                   TextButton(
@@ -158,8 +162,11 @@ class _MeetingPageState extends State<MeetingPage> {
             },
           );
         },
-        child: const Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 16, 16, 17),
+        child: new IconTheme(
+          data: new IconThemeData(color: Color.fromARGB(255, 16, 16, 17)),
+          child: new Icon(Icons.add),
+        ),
+        backgroundColor: Colors.grey,
       ),
     );
   }

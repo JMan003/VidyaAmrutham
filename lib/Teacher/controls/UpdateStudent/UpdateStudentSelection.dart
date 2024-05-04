@@ -1,23 +1,23 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Teacher/controls/ContactStudent.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
+import 'package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudent.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class ContactStudentSelection extends StatefulWidget {
-  const ContactStudentSelection({Key? key}) : super(key: key);
+class StudentUpdateSelection extends StatefulWidget {
+  const StudentUpdateSelection({Key? key}) : super(key: key);
   @override
-  State<ContactStudentSelection> createState() => StudentSelection();
+  State<StudentUpdateSelection> createState() => UpdateStudentSelection();
 }
 
-class StudentSelection extends State<ContactStudentSelection> {
+class UpdateStudentSelection extends State<StudentUpdateSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env["SERVER"];
-    var response =
-        await http.get(Uri.parse('http://$url/teacher/classes'));
+    String? url = dotenv.env['SERVER'];
+    var response = await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -26,7 +26,7 @@ class StudentSelection extends State<ContactStudentSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Choose Class'),
+          title: const Text('Update Student'),
         ),
         body: FutureBuilder(
             future: getClasses(),
@@ -48,12 +48,10 @@ class StudentSelection extends State<ContactStudentSelection> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ContactStudent(
-                                          grade : data['result'][index]['class'],
-                                          section : data['result'][index]['section']
-                                        )
-                                  )
-                              );
+                                      builder: (context) => UpdateStudent(
+                                          grade: data['result'][index]['class'],
+                                          section: data['result'][index]
+                                              ['section'])));
                             },
                           ),
                         );

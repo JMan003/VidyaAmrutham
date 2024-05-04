@@ -24,6 +24,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: const Color(0xFF41BB95),
+      ),
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
@@ -151,7 +155,6 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'teacher') {
-
       print('https://$url/teacher/login');
       print(username);
       print(password);
