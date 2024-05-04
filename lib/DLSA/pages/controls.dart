@@ -32,12 +32,6 @@ class ControlPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ListTile(
-                        //title: Text(
-                        //  'Controls',
-                        //  style: TextStyle(
-                        //    fontSize: 24.0,
-                        //    )
-                        //    ),
                         subtitle: GridView.count(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
