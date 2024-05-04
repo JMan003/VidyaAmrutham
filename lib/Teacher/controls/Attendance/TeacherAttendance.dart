@@ -22,7 +22,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
   Future<Map<String, dynamic>> getStudents() async {
     String? url = dotenv.env['SERVER'];
     var response = await http.get(Uri.parse(
-        'http://$url/teacher/students/${widget.grade}/${widget.section}'));
+        'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
   }
 
@@ -52,8 +52,9 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                             subtitle: Text(
                                 'Roll Number: ${data['result'][index]['roll_no']}'),
                             trailing: Checkbox(
-                              value: _attendance[
-                                      data['result'][index]['username'].toString()] ??
+                              value: _attendance[data['result'][index]
+                                          ['username']
+                                      .toString()] ??
                                   false,
                               onChanged: (bool? value) {
                                 setState(() {
@@ -87,13 +88,13 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
 
   void submitAttendance() async {
     for (int i = 0; i < data['result'].length; i++) {
-      if (_attendance[data['result'][i]['id'].toString()] == null) {
-        _attendance[data['result'][i]['id'].toString()] = false;
+      if (_attendance[data['result'][i]['username'].toString()] == null) {
+        _attendance[data['result'][i]['username'].toString()] = false;
       }
     }
     String? url = dotenv.env['SERVER'];
     var response = await http.post(
-      Uri.parse('http://$url/teacher/attendance'),
+      Uri.parse('https://$url/teacher/attendance'),
       body: json.encode({
         'grade': widget.grade,
         'section': widget.section,
@@ -120,8 +121,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Teacher1()),
+                        MaterialPageRoute(builder: (context) => Teacher1()),
                         (route) => false);
                   },
                   child: const Text('OK'),
@@ -142,8 +142,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Teacher1()),
+                        MaterialPageRoute(builder: (context) => Teacher1()),
                         (route) => false);
                   },
                   child: const Text('OK'),

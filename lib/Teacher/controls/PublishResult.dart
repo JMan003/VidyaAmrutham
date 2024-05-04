@@ -11,7 +11,7 @@ class PublishResult extends StatefulWidget {
       {Key? key,
       required this.exam_id,
       required this.examClass,
-      required this.examDivision, 
+      required this.examDivision,
       required this.totalMarks})
       : super(key: key);
 
@@ -69,20 +69,20 @@ class _PublishResultState extends State<PublishResult> {
                                 color: Colors.white,
                               ),
                               onChanged: (value) {
-                                if(int.parse(value) > widget.totalMarks) {
+                                if (int.parse(value) > widget.totalMarks) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text('Marks cannot be greater than total marks'),
+                                      content: Text(
+                                          'Marks cannot be greater than total marks'),
                                     ),
                                   );
                                   value = "";
                                   return;
                                 }
-                                
-                                _marks[data['result'][index]['id'].toString()] =
-                                    value;
+
+                                _marks[data['result'][index]['username'].toString()] = value;
                               },
-                            ),
+                           ),
                           ),
                         );
                       },
@@ -94,25 +94,25 @@ class _PublishResultState extends State<PublishResult> {
 
                       print(widget.exam_id);
 
-                      print(_marks);  
+                      print(_marks);
 
                       var link = Uri.parse(
                           'https://${url}/teacher/exams/${widget.exam_id}/result');
                       var response = await http.post(
-                        link, 
-                        body: {"mark": _marks},
-                        headers: {"Content-Type": "application/json"},
+                        link,
+                        body: jsonEncode({"mark": _marks}),
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
                       );
 
-                      if(response.statusCode == 200) {
+                      if (response.statusCode == 200) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Result published successfully'),
                           ),
                         );
-                        setState(() {
-
-                        });
+                        setState(() {});
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -120,11 +120,12 @@ class _PublishResultState extends State<PublishResult> {
                           ),
                         );
                       }
-
                     },
                     child: const Text('Submit'),
                   ),
-                  SizedBox(height: 100,)
+                  SizedBox(
+                    height: 100,
+                  )
                 ],
               );
             });

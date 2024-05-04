@@ -37,7 +37,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Registration'),
+        title: const Text('Student Registration'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -54,7 +54,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        const Text(
                           "Student's Details",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
@@ -63,47 +63,47 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: nameController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Name',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the name',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: classController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Class',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the class',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: divisionController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Division',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the Division',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: rollNumberController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Roll Number',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the Roll Number',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Date of Birth',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the date of birth',
@@ -121,31 +121,31 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                             });
                           },
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: bloodGroupController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Blood Group',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the Blood Group',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: genderController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Gender',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the Gender',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: admissionNumberController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Admission Number',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the Admission number',
@@ -156,8 +156,8 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: sUserController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: "Student Username",
                             border: OutlineInputBorder(),
                             hintText: "Enter Student's Username",
@@ -168,8 +168,8 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: sPassController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: "Student Password",
                             border: OutlineInputBorder(),
                             hintText: "Enter Student's Password",
@@ -179,7 +179,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -188,7 +188,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        const Text(
                           "Parent's Details",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
@@ -197,60 +197,60 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: fatherController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: "Father's Name",
                             border: OutlineInputBorder(),
                             hintText: 'Enter Father name',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: fNumberController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Father Phone Number',
                             border: OutlineInputBorder(),
                             hintText: 'Enter Father Number',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: motherController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Mother Name',
                             border: OutlineInputBorder(),
                             hintText: 'Enter Mother name',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: mNumberController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Mother Phone Number',
                             border: OutlineInputBorder(),
                             hintText: 'Enter Mother Number',
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           controller: addressController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Address',
                             border: OutlineInputBorder(),
                             hintText: 'Enter the address',
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           controller: emailController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Parent Email',
                             border: OutlineInputBorder(),
                             hintText: 'Enter email address',
@@ -261,8 +261,8 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: pUserController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: "Parent Username",
                             border: OutlineInputBorder(),
                             hintText: "Enter Parent's Username",
@@ -273,8 +273,8 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                         ),
                         TextFormField(
                           controller: pPassController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: "Parent Password",
                             border: OutlineInputBorder(),
                             hintText: "Enter Parent's Password",
@@ -284,12 +284,12 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     registerStudent();
                   },
-                  child: Text('Register'),
+                  child: const Text('Register'),
                 ),
               ],
             ),
@@ -328,13 +328,13 @@ class _StudentRegistrationState extends State<StudentRegistration> {
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Student Registered Successfully'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to register student'),
         ),
       );

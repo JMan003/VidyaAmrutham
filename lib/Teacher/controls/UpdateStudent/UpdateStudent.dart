@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vidyaamrutham/Teacher/controls/UpdateStudentRegister.dart';
+import 'package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudentRegister.dart';
 import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
 class UpdateStudent extends StatefulWidget {
