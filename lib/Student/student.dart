@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:vidyaamrutham/Mentor/pages/home.dart';
-import 'package:vidyaamrutham/Mentor/pages/profile.dart';
-import 'package:vidyaamrutham/Mentor/pages/notes.dart';
-import 'package:vidyaamrutham/Mentor/pages/actions.dart';
+import 'package:vidyaamrutham/Student/pages/home.dart';
+import 'package:vidyaamrutham/Student/pages/profile.dart';
 import 'package:vidyaamrutham/components/Drawer.dart';
 
-String mentor_name = "Mentor";
+String student_name = "Student";
 
-class Mentor extends StatefulWidget {
-  const Mentor({Key? key}) : super(key: key);
+class Student extends StatefulWidget {
+  const Student({Key? key}) : super(key: key);
 
   @override
-  State<Mentor> createState() => _MentorState();
+  State<Student> createState() => StudentState();
 }
 
-class _MentorState extends State<Mentor> {
+class StudentState extends State<Student> {
   int currentPageIndex = 0;
 
   @override
@@ -51,15 +49,15 @@ class _MentorState extends State<Mentor> {
                     child: SizedBox(
                         width: 30,
                         height: 30,
-                        child: Image.asset("assets/images/mentor.png")),
+                        child: Image.asset("assets/images/student.png")),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Text(
-                      mentor_name,
+                      student_name,
                       style: const TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   )
@@ -80,10 +78,8 @@ class _MentorState extends State<Mentor> {
       ),
       drawer: const CommonDrawer(),
       body: <Widget>[
-        const MentorHome(),
-        const MentorProfile(),
-        const MentorNotes(),
-        const MentorActions(),
+        const StudentHome(),
+        const StudentProfile(),
       ][currentPageIndex],
       bottomNavigationBar: MyBottomNavigationBar(
         currentPageIndex: currentPageIndex,
@@ -131,20 +127,6 @@ class MyBottomNavigationBar extends StatelessWidget {
             color: Colors.black,
           ),
           label: 'Profile',
-        ),
-        NavigationDestination(
-          icon: Icon(
-            Icons.book,
-            color: Colors.black,
-          ),
-          label: 'Notes',
-        ),
-        NavigationDestination(
-          icon: Icon(
-            Icons.dashboard,
-            color: Colors.black,
-          ),
-          label: 'Actions',
         ),
       ],
     );

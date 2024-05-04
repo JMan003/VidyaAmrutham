@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
@@ -324,7 +322,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
     };
 
     var response = await http
-        .post(Uri.parse('https://${url}/teacher/register/student'), body: data);
+        .post(Uri.parse('https://$url/teacher/register/student'), body: data);
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(

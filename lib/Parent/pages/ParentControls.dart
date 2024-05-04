@@ -4,10 +4,6 @@ import 'package:vidyaamrutham/Parent/components/Announcements.dart';
 import 'package:vidyaamrutham/Parent/components/ContactMentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_mentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_teacher.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 3;
 double? containerHeight, innerContainerWidth, innerContainerHeight;

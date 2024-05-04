@@ -16,16 +16,16 @@ class _ViewExamsState extends State<ViewExams> {
 
     String? url = dotenv.env['SERVER'];
 
-    var link = Uri.parse('http://${url}/exams');
+    var link = Uri.parse('http://$url/exams');
     var response = await http.get(link);
     return json.decode(response.body);
   }
 
-  Future deleteExam(String exam_id) async {
+  Future deleteExam(String examId) async {
 
     String? url = dotenv.env['SERVER'];
 
-    var link = Uri.parse('http://${url}/exams/${exam_id}');
+    var link = Uri.parse('http://$url/exams/$examId');
     var response = await http.delete(link);
     return json.decode(response.body);
   }

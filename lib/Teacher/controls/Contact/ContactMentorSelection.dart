@@ -17,7 +17,7 @@ class MentorSelection extends State<ContactMentorSelection> {
   Future<Map<String, dynamic>> getClasses() async {
     String? url = dotenv.env['SERVER'];
     var response =
-        await http.get(Uri.parse('http://${url}/teacher/classes'));
+        await http.get(Uri.parse('http://$url/teacher/classes'));
 
     return json.decode(response.body);
   }

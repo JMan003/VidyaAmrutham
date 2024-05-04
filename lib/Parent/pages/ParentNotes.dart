@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 2;
 double? containerHeight,
@@ -13,10 +9,10 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
-final String studentName = "Student's Name";
-final String studentAdmissionNo = "123456";
-final String studentGrade = "Grade 10";
-final String studentClass = "10 A";
+const String studentName = "Student's Name";
+const String studentAdmissionNo = "123456";
+const String studentGrade = "Grade 10";
+const String studentClass = "10 A";
 
 class ParentNotes extends StatefulWidget {
   const ParentNotes({Key? key}) : super(key: key);

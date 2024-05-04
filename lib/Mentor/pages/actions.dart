@@ -19,10 +19,10 @@ class MentorActions extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             "Controls",
             style: TextStyle(
               fontSize: 30,
@@ -30,16 +30,16 @@ class MentorActions extends StatelessWidget {
               color: Color(0xFF514D4D),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             height: 250,
             width: 330,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFF3EDF7),
               borderRadius: BorderRadius.all(Radius.circular(16)),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: Color(0x26000000),
                   blurRadius: 3,
@@ -67,7 +67,7 @@ class MentorActions extends StatelessWidget {
                           icon: Image.asset("assets/images/Brief.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Instruction\nfor parents",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
@@ -81,7 +81,7 @@ class MentorActions extends StatelessWidget {
                           icon: Image.asset("assets/images/Inscription.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Letter to Teacher",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
@@ -95,7 +95,7 @@ class MentorActions extends StatelessWidget {
                           icon: Image.asset("assets/images/Team.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Meeting\nTeacher",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
@@ -114,7 +114,7 @@ class MentorActions extends StatelessWidget {
                           icon: Image.asset("assets/images/Collaborating In Circle.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Meeting\nParents",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
@@ -128,7 +128,7 @@ class MentorActions extends StatelessWidget {
                           icon: Image.asset("assets/images/Todo.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Support Plan",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
@@ -139,12 +139,12 @@ class MentorActions extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PDFPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const PDFPage()));
                           },
                           icon: Image.asset("assets/images/Print.png"),
                           iconSize: 60,
                         ),
-                        Text(
+                        const Text(
                           "Print Report",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
