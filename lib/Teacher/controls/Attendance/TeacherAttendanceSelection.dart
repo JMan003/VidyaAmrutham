@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Teacher/controls/RemoveStudent.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class StudentRemovalSelection extends StatefulWidget {
-  const StudentRemovalSelection({Key? key}) : super(key: key);
+class TeacherAttendanceSelection extends StatefulWidget {
+  const TeacherAttendanceSelection({Key? key}) : super(key: key);
   @override
-  State<StudentRemovalSelection> createState() => RemoveStudentSelection();
+  State<TeacherAttendanceSelection> createState() => AttendanceSelection();
 }
 
-class RemoveStudentSelection extends State<StudentRemovalSelection> {
+class AttendanceSelection extends State<TeacherAttendanceSelection> {
   Future<Map<String, dynamic>> getClasses() async {
     String? url = dotenv.env['SERVER'];
     var response =
-        await http.get(Uri.parse('https://$url/teacher/classes'));
+        await http.get(Uri.parse('http://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -27,7 +26,7 @@ class RemoveStudentSelection extends State<StudentRemovalSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Remove Student'),
+          title: const Text('Take Attendance'),
         ),
         body: FutureBuilder(
             future: getClasses(),
@@ -49,7 +48,7 @@ class RemoveStudentSelection extends State<StudentRemovalSelection> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => RemoveStudent(
+                                      builder: (context) => TeacherAttendance(
                                           grade : data['result'][index]['class'],
                                           section : data['result'][index]['section']
                                         )

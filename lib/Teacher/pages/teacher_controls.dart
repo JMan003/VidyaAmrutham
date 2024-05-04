@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import "package:url_launcher/url_launcher.dart";
 import "package:url_launcher/url_launcher_string.dart";
-import "package:vidyaamrutham/Teacher/controls/ContactMentorSelection.dart";
-import "package:vidyaamrutham/Teacher/controls/ContactStudentSelection.dart";
-import "package:vidyaamrutham/Teacher/controls/RemoveStudentSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/Contact/ContactMentorSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/Contact/ContactStudentSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/RemoveStudent/RemoveStudentSelection.dart";
 import "package:vidyaamrutham/Teacher/controls/StudentRegistration.dart";
-import "package:vidyaamrutham/Teacher/controls/UpdateStudentSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudentSelection.dart";
 
 class Teacher2 extends StatelessWidget {
 

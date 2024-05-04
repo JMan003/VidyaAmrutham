@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
+import 'package:vidyaamrutham/Teacher/controls/Grievances/GrievanceStudent.dart';
+import 'package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudent.dart';
+import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class TeacherAttendanceSelection extends StatefulWidget {
-  const TeacherAttendanceSelection({Key? key}) : super(key: key);
+class StudentGrievanceSelection extends StatefulWidget {
+  const StudentGrievanceSelection({Key? key}) : super(key: key);
   @override
-  State<TeacherAttendanceSelection> createState() => AttendanceSelection();
+  State<StudentGrievanceSelection> createState() => GrievanceStudentSelection();
 }
 
-class AttendanceSelection extends State<TeacherAttendanceSelection> {
+class GrievanceStudentSelection extends State<StudentGrievanceSelection> {
   Future<Map<String, dynamic>> getClasses() async {
     String? url = dotenv.env['SERVER'];
-    var response =
-        await http.get(Uri.parse('http://$url/teacher/classes'));
+    var response = await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -26,7 +26,7 @@ class AttendanceSelection extends State<TeacherAttendanceSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Take Attendance'),
+          title: const Text('Select Student Class'),
         ),
         body: FutureBuilder(
             future: getClasses(),
@@ -48,12 +48,10 @@ class AttendanceSelection extends State<TeacherAttendanceSelection> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => TeacherAttendance(
-                                          grade : data['result'][index]['class'],
-                                          section : data['result'][index]['section']
-                                        )
-                                  )
-                              );
+                                      builder: (context) => GrievanceStudent(
+                                          grade: data['result'][index]['class'],
+                                          section: data['result'][index]
+                                              ['section'])));
                             },
                           ),
                         );

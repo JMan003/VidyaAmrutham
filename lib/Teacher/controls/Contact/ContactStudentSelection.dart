@@ -4,8 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Teacher/controls/ContactStudent.dart';
-import 'package:vidyaamrutham/Teacher/controls/TeacherAttendance.dart';
+import 'package:vidyaamrutham/Teacher/controls/Contact/ContactStudent.dart';
+import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
 
 class ContactStudentSelection extends StatefulWidget {
   const ContactStudentSelection({Key? key}) : super(key: key);
