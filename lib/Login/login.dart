@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
     var username = usernameController.text;
     var password = passwordController.text;
     if (role == 'parent') {
-      final response = await http.post(Uri.parse('http://$url/parent/login'),
+      final response = await http.post(Uri.parse('https://$url/parent/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         prefs.setString('username', username);

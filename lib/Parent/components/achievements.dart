@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,9 +15,12 @@ class Achievements extends StatefulWidget {
 class _AchievementsState extends State<Achievements> {
   Future<Map<String, dynamic>> getAchivements() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final studentId = prefs.getString('studentId')!;
+    final studentId = prefs.getString('student_id')!;
+
+    String? link = dotenv.env['SERVER'];
+
     var url =
-        Uri.parse('http://192.168.1.9:3001/parent/achievements/${studentId}');
+        Uri.parse('http://$link/parent/achievements/${studentId}');
     var response = await http.get(url);
     print(response.body);
     return json.decode(response.body);
