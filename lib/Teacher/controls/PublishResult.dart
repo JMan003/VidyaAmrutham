@@ -27,7 +27,7 @@ class _PublishResultState extends State<PublishResult> {
     String? url = dotenv.env['SERVER'];
 
     var link = Uri.parse(
-        'http://${url}/teacher/students/${widget.examClass}/${widget.examDivision}');
+        'http://$url/teacher/students/${widget.examClass}/${widget.examDivision}');
     var response = await http.get(link);
     return json.decode(response.body);
   }
@@ -36,7 +36,7 @@ class _PublishResultState extends State<PublishResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Publish Result'),
+        title: const Text('Publish Result'),
       ),
       body: FutureBuilder(
         future: getStudents(),
@@ -59,7 +59,7 @@ class _PublishResultState extends State<PublishResult> {
                           title: Text(data['result'][index]['name']),
                           subtitle: Text(
                               'Roll Number: ${data['result'][index]['roll_no']}'),
-                          trailing: Container(
+                          trailing: SizedBox(
                             width: 100, // Adjust this value as needed
                             child: TextField(
                               decoration: InputDecoration(
@@ -97,7 +97,7 @@ class _PublishResultState extends State<PublishResult> {
                       print(_marks);  
 
                       var link = Uri.parse(
-                          'https://${url}/teacher/exams/${widget.exam_id}/result');
+                          'https://$url/teacher/exams/${widget.exam_id}/result');
                       var response = await http.post(
                         link, 
                         body: {"mark": _marks},
@@ -124,7 +124,7 @@ class _PublishResultState extends State<PublishResult> {
                     },
                     child: const Text('Submit'),
                   ),
-                  SizedBox(height: 100,)
+                  const SizedBox(height: 100,)
                 ],
               );
             });

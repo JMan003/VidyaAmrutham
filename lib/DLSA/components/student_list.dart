@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class StudentList extends StatelessWidget {
+  const StudentList({super.key});
+
   Future<Map<String, dynamic>> getStudentList() async {
     try {
       var url = dotenv.env['SERVER'];

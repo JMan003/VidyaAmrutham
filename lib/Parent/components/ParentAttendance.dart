@@ -80,14 +80,14 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                             cells: <DataCell>[
                               DataCell(
                                 Text(data['result'][index]['date'].toString().substring(0, 10),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black
                                   ),
                                 ),
                               ),
                               DataCell(
                                 Text(data['result'][index]['status'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black
                                   ),
                                 ),
@@ -107,7 +107,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                 return const Text('No data');
               }
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

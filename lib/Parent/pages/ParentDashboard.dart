@@ -5,10 +5,6 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Parent/components/ParentAttendance.dart';
 import 'package:vidyaamrutham/Parent/components/achievements.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 double? containerHeight,
     innerContainerWidth,
@@ -433,7 +429,7 @@ class DashboardState extends State<ParentDashboard> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>
-                                                                Achievements()));
+                                                                const Achievements()));
                                                   },
                                                   child: const Column(
                                                     children: [

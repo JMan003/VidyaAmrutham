@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:vidyaamrutham/DLSA/pages/controls.dart';
-import 'package:vidyaamrutham/DLSA/pages/home.dart';
-import 'package:vidyaamrutham/DLSA/pages/meeting.dart';
+import 'package:vidyaamrutham/Student/pages/home.dart';
+import 'package:vidyaamrutham/Student/pages/profile.dart';
 import 'package:vidyaamrutham/components/Drawer.dart';
 
+String student_name = "Student";
 
-class DLSA extends StatefulWidget {
-  const DLSA({Key? key}) : super(key: key);
+class Student extends StatefulWidget {
+  const Student({Key? key}) : super(key: key);
 
   @override
-  State<DLSA> createState() => _DLSAState();
+  State<Student> createState() => StudentState();
 }
 
-class _DLSAState extends State<DLSA> {
+class StudentState extends State<Student> {
   int currentPageIndex = 0;
-
-  final List<Widget>_pages = [
-    const HomePage(),
-    const MeetingPage(),
-    const ControlPage()
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +49,15 @@ class _DLSAState extends State<DLSA> {
                     child: SizedBox(
                         width: 30,
                         height: 30,
-                        child: Image.asset("assets/images/mentor.png")),
+                        child: Image.asset("assets/images/student.png")),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20, left: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Text(
-                      "DLSA",
-                      style: TextStyle(
+                      student_name,
+                      style: const TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   )
@@ -83,34 +77,58 @@ class _DLSAState extends State<DLSA> {
         ),
       ),
       drawer: const CommonDrawer(),
-      body: _pages[currentPageIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentPageIndex,
-        onTap: (index) {
+      body: <Widget>[
+        const StudentHome(),
+        const StudentProfile(),
+      ][currentPageIndex],
+      bottomNavigationBar: MyBottomNavigationBar(
+        currentPageIndex: currentPageIndex,
+        onPageChanged: (index) {
           setState(() {
             currentPageIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Meeting Notes',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            label: 'Controls',
-          ),
-        ],
-        selectedItemColor: const Color.fromARGB(255, 235, 143, 57),
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: false,
-      ), 
+      ),
       backgroundColor: const Color.fromARGB(255, 13, 15, 31),
     );
   }
 }
 
+class MyBottomNavigationBar extends StatelessWidget {
+  final int currentPageIndex;
+  final ValueChanged<int> onPageChanged;
+
+  const MyBottomNavigationBar({
+    Key? key,
+    required this.currentPageIndex,
+    required this.onPageChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigationBar(
+      backgroundColor: Colors.white,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      onDestinationSelected: onPageChanged,
+      indicatorColor: Colors.amber,
+      surfaceTintColor: Colors.white,
+      selectedIndex: currentPageIndex,
+      destinations: const <Widget>[
+        NavigationDestination(
+          icon: Icon(
+            Icons.home,
+            color: Colors.black,
+          ),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Icon(
+            Icons.person,
+            color: Colors.black,
+          ),
+          label: 'Profile',
+        ),
+      ],
+    );
+  }
+}

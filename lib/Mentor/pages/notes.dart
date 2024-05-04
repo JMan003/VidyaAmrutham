@@ -122,14 +122,14 @@ class ProfileState extends State<MentorNotes> {
                         ),
                       )),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(onPressed: saveText, child: const Text('Save')),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Text(
+                const Text(
                   'Academic Improvements ',
                   style: TextStyle(
                     fontSize: 20,

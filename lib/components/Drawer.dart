@@ -4,6 +4,8 @@ import 'package:vidyaamrutham/Login/role.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CommonDrawer extends StatelessWidget {
+  const CommonDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(

@@ -40,15 +40,15 @@ class _MentorState extends State<Mentor> {
           ),
           title: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 0, right: 110),
+              const Padding(
+                padding: EdgeInsets.only(top: 0, right: 110),
                 child: Text("Vidyamrutham"),
               ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: Container(
+                    child: SizedBox(
                         width: 30,
                         height: 30,
                         child: Image.asset("assets/images/mentor.png")),
@@ -57,7 +57,7 @@ class _MentorState extends State<Mentor> {
                     padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Text(
                       mentor_name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w300,
                       ),
@@ -72,18 +72,18 @@ class _MentorState extends State<Mentor> {
             Padding(
               padding: const EdgeInsets.only(bottom: 50),
               child:
-                  IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
             )
           ],
           toolbarHeight: 150,
         ),
       ),
-      drawer: CommonDrawer(),
+      drawer: const CommonDrawer(),
       body: <Widget>[
-        MentorHome(),
-        MentorProfile(),
-        MentorNotes(),
-        MentorActions(),
+        const MentorHome(),
+        const MentorProfile(),
+        const MentorNotes(),
+        const MentorActions(),
       ][currentPageIndex],
       bottomNavigationBar: MyBottomNavigationBar(
         currentPageIndex: currentPageIndex,

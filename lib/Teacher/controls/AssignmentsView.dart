@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:vidyaamrutham/Teacher/controls/AddAssignment.dart';
 
 class AssignmentsView extends StatefulWidget {
+  const AssignmentsView({super.key});
+
   @override
   _AssignmentsViewState createState() => _AssignmentsViewState();
 }

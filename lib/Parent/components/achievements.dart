@@ -16,7 +16,7 @@ class _AchievementsState extends State<Achievements> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final studentId = prefs.getString('studentId')!;
     var url =
-        Uri.parse('http://192.168.1.9:3001/parent/achievements/${studentId}');
+        Uri.parse('http://192.168.1.9:3001/parent/achievements/$studentId');
     var response = await http.get(url);
     print(response.body);
     return json.decode(response.body);

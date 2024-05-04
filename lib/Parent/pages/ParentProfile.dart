@@ -2,10 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentControls.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 1;
 double? containerHeight,
@@ -14,7 +10,7 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
-late String studentName= "", fatherName= "", motherName= "", fatherMobile= "", motherMobile= "", email= "", address= "";
+String studentName= "", fatherName= "", motherName= "", fatherMobile= "", motherMobile= "", email= "", address= "";
 
 class ParentProfile extends StatefulWidget {
   const ParentProfile({Key? key}) : super(key: key);

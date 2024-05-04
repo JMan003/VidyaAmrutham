@@ -34,8 +34,8 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
               ),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20),
                     child: Text(
                       'Note to teacher',
                       style: TextStyle(
@@ -44,8 +44,8 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
+                  const Padding(
+                    padding: EdgeInsets.all(20),
                     child: TextField(
                       maxLines: 10,
                       decoration: InputDecoration(

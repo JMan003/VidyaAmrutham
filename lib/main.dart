@@ -10,35 +10,39 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(Vidyaamrutham());
+  runApp(const Vidyaamrutham());
 }
 
 class Vidyaamrutham extends StatelessWidget {
+  const Vidyaamrutham({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Vidyaamrutham',
       theme: ThemeData(
-        primaryColor: const Color(0x00000001A1C29), // Adjusted primary color
+        primaryColor: const Color(0x001a1c29), // Adjusted primary color
         scaffoldBackgroundColor:
-            const Color(0x00000001A1C29), // Scaffold background color
+            const Color(0x001a1c29), // Scaffold background color
         brightness: Brightness.dark, // Use dark theme
 
         hintColor: Colors.blue, // Accent color for text fields
         // To ensure text is visible against the dark background, adjust text colors accordingly
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-          bodyText2: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+          bodyLarge: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+          bodyMedium: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
           // Adjust other text styles as needed
         ),
       ),
-      home: AppLoader(),
+      home: const AppLoader(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class AppLoader extends StatefulWidget {
+  const AppLoader({super.key});
+
   @override
   _AppLoaderState createState() => _AppLoaderState();
 }
@@ -65,7 +69,7 @@ class _AppLoaderState extends State<AppLoader> {
     bool isValidCookie = false;
 
     // Check if the username is not empty
-    if (!username.isEmpty && !role.isEmpty) {
+    if (username.isNotEmpty && role.isNotEmpty) {
       isValidCookie = true;
     }
 
@@ -84,7 +88,7 @@ class _AppLoaderState extends State<AppLoader> {
         ),
       );
     } else {
-      return _isLoggedIn ? choosePage(role) : RoleChoose();
+      return _isLoggedIn ? choosePage(role) : const RoleChoose();
     }
   }
 
@@ -96,11 +100,11 @@ class _AppLoaderState extends State<AppLoader> {
       // } else if (role == "student") {
       //   return StudentDashboardPage();
     } else if (role == "dlsa") {
-      return DLSA();
+      return const DLSA();
     } else if (role == "mentor") {
       return const Mentor();
     } else {
-      return LoginPage();
+      return const LoginPage();
     }
   }
 }

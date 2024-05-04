@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -7,9 +6,10 @@ import 'package:vidyaamrutham/DLSA/dlsa.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
 import 'package:vidyaamrutham/Parent/parent.dart';
 import 'package:vidyaamrutham/Teacher/teacher.dart';
+import 'package:vidyaamrutham/Student/student.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -98,8 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(top: 60, left: 250),
                   child: FloatingActionButton.large(
                     backgroundColor: const Color(0xFF41BB95),
-                    child: const Icon(Icons.arrow_forward),
                     onPressed: userValidation,
+                    child: const Icon(Icons.arrow_forward),
                   ),
                 )
               ],
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
         prefs.setString('username', username);
         // ignore: use_build_context_synchronously
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Parent()));
+            context, MaterialPageRoute(builder: (context) => const Parent()));
       } else {
         // ignore: use_build_context_synchronously
         showDialog(
@@ -181,13 +181,13 @@ class _LoginPageState extends State<LoginPage> {
             });
       }
     } else if (role == 'student') {
-      final response = await http.post(Uri.parse('http://$url/student/login'),
+      final response = await http.post(Uri.parse('https://$url/student/login'),
           body: {'username': username, 'password': password});
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
         prefs.setString('username', username);
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => ParentDashboard()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Student()));
       } else {
         // ignore: use_build_context_synchronously
         showDialog(
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text("Error"),
-                  content: Text('Invalid username or password'),
+                  content: const Text('Invalid username or password'),
                   actions: [
                     TextButton(
                         onPressed: () {

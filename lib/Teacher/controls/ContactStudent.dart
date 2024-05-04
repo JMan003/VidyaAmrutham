@@ -66,7 +66,7 @@ class _ContactStudentState extends State<ContactStudent> {
                                       data['result'][index]['father_phone']),
                                   child: Column(
                                     children:  [
-                                      Text("Call Father"),
+                                      const Text("Call Father"),
                                       Text(data['result'][index]['father_name']),
                                     ]
                                   ),
@@ -76,7 +76,7 @@ class _ContactStudentState extends State<ContactStudent> {
                                         data['result'][index]['mother_phone']),
                                     child: Column(
                                     children:  [
-                                      Text("Call Mother"),
+                                      const Text("Call Mother"),
                                       Text(data['result'][index]['mother_name']),
                                     ]
                                   ),

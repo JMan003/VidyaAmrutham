@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_mentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_teacher.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentDashboard.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentNotes.dart';
-import 'package:vidyaamrutham/Parent/pages/ParentProfile.dart';
-import 'package:vidyaamrutham/components/Drawer.dart';
 
 int _selectedIndex = 3;
 double? containerHeight, innerContainerWidth, innerContainerHeight;
-final String studentName = "";
+const String studentName = "";
 class ParentControls extends StatelessWidget {
   const ParentControls({super.key});
 
@@ -136,7 +132,7 @@ class ParentControls extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => NoteToTeacher(),
+                                          builder: (context) => const NoteToTeacher(),
                                         ),
                                       );
                                     },
@@ -174,7 +170,7 @@ class ParentControls extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => NoteToMentor(),
+                                          builder: (context) => const NoteToMentor(),
                                         ),
                                       );
                                     },
@@ -315,7 +311,7 @@ class ParentControls extends StatelessWidget {
   }
 
   void _callDLSA() async{
-    final phone = 'tel:+919400391522';
+    const phone = 'tel:+919400391522';
     if (await canLaunchUrlString(phone)) {
       await launchUrlString(phone);
     } else {

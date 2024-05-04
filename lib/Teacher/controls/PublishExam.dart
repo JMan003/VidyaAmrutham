@@ -26,7 +26,7 @@ class _PublishExamState extends State<PublishExam> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Publish Exam'),
+        title: const Text('Publish Exam'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -36,30 +36,30 @@ class _PublishExamState extends State<PublishExam> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     labelText: 'Exam Name',
                     border: OutlineInputBorder(),
                     hintText: 'Enter the exam name',
                   ),
                   controller: examName,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     labelText: 'Class',
                     border: OutlineInputBorder(),
                     hintText: 'Enter the class',
                   ),
                   controller: examClass,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Division',
                     border: OutlineInputBorder(),
                     hintText: 'Enter class division',
@@ -79,28 +79,28 @@ class _PublishExamState extends State<PublishExam> {
                     minuteInterval: 1,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     labelText: 'Total Marks',
                     border: OutlineInputBorder(),
                     hintText: 'Enter the total marks',
                   ),
                   controller: marks,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     labelText: 'Subject',
                     border: OutlineInputBorder(),
                     hintText: 'Enter the exam subject',
                   ),
                   controller: subject,
                 ),
-                SizedBox(height: 20),
-                Container(
+                const SizedBox(height: 20),
+                SizedBox(
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
@@ -112,7 +112,7 @@ class _PublishExamState extends State<PublishExam> {
                       print(subject.text);
 
                       var response = await http.post(
-                          Uri.parse('https://${url}/teacher/publish/exam'),
+                          Uri.parse('https://$url/teacher/publish/exam'),
                           body: {
                             'name': examName.text,
                             'examClass': examClass.text,
@@ -123,24 +123,23 @@ class _PublishExamState extends State<PublishExam> {
                           });
                       if (response.statusCode == 200) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Exam Published Successfully'),
                           ),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Failed to publish exam'),
                           ),
                         );
                       }
                     },
-                    child: Text('Publish Exam'),
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.blue),
                       textStyle: MaterialStateProperty.all<TextStyle>(
-                        TextStyle(
+                        const TextStyle(
                           fontSize: 18,
                         ),
                       ),
@@ -150,6 +149,7 @@ class _PublishExamState extends State<PublishExam> {
                         ),
                       ),
                     ),
+                    child: const Text('Publish Exam'),
                   ),
                 ),
               ],

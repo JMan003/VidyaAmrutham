@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class MentorList extends StatelessWidget {
+  const MentorList({super.key});
+
   Future<Map<String, dynamic>> getMentorList() async {
     try {
       var url = dotenv.env['SERVER'];
