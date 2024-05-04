@@ -3,8 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
-
 class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({Key? key}) : super(key: key);
 

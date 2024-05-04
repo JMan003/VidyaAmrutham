@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Parent/components/ExamView.dart';
 import 'package:vidyaamrutham/Parent/components/ParentAttendance.dart';
+import 'package:vidyaamrutham/Parent/components/Remarks.dart';
 import 'package:vidyaamrutham/Parent/components/ResultsView.dart';
 import 'package:vidyaamrutham/Parent/components/achievements.dart';
 
@@ -481,7 +482,11 @@ class DashboardState extends State<ParentDashboard> {
                                               children: [
                                                 GestureDetector(
                                                   onTap: () {
-                                                    // Add the required functionality here
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const Remarks()));
                                                   },
                                                   child: const Column(
                                                     children: [

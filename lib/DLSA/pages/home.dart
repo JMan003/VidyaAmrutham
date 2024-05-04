@@ -28,9 +28,9 @@ class HomePage extends StatelessWidget {
   Future<Map<String,dynamic>> getCount() async {
     print("Fetching data");
     String? url = dotenv.env['SERVER'];
-    var response = await http.get(Uri.parse('http://$url/dlsa/count'));
+    var response = await http.get(Uri.parse('https://$url/dlsa/count'));
     print(response.body);
-    number_of_students = json.decode(response.body)['result'][0]['COUNT(id)'].toString();
+    number_of_students = json.decode(response.body)['result'][0]['COUNT(username)'].toString();
     number_of_mentors = json.decode(response.body)['result'][1]['COUNT(username)'].toString();
     return json.decode(response.body);
   }
@@ -67,10 +67,10 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: ListTile(
                         title: const Text(
-                          'Number of Students',
+                          'Number of \nStudents',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
                           ),
@@ -122,10 +122,10 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: ListTile(
                         title: const Text(
-                          'Number of Mentors',
+                          'Number of \nMentors',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             fontFamily: "Poppins",
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
