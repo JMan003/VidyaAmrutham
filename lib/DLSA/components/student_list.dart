@@ -7,7 +7,8 @@ class StudentList extends StatelessWidget {
   Future<Map<String, dynamic>> getStudentList() async {
     try {
       var url = dotenv.env['SERVER'];
-      var response = await http.get(Uri.parse('https://$url/dlsa/student/list'));
+      var response =
+          await http.get(Uri.parse('https://$url/dlsa/student/list'));
 
       if (response.statusCode == 200) {
         return json.decode(response.body);
@@ -22,8 +23,10 @@ class StudentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 13, 15, 31),
       appBar: AppBar(
         title: const Text('Student List'),
+        backgroundColor: Color.fromARGB(255, 13, 15, 31),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: getStudentList(),
@@ -35,48 +38,59 @@ class StudentList extends StatelessWidget {
               return ListView.builder(
                 itemCount: data['result'].length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(data['result'][index]['name']),
-                    subtitle: Text(data['result'][index]['roll_no'].toString()),
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(data['result'][index]['name']),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Roll Number: ${data['result'][index]['roll_no']}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Class: ${data['result'][index]['class']} ${data['result'][index]['section']}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Date of Birth: ${data['result'][index]['dob'].toString().substring(0, 10)}',
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Mentor: ${data['result'][index]['mentor_name']}',
-                                    style: const TextStyle(color: Colors.grey),
+                  return Card(
+                    elevation: 5.0,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                    child: ListTile(
+                      title: Text(data['result'][index]['name']),
+                      subtitle:
+                          Text(data['result'][index]['roll_no'].toString()),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(data['result'][index]['name']),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Roll Number: ${data['result'][index]['roll_no']}',
+                                      style:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                    Text(
+                                      'Class: ${data['result'][index]['class']} ${data['result'][index]['section']}',
+                                      style:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                    Text(
+                                      'Date of Birth: ${data['result'][index]['dob'].toString().substring(0, 10)}',
+                                      style:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                    Text(
+                                      'Mentor: ${data['result'][index]['mentor_name']}',
+                                      style:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('Close'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
                                 ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Close'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          });
-                    },
+                              );
+                            });
+                      },
+                    ),
+                    ),
                   );
                 },
               );

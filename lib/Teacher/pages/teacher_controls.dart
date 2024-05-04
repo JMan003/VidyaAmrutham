@@ -3,7 +3,9 @@ import "package:url_launcher/url_launcher.dart";
 import "package:url_launcher/url_launcher_string.dart";
 import "package:vidyaamrutham/Teacher/controls/ContactMentorSelection.dart";
 import "package:vidyaamrutham/Teacher/controls/ContactStudentSelection.dart";
+import "package:vidyaamrutham/Teacher/controls/RemoveStudentSelection.dart";
 import "package:vidyaamrutham/Teacher/controls/StudentRegistration.dart";
+import "package:vidyaamrutham/Teacher/controls/UpdateStudentSelection.dart";
 
 class Teacher2 extends StatelessWidget {
 
@@ -128,14 +130,26 @@ class Teacher2 extends StatelessWidget {
                         iconSize: 60,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      StudentRemovalSelection()));
+                        },
                         icon: Container(
                           child: Image.asset("assets/images/Delete Trash.png"),
                         ),
                         iconSize: 60,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const StudentUpdateSelection()));
+                        },
                         icon: Container(
                           child: Image.asset("assets/images/Hand With Pen.png"),
                         ),

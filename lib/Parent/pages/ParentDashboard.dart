@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,9 +33,10 @@ class DashboardState extends State<ParentDashboard> {
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
+    String? url = dotenv.env['SERVER'];
     print(username);
     var data = await http
-        .get(Uri.parse('http://192.168.1.9:3001/parent/student/$username'));
+        .get(Uri.parse('http://$url/parent/student/$username'));
     print(data.body);
     var jsonData = json.decode(data.body);
 

@@ -4,7 +4,8 @@ class ControlPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView( 
+      child:Container(
         margin: const EdgeInsets.only(top: 50),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -118,6 +119,7 @@ class ControlPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }
