@@ -32,7 +32,7 @@ class GrievanceStudentState extends State<GrievanceStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Student'),
+        title: const Text('Select Student'),
       ),
       body: FutureBuilder(
         future: getStudents(),
