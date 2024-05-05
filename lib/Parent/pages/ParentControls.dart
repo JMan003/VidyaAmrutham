@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:vidyaamrutham/Parent/components/Announcements.dart';
 import 'package:vidyaamrutham/Parent/components/ContactMentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_mentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_teacher.dart';
@@ -105,12 +104,12 @@ class ParentControls extends StatelessWidget {
                           'Announcements',
                           'assets/images/Megaphone.png',
                           () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AnnouncementsPage(),
-                              ),
-                            );
+                            // Navigator.push(
+                              // context,
+                              // MaterialPageRoute(
+                                // builder: (context) => AnnouncementsPage(),
+                              // ),
+                            // );
                           },
                         ),
                         _buildGridItem(

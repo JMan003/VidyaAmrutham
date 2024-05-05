@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/assignments.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/student_selection.dart';
+import 'package:intl/intl.dart';
 
 class MentorHome extends StatelessWidget {
   const MentorHome({Key? key}) : super(key: key);
@@ -73,7 +74,6 @@ class MentorHome extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               showDialog(
-
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
@@ -106,7 +106,8 @@ class MentorHome extends StatelessWidget {
                                               students[index]['roll_no']
                                                   .toString()),
                                           buildDetailRow(
-                                              "DOB", students[index]['dob']),
+                                              "DOB",
+                                              students[index]['dob'].substring(0, 10).toString()),
                                           buildDetailRow(
                                               "Admission Number",
                                               students[index]['admission_no']
@@ -331,7 +332,7 @@ class MentorHome extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-      },  
+      },
     );
   }
 

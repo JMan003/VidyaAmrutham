@@ -29,7 +29,7 @@ class _MentorAttendanceState extends State<MentorAttendance> {
   Future<Map<String, dynamic>> getAttendance() async {
     print("Student ID: $studentId");
     var link = dotenv.env['SERVER'];
-    String url = 'http://$link/mentor/attendance/$studentId';
+    String url = 'https://$link/mentor/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),
     );

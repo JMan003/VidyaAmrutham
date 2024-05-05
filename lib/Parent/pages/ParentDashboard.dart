@@ -33,10 +33,9 @@ class DashboardState extends State<ParentDashboard> {
 
     String? url = dotenv.env['SERVER'];
     var username = prefs.getString('username');
-    String? url = dotenv.env['SERVER'];
     print(username);
-    var data = await http
-        .get(Uri.parse('https://$url/parent/student/$username'));
+    var data =
+        await http.get(Uri.parse('https://$url/parent/student/$username'));
     print(data.body);
     var jsonData = json.decode(data.body);
 
@@ -59,9 +58,9 @@ class DashboardState extends State<ParentDashboard> {
     containerHeight = screenHeight * 0.67;
     double screenWidth = MediaQuery.of(context).size.width;
     innerContainerWidth = screenWidth * 0.75;
-    innerContainerHeight = screenHeight * 0.16;
+    innerContainerHeight = screenHeight * 0.22;
     controllerContainerWidth = screenWidth * 0.85;
-    controllerContainerHeight = screenHeight * 0.27;
+    controllerContainerHeight = screenHeight * 0.32;
 
     return Scaffold(
       body: FutureBuilder<Map<String, dynamic>>(
@@ -74,448 +73,437 @@ class DashboardState extends State<ParentDashboard> {
                 (BuildContext context, ViewportOffset position) {
               return Column(
                 children: [
-                  Expanded(child: Container()),
-                  Container(
-                    height: containerHeight,
-                    width: double.infinity,
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFD9D9D9),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(63),
-                          topRight: Radius.circular(63),
+                  Expanded(
+                    child: Container(
+                      //height: containerHeight,
+                      width: double.infinity,
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFD9D9D9),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(63),
+                            topRight: Radius.circular(63),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            top: 20,
-                            left: 50,
-                          ),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Student Details',
-                              style: TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 70, 70, 70)),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 20,
-                            left: 50,
-                          ),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              width: innerContainerWidth,
-                              height: innerContainerHeight,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF7F2FA),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 20,
-                                        left: 20,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Name :',
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 70, 70, 70)),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  studentName,
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color.fromARGB(
-                                                          255, 70, 70, 70)),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 10,
-                                        left: 20,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Admission No. :',
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 70, 70, 70)),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  studentAdmissionNo,
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color.fromARGB(
-                                                          255, 70, 70, 70)),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 10,
-                                        left: 20,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Class :',
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 70, 70, 70)),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  studentGrade,
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color.fromARGB(
-                                                          255, 70, 70, 70)),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 10,
-                                        left: 20,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Division :',
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 70, 70, 70)),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Text(
-                                                  studentClass,
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      color: Color.fromARGB(
-                                                          255, 70, 70, 70)),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ],
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                'Student Details',
+                                style: TextStyle(
+                                    fontSize: 27,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 70, 70, 70)),
                               ),
                             ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 20, left: 50),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Academic Details',
-                              style: TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 70, 70, 70)),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 20,
-                            left: 30,
-                          ),
-                          child: Align(
-                              alignment: Alignment.topLeft,
+                          
+                          SizedBox(height: 20,),
+                           Align(
+                              alignment: Alignment.topCenter,
                               child: Container(
-                                width: controllerContainerWidth,
-                                height: controllerContainerHeight,
+                                width: innerContainerWidth,
+                                height: innerContainerHeight,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFFF7F2FA),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 20,
-                                            left: 20,
-                                          ),
-                                          child: Align(
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    // Add the required functionality here
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ParentAttendance()));
-                                                  },
-                                                  child: const Column(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            'assets/images/Attendance.png'),
-                                                        width: 75,
-                                                      ),
-                                                      Text(
-                                                        'Attendance',
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    70,
-                                                                    70,
-                                                                    70)),
-                                                      ),
-                                                    ],
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 20,
+                                          left: 20,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                'Name :',
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 70, 70, 70)),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Text(
+                                                    studentName,
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 10,
+                                          left: 20,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 20,
-                                            left: 43,
-                                          ),
-                                          child: Align(
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ResultView()));
-                                                  },
-                                                  child: const Column(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            'assets/images/Pass Fail.png'),
-                                                        width: 75,
-                                                      ),
-                                                      Text(
-                                                        'Results',
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    70,
-                                                                    70,
-                                                                    70)),
-                                                      ),
-                                                    ],
+                                        child: Row(
+                                          children: [
+                                            const Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                'Admission No. :',
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 70, 70, 70)),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Text(
+                                                    studentAdmissionNo,
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 10,
+                                          left: 20,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 20,
-                                            left: 43,
-                                          ),
-                                          child: Align(
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ExamView()));
-                                                  },
-                                                  child: const Column(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            'assets/images/Exam.png'),
-                                                        width: 75,
-                                                      ),
-                                                      Text(
-                                                        'Exams',
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    70,
-                                                                    70,
-                                                                    70)),
-                                                      ),
-                                                    ],
+                                        child: Row(
+                                          children: [
+                                            const Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                'Class :',
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 70, 70, 70)),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Text(
+                                                    studentGrade,
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                          ],
+                                        )),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 10,
+                                          left: 20,
                                         ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 20,
-                                            left: 0,
-                                          ),
-                                          child: Align(
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Achievements()));
-                                                  },
-                                                  child: const Column(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            'assets/images/Prize.png'),
-                                                        width: 75,
-                                                      ),
-                                                      Text(
-                                                        'Achivements',
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    70,
-                                                                    70,
-                                                                    70)),
-                                                      ),
-                                                    ],
+                                        child: Row(
+                                          children: [
+                                            const Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                'Division :',
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(
+                                                        255, 70, 70, 70)),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Align(
+                                                  alignment: Alignment.topRight,
+                                                  child: Text(
+                                                    studentClass,
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 20,
-                                            left: 30,
-                                          ),
-                                          child: Align(
-                                            child: Column(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    // Add the required functionality here
-                                                  },
-                                                  child: const Column(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            'assets/images/Yes Or No.png'),
-                                                        width: 75,
-                                                      ),
-                                                      Text(
-                                                        'Remarks',
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    70,
-                                                                    70,
-                                                                    70)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
+                                          ],
+                                        )),
                                   ],
                                 ),
-                              )),
-                        ),
-                      ],
+                              
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                'Academic Details',
+                                style: TextStyle(
+                                    fontSize: 27,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 70, 70, 70)),
+                              ),
+                            ),
+                          SizedBox(height: 20,),
+                           Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  width: controllerContainerWidth,
+                                  height: controllerContainerHeight,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF7F2FA),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20,
+                                              left: 20,
+                                            ),
+                                            child: Align(
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      // Add the required functionality here
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const ParentAttendance()));
+                                                    },
+                                                    child: const Column(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              'assets/images/Attendance.png'),
+                                                          width: 75,
+                                                        ),
+                                                        Text(
+                                                          'Attendance',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      70,
+                                                                      70,
+                                                                      70)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20,
+                                              left: 43,
+                                            ),
+                                            child: Align(
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const ResultView()));
+                                                    },
+                                                    child: const Column(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              'assets/images/Pass Fail.png'),
+                                                          width: 75,
+                                                        ),
+                                                        Text(
+                                                          'Results',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      70,
+                                                                      70,
+                                                                      70)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20,
+                                              left: 43,
+                                            ),
+                                            child: Align(
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const ExamView()));
+                                                    },
+                                                    child: const Column(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              'assets/images/Exam.png'),
+                                                          width: 75,
+                                                        ),
+                                                        Text(
+                                                          'Exams',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      70,
+                                                                      70,
+                                                                      70)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20,
+                                              left: 0,
+                                            ),
+                                            child: Align(
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  Achievements()));
+                                                    },
+                                                    child: const Column(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              'assets/images/Prize.png'),
+                                                          width: 75,
+                                                        ),
+                                                        Text(
+                                                          'Achivements',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      70,
+                                                                      70,
+                                                                      70)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20,
+                                              left: 30,
+                                            ),
+                                            child: Align(
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      // Add the required functionality here
+                                                    },
+                                                    child: const Column(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              'assets/images/Yes Or No.png'),
+                                                          width: 75,
+                                                        ),
+                                                        Text(
+                                                          'Remarks',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      70,
+                                                                      70,
+                                                                      70)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

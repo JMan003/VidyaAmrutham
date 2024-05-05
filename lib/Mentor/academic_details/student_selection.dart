@@ -45,14 +45,14 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                 appBar: AppBar(
                   title: const Text('Select Student'),
                 ),
-                body: Container(
+                body: Align(
                   alignment: Alignment.center,
                   child: ListView.builder(
-                    itemCount: count,
+                    itemCount: students.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         title: Container(
-                          height: screenHeight * 0.1,
+                          //height: screenHeight * 0.1,
                           width: screenWidth * 0.6,
                           color: const Color.fromARGB(255, 54, 120, 244),
                           padding: const EdgeInsets.all(10),
@@ -66,7 +66,7 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => MentorAttendance(
-                                  studentId: students[index]['id'].toString()),
+                                  studentId: students[index]['username'].toString()),
                             ),
                           );
                         },
