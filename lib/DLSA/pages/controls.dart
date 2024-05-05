@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ControlPage extends StatelessWidget {
+  const ControlPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class ControlPage extends StatelessWidget {
         ),
         child: Align(
           alignment: Alignment.center,
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width * 0.9,
             child: Card(
@@ -32,12 +34,6 @@ class ControlPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ListTile(
-                        //title: Text(
-                        //  'Controls',
-                        //  style: TextStyle(
-                        //    fontSize: 24.0,
-                        //    )
-                        //    ),
                         subtitle: GridView.count(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -47,7 +43,7 @@ class ControlPage extends StatelessWidget {
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(
@@ -58,7 +54,7 @@ class ControlPage extends StatelessWidget {
                             ),
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(
@@ -69,7 +65,7 @@ class ControlPage extends StatelessWidget {
                             ),
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(
@@ -80,7 +76,7 @@ class ControlPage extends StatelessWidget {
                             ),
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(
@@ -91,7 +87,7 @@ class ControlPage extends StatelessWidget {
                             ),
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(
@@ -102,7 +98,7 @@ class ControlPage extends StatelessWidget {
                             ),
                             Column(
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 60, // Set this to your desired width
                                   height: 60, // Set this to your desired height
                                   child: Image.asset(

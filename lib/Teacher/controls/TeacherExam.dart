@@ -29,7 +29,7 @@ class _TeacherExamState extends State<TeacherExam> {
               },
               child: const Text('Publish Exam'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

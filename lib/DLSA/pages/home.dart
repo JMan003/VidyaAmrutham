@@ -9,6 +9,8 @@ import 'package:vidyaamrutham/DLSA/components/student_list.dart';
 String number_of_mentors = '', number_of_students = '';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     double height1 = MediaQuery.of(context).size.height;
@@ -26,9 +28,9 @@ class HomePage extends StatelessWidget {
   Future<Map<String,dynamic>> getCount() async {
     print("Fetching data");
     String? url = dotenv.env['SERVER'];
-    var response = await http.get(Uri.parse('http://$url/dlsa/count'));
+    var response = await http.get(Uri.parse('https://$url/dlsa/count'));
     print(response.body);
-    number_of_students = json.decode(response.body)['result'][0]['COUNT(id)'].toString();
+    number_of_students = json.decode(response.body)['result'][0]['COUNT(username)'].toString();
     number_of_mentors = json.decode(response.body)['result'][1]['COUNT(username)'].toString();
     return json.decode(response.body);
   }
@@ -50,7 +52,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 15.0), // Add some space at the top
-            Container(
+            SizedBox(
               height: height1 * 0.23,
               width: width1 * 0.90,
               child: Card(
@@ -65,10 +67,10 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: ListTile(
                         title: const Text(
-                          'Number of Students',
+                          'Number of \nStudents',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
                           ),
@@ -120,10 +122,10 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       child: ListTile(
                         title: const Text(
-                          'Number of Mentors',
+                          'Number of \nMentors',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             fontFamily: "Poppins",
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
@@ -191,7 +193,7 @@ class HomePage extends StatelessWidget {
                           Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => StudentList()
+                                      builder: (context) => const StudentList()
                                   )
                               );
                         },
@@ -236,7 +238,7 @@ class HomePage extends StatelessWidget {
                           Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MentorList()
+                                      builder: (context) => const MentorList()
                                   )
                               );
                         },
@@ -278,7 +280,7 @@ class HomePage extends StatelessWidget {
 
       );
   }
-  return Center(child: CircularProgressIndicator(),);
+  return const Center(child: CircularProgressIndicator(),);
       },
     );
   }

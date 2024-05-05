@@ -12,12 +12,14 @@ import 'package:vidyaamrutham/Teacher/controls/TeacherResult.dart';
 class Teacher1 extends StatelessWidget {
   String? url = dotenv.env['SERVER'];
 
+  Teacher1({super.key});
+
   @override
   Widget build(BuildContext context) {
     print(url);
 
     return Padding(
-      padding: EdgeInsets.only(top: 80),
+      padding: const EdgeInsets.only(top: 80),
       child: Container(
         width: double.infinity,
         decoration: const ShapeDecoration(
@@ -144,7 +146,7 @@ class Teacher1 extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AssignmentsView()));
+                                builder: (context) => const AssignmentsView()));
                       },
                       icon: Container(
                         child: Image.asset("assets/images/Page.png"),
@@ -205,7 +207,7 @@ class Teacher1 extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SubjectsListing()));
+                                builder: (context) => const SubjectsListing()));
                       },
                       icon: Container(
                         child: Image.asset("assets/images/Books.png"),
@@ -217,7 +219,7 @@ class Teacher1 extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StudentList()));
+                                builder: (context) => const StudentList()));
                       },
                       icon: Container(
                         child: Image.asset("assets/images/Classroom.png"),

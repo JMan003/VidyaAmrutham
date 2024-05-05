@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vidyaamrutham/DLSA/pages/controls.dart';
 import 'package:vidyaamrutham/DLSA/pages/home.dart';
 import 'package:vidyaamrutham/DLSA/pages/meeting.dart';
-import 'package:vidyaamrutham/DLSA/pages/home.dart';
-import 'package:vidyaamrutham/DLSA/pages/meeting.dart';
-import 'package:vidyaamrutham/DLSA/pages/controls.dart';
 import 'package:vidyaamrutham/components/Drawer.dart';
 
 
@@ -19,9 +16,9 @@ class _DLSAState extends State<DLSA> {
   int currentPageIndex = 0;
 
   final List<Widget>_pages = [
-    HomePage(),
-    MeetingPage(),
-    ControlPage()
+    const HomePage(),
+    const MeetingPage(),
+    const ControlPage()
   ];
 
   @override
@@ -55,7 +52,7 @@ class _DLSAState extends State<DLSA> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: Container(
+                    child: SizedBox(
                         width: 30,
                         height: 30,
                         child: Image.asset("assets/images/mentor.png")),
@@ -85,7 +82,7 @@ class _DLSAState extends State<DLSA> {
           toolbarHeight: 150,
         ),
       ),
-      drawer: CommonDrawer(),
+      drawer: const CommonDrawer(),
       body: _pages[currentPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPageIndex,
@@ -94,16 +91,16 @@ class _DLSAState extends State<DLSA> {
             currentPageIndex = index;
           });
         },
-        items: [
-          const BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: 'Meeting Notes',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.dashboard_outlined),
             label: 'Controls',
           ),

@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:convert';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
@@ -11,14 +10,14 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
-late String name = "",
+String name = "",
     phoneNumber = "",
     emailId = "",
     address = "",
     subject = "";
 
 class Teacher4 extends StatelessWidget {
-  Teacher4({Key? key}) : super(key: key);
+  const Teacher4({Key? key}) : super(key: key);
 
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

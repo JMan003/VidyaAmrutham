@@ -12,7 +12,7 @@ class AddAnnouncement extends StatefulWidget {
 }
 
 class _AddAnnouncementState extends State<AddAnnouncement> {
-  TextEditingController _announcement = TextEditingController();
+  final TextEditingController _announcement = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
     // Implement the logic to publish the announcement
     String? url = dotenv.env['SERVER'];
 
-    var link = Uri.parse('https://${url}/teacher/announcement');
+    var link = Uri.parse('https://$url/teacher/announcement');
     var response = await http.post(
       link,
       body: jsonEncode({

@@ -8,7 +8,7 @@ import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 class TeacherAttendance extends StatefulWidget {
   final String grade, section;
 
-  TeacherAttendance({Key? key, required this.grade, required this.section})
+  const TeacherAttendance({Key? key, required this.grade, required this.section})
       : super(key: key);
 
   @override

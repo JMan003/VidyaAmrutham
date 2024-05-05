@@ -3,8 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:vidyaamrutham/Teacher/controls/Announcement/AddAnnouncement.dart';
-
 class AnnouncementsPage extends StatefulWidget {
   const AnnouncementsPage({Key? key}) : super(key: key);
 
@@ -53,21 +51,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
                               'Announced on ${data['result'][index]['date'].toString().substring(0, 10)}',
                               style: const TextStyle(fontSize: 15),
                             ),
-                            trailing: const Icon(Icons.delete),
-                            isThreeLine: true,
-                            onTap: () {
-                              deleteAnnouncement(data['result'][index]['announcement_id']);
-                            },
                           ),
                         );
                       },
                     )),
-                    ElevatedButton(
-                      onPressed:() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AddAnnouncement()));
-                      }, 
-                    child: const Text('Add Announcement')
-                    ),
                     const SizedBox(height: 40),
                   ],
                 );
@@ -81,24 +68,5 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         },
       ),
     );
-  }
-  
-  Future<void> deleteAnnouncement(data) async {
-    String? url = dotenv.env['SERVER'];
-
-    var link = Uri.parse('https://$url/announcement/delete/$data');
-    var res = await http.delete(link);
-
-    if(res.statusCode == 200){
-      setState(() {
-        
-      });
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to delete announcement'),
-        ),
-      );
-    }
   }
 }

@@ -78,7 +78,7 @@ class MentorHome extends StatelessWidget {
                                 builder: (context) {
                                   return AlertDialog(
                                     backgroundColor: Colors.white,
-                                    title: Text(
+                                    title: const Text(
                                       "Student Details",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class MentorHome extends StatelessWidget {
                                         color: Color(0xFF514D4D),
                                       ),
                                     ),
-                                    content: Container(
+                                    content: SizedBox(
                                       height: screenHeight * 0.3,
                                       width: screenWidth * 0.8,
                                       child: Column(
@@ -120,7 +120,7 @@ class MentorHome extends StatelessWidget {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Close",
                                           style: TextStyle(
                                             color: Colors.blue,
@@ -323,7 +323,7 @@ class MentorHome extends StatelessWidget {
                     ],
                   ),
                 );
-                ; // Replace with your desired widget
+// Replace with your desired widget
               },
             );
           }
@@ -344,15 +344,15 @@ class MentorHome extends StatelessWidget {
         children: <Widget>[
           Text(
             "$label:",
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
             ),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
             ),
           ),
