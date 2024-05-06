@@ -31,7 +31,6 @@ class Grievance extends StatelessWidget {
     containerWidth = screenWidth * 0.9;
     innerContainerWidth = screenWidth * 0.9;
     innerContainerHeight = screenHeight * 0.35;
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Grievance'),
@@ -66,7 +65,6 @@ class Grievance extends StatelessWidget {
                                 decoration: const InputDecoration(
                                   hintText: 'Enter your text',
                                   border: InputBorder.none,
-                                  
                                 ),
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -88,26 +86,30 @@ class Grievance extends StatelessWidget {
                 ]))));
   }
 
-   void grievance_of_Student(context) async {
-     String? url = dotenv.env['SERVER'];
+  void grievance_of_Student(context) async {
+    String? url = dotenv.env['SERVER'];
 
-     var data = {'mentor_id': mentor_id, 'grievance': myController.text};
+    var data = {
+      'mentor_id': mentor_id,
+      'grievance': myController.text,
+      'id': roll_no
+    };
 
-     var response = await http
-         .post(Uri.parse('https://${url}/teacher/grievance'), body: data);
+    var response = await http
+        .post(Uri.parse('https://${url}/teacher/grievance'), body: data);
 
-     if (response.statusCode == 200) {
-       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-           content: Text('Successful'),
-         ),
-       );
-     } else {
-       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-           content: Text('Failed to add to grievance'),
-         ),
-       );
-     }
-   }
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Successful'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to add to grievance'),
+        ),
+      );
+    }
+  }
 }
