@@ -4,15 +4,16 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/attendance.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Result/ViewResult.dart';
 
-class AttendanceSelection extends StatefulWidget {
-  const AttendanceSelection({Key? key}) : super(key: key);
+class ResultSelection extends StatefulWidget {
+  const ResultSelection({Key? key}) : super(key: key);
 
   @override
-  State<AttendanceSelection> createState() => _AttendanceSelectionState();
+  State<ResultSelection> createState() => _ResultSelectionState();
 }
 
-class _AttendanceSelectionState extends State<AttendanceSelection> {
+class _ResultSelectionState extends State<ResultSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
@@ -64,8 +65,8 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MentorAttendance(
-                                  studentId: students[index]['username'].toString()),
+                              builder: (context) => ResultView(
+                                  id: students[index]['username'].toString()),
                             ),
                           );
                         },
