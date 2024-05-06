@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/Mentor/controls/InstructionForParents/SelectStudentInstructionParents.dart';
+import 'package:vidyaamrutham/Mentor/controls/LetterToTeacher/SelectStudentLetterTeacher.dart';
+import 'package:vidyaamrutham/Mentor/controls/MeetingParent/SelectStudentMeetingParent.dart';
+import 'package:vidyaamrutham/Mentor/controls/MeetingTeacher/SelectStudentMeetingTeacher.dart';
 import 'package:vidyaamrutham/Mentor/controls/pdf_page.dart';
 
 class MentorActions extends StatelessWidget {
@@ -63,7 +67,15 @@ class MentorActions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const InstructionSelection(),
+                                          ),
+                                        );
+                          },
                           icon: Image.asset("assets/images/Brief.png"),
                           iconSize: 60,
                         ),
@@ -77,7 +89,15 @@ class MentorActions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                             Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LetterSelection(),
+                                          ),
+                                        );
+                          },
                           icon: Image.asset("assets/images/Inscription.png"),
                           iconSize: 60,
                         ),
@@ -91,7 +111,15 @@ class MentorActions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SelectTeacher(),
+                                          ),
+                                        );
+                          },
                           icon: Image.asset("assets/images/Team.png"),
                           iconSize: 60,
                         ),
@@ -110,7 +138,15 @@ class MentorActions extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SelectParent(),
+                                          ),
+                                        );
+                          },
                           icon: Image.asset("assets/images/Collaborating In Circle.png"),
                           iconSize: 60,
                         ),

@@ -4,8 +4,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/assignments.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/student_selection.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Achievements/SelectStudentAchievement.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Exams/Exams.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Assignments.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Exams/SelectStudentExam.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Attendance/SelectStudentAttendance.dart';
 import 'package:intl/intl.dart';
 
 class MentorHome extends StatelessWidget {
@@ -247,7 +250,15 @@ class MentorHome extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ExamSelection(),
+                                          ),
+                                        );
+                                      },
                                       icon:
                                           Image.asset("assets/images/Exam.png"),
                                       iconSize: 60,
@@ -284,7 +295,15 @@ class MentorHome extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const AchievementSelection(),
+                                          ),
+                                        );
+                                      },
                                       icon: Image.asset(
                                           "assets/images/Prize.png"),
                                       iconSize: 60,
@@ -300,7 +319,8 @@ class MentorHome extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                      },
                                       icon: Image.asset(
                                           "assets/images/YesOrNo.png"),
                                       iconSize: 60,
