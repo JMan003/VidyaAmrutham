@@ -5,6 +5,7 @@ import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
 import 'package:vidyaamrutham/Parent/parent.dart';
+import 'package:vidyaamrutham/Student/student.dart';
 import 'package:vidyaamrutham/Teacher/teacher.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -97,14 +98,14 @@ class _AppLoaderState extends State<AppLoader> {
       return const Parent();
     } else if (role == "teacher") {
       return const Teacher();
-      // } else if (role == "student") {
-      //   return StudentDashboardPage();
+      } else if (role == "student") {
+        return Student();
     } else if (role == "dlsa") {
       return const DLSA();
     } else if (role == "mentor") {
       return const Mentor();
     } else {
-      return const LoginPage();
+      return const LoginPage(role:'');
     }
   }
 }
