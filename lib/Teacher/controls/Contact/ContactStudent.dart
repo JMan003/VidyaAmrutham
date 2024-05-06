@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,8 +19,10 @@ class _ContactStudentState extends State<ContactStudent> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
 
+    String? url = dotenv.env["SERVER"];
+
     var response = await http.get(Uri.parse(
-        'http://192.168.1.9:3001/teacher/student/${widget.grade}/${widget.section}'));
+        'https://$url/teacher/student/${widget.grade}/${widget.section}'));
 
     print(response.body);
 

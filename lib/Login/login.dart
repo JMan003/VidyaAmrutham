@@ -9,7 +9,9 @@ import 'package:vidyaamrutham/Teacher/teacher.dart';
 import 'package:vidyaamrutham/Student/student.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final role;
+
+  const LoginPage({super.key, required this.role});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -25,8 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: const Color(0xFF41BB95),
+        title: Text(widget.role),
+        backgroundColor: Color.fromARGB(255, 169, 169, 169),
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -134,6 +136,11 @@ class _LoginPageState extends State<LoginPage> {
 
     var username = usernameController.text;
     var password = passwordController.text;
+
+    print(username);
+    print(password);
+
+
     if (role == 'parent') {
       final response = await http.post(Uri.parse('https://$url/parent/login'),
           body: {'username': username, 'password': password});
