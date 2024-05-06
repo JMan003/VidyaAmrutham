@@ -95,6 +95,9 @@ class _NoteToMentorState extends State<NoteToMentor> {
     String? url = dotenv.env['SERVER'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
+    var studentId = prefs.getString('student_id');
+    print("Username: $username");
+    print("Student ID: $studentId");
 
     final response = await http
         .post(
@@ -102,6 +105,7 @@ class _NoteToMentorState extends State<NoteToMentor> {
         body: {
           'note': text,
           'username': username,
+          'student_id': studentId,
         }
         );
     

@@ -5,11 +5,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Achievements/SelectStudentAchievement.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Exams/Exams.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Assignments.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Exams/SelectStudentExam.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Attendance/SelectStudentAttendance.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Remarks/Remarks_Student_Selection.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Result/Result_Student_Selection.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/assignments.dart';
 import 'package:intl/intl.dart';
+import 'package:vidyaamrutham/Parent/components/ResultsView.dart';
 
 class MentorHome extends StatelessWidget {
   const MentorHome({Key? key}) : super(key: key);
@@ -227,13 +230,13 @@ class MentorHome extends StatelessWidget {
                                   children: [
                                     IconButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Assignments(),
-                                          ),
-                                        );
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) =>
+                                        //         const Assignments(),
+                                        //   ),
+                                        // );
                                       },
                                       icon: Image.asset(
                                           "assets/images/Assignments.png"),
@@ -279,7 +282,15 @@ class MentorHome extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ResultSelection(),
+                                          ),
+                                        );
+                                      },
                                       icon: Image.asset(
                                           "assets/images/Pass Fail.png"),
                                       iconSize: 60,
@@ -320,6 +331,13 @@ class MentorHome extends StatelessWidget {
                                   children: [
                                     IconButton(
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RemarksSelection(),
+                                          ),
+                                        );
                                       },
                                       icon: Image.asset(
                                           "assets/images/YesOrNo.png"),

@@ -57,7 +57,7 @@ class RoleChoose extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => const LoginPage(role:'Parent')),
                             );
                           },
                           icon: const Icon(
@@ -88,7 +88,7 @@ class RoleChoose extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => const LoginPage(role:'Teacher')),
                             );
                           },
                           icon: const Icon(
@@ -119,7 +119,7 @@ class RoleChoose extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => const LoginPage(role:'Mentor')),
                             );
                           },
                           icon: const Icon(
@@ -149,7 +149,7 @@ class RoleChoose extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
+                                builder: (context) => const LoginPage(role:'DLSA')),
                           );
                         },
                         icon: const Icon(
@@ -179,7 +179,7 @@ class RoleChoose extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => const LoginPage(role:'Student')),
                             );
                           },
                           icon: const Icon(

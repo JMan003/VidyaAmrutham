@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
+import 'package:vidyaamrutham/Teacher/teacher.dart';
 
 class TeacherAttendance extends StatefulWidget {
   final String grade, section;
@@ -121,7 +122,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => Teacher1()),
+                        MaterialPageRoute(builder: (context) => Teacher()),
                         (route) => false);
                   },
                   child: const Text('OK'),
