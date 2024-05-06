@@ -3,17 +3,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Attendance/Attendance.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Result/ViewResult.dart';
+import 'package:vidyaamrutham/Mentor/controls/MeetingParent/MeetingParent.dart';
 
-class ResultSelection extends StatefulWidget {
-  const ResultSelection({Key? key}) : super(key: key);
+class SelectParent extends StatefulWidget {
+  const SelectParent({Key? key}) : super(key: key);
 
   @override
-  State<ResultSelection> createState() => _ResultSelectionState();
+  State<SelectParent> createState() => SelectParentState();
 }
 
-class _ResultSelectionState extends State<ResultSelection> {
+class SelectParentState extends State<SelectParent> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
@@ -65,7 +64,7 @@ class _ResultSelectionState extends State<ResultSelection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ResultView(
+                              builder: (context) => MeetingParent(
                                   id: students[index]['username'].toString()),
                             ),
                           );

@@ -59,7 +59,7 @@ class _MentorState extends State<Mentor> {
                       mentor_name,
                       style: const TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.w300,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   )

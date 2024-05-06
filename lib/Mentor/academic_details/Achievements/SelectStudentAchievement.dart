@@ -3,17 +3,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Attendance/Attendance.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Result/ViewResult.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/Achievements/Achievements.dart';
 
-class ResultSelection extends StatefulWidget {
-  const ResultSelection({Key? key}) : super(key: key);
+class AchievementSelection extends StatefulWidget {
+  const AchievementSelection({Key? key}) : super(key: key);
 
   @override
-  State<ResultSelection> createState() => _ResultSelectionState();
+  State<AchievementSelection> createState() => _AchievementSelectionState();
 }
 
-class _ResultSelectionState extends State<ResultSelection> {
+class _AchievementSelectionState extends State<AchievementSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
@@ -65,7 +64,7 @@ class _ResultSelectionState extends State<ResultSelection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ResultView(
+                              builder: (context) => Achievements(
                                   id: students[index]['username'].toString()),
                             ),
                           );

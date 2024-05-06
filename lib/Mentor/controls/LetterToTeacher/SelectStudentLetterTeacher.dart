@@ -3,16 +3,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/attendance.dart';
+import 'package:vidyaamrutham/Mentor/controls/LetterToTeacher/LetterToTeacher.dart';
 
-class AttendanceSelection extends StatefulWidget {
-  const AttendanceSelection({Key? key}) : super(key: key);
+class LetterSelection extends StatefulWidget {
+  const LetterSelection({Key? key}) : super(key: key);
 
   @override
-  State<AttendanceSelection> createState() => _AttendanceSelectionState();
+  State<LetterSelection> createState() => _LetterSelectionState();
 }
 
-class _AttendanceSelectionState extends State<AttendanceSelection> {
+class _LetterSelectionState extends State<LetterSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
@@ -64,8 +64,8 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MentorAttendance(
-                                  studentId: students[index]['username'].toString()),
+                              builder: (context) => LetterToTeacher(
+                                  id: students[index]['username'].toString()),
                             ),
                           );
                         },
