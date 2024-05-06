@@ -61,7 +61,7 @@ class DashboardState extends State<ParentDashboard> {
     innerContainerWidth = screenWidth * 0.75;
     innerContainerHeight = screenHeight * 0.22;
     controllerContainerWidth = screenWidth * 0.85;
-    controllerContainerHeight = screenHeight * 0.32;
+    controllerContainerHeight = screenHeight * 0.37;
 
     return Scaffold(
       body: FutureBuilder<Map<String, dynamic>>(
@@ -72,10 +72,10 @@ class DashboardState extends State<ParentDashboard> {
             }
             return Scrollable(viewportBuilder:
                 (BuildContext context, ViewportOffset position) {
-              return Column(
+              return SingleChildScrollView(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Container(
+                     Container(
                       //height: containerHeight,
                       width: double.infinity,
                       decoration: const ShapeDecoration(
@@ -324,191 +324,164 @@ class DashboardState extends State<ParentDashboard> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 20,
-                                        ),
-                                        child: Align(
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  // Add the required functionality here
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ParentAttendance()));
-                                                },
-                                                child: const Column(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          'assets/images/Attendance.png'),
-                                                      width: 75,
-                                                    ),
-                                                    Text(
-                                                      'Attendance',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: Color.fromARGB(
-                                                              255, 70, 70, 70)),
-                                                    ),
-                                                  ],
-                                                ),
+                                      Align(
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                // Add the required functionality here
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ParentAttendance()));
+                                              },
+                                              child: const Column(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/Attendance.png'),
+                                                    width: 75,
+                                                  ),
+                                                  Text(
+                                                    'Attendance',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 43,
-                                        ),
-                                        child: Align(
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ResultView()));
-                                                },
-                                                child: const Column(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          'assets/images/Pass Fail.png'),
-                                                      width: 75,
-                                                    ),
-                                                    Text(
-                                                      'Results',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: Color.fromARGB(
-                                                              255, 70, 70, 70)),
-                                                    ),
-                                                  ],
-                                                ),
+                                      Align(
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ResultView()));
+                                              },
+                                              child: const Column(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/Pass Fail.png'),
+                                                    width: 75,
+                                                  ),
+                                                  Text(
+                                                    'Results',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 43,
-                                        ),
-                                        child: Align(
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ExamView()));
-                                                },
-                                                child: const Column(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          'assets/images/Exam.png'),
-                                                      width: 75,
-                                                    ),
-                                                    Text(
-                                                      'Exams',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: Color.fromARGB(
-                                                              255, 70, 70, 70)),
-                                                    ),
-                                                  ],
-                                                ),
+                                      Align(
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ExamView()));
+                                              },
+                                              child: const Column(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/Exam.png'),
+                                                    width: 75,
+                                                  ),
+                                                  Text(
+                                                    'Exams',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 0,
-                                        ),
-                                        child: Align(
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Achievements()));
-                                                },
-                                                child: const Column(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          'assets/images/Prize.png'),
-                                                      width: 75,
-                                                    ),
-                                                    Text(
-                                                      'Achivements',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: Color.fromARGB(
-                                                              255, 70, 70, 70)),
-                                                    ),
-                                                  ],
-                                                ),
+                                      Align(
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Achievements()));
+                                              },
+                                              child: const Column(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/Prize.png'),
+                                                    width: 75,
+                                                  ),
+                                                  Text(
+                                                    'Achivements',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 30,
-                                        ),
-                                        child: Align(
-                                          child: Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  // Add the required functionality here
-                                                },
-                                                child: const Column(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          'assets/images/Yes Or No.png'),
-                                                      width: 75,
-                                                    ),
-                                                    Text(
-                                                      'Remarks',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: Color.fromARGB(
-                                                              255, 70, 70, 70)),
-                                                    ),
-                                                  ],
-                                                ),
+                                      Align(
+                                        child: Column(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                // Add the required functionality here
+                                              },
+                                              child: const Column(
+                                                children: [
+                                                  Image(
+                                                    image: AssetImage(
+                                                        'assets/images/Yes Or No.png'),
+                                                    width: 75,
+                                                  ),
+                                                  Text(
+                                                    'Remarks',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Color.fromARGB(
+                                                            255, 70, 70, 70)),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -517,11 +490,17 @@ class DashboardState extends State<ParentDashboard> {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
+                    
                     ),
-                  ),
+                  
                 ],
+              
+              ),
               );
             });
           }),
