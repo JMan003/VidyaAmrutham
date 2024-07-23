@@ -3,6 +3,7 @@ import 'package:vidyaamrutham/DLSA/components/student_list.dart';
 import 'package:vidyaamrutham/Teacher/controls/Announcement/AnnouncementsPage.dart';
 import 'package:vidyaamrutham/Teacher/controls/Assignment/AssignmentsView.dart';
 import 'package:vidyaamrutham/Teacher/controls/Grievances/GrievanceStudentSelection.dart';
+import 'package:vidyaamrutham/Teacher/controls/NotesFromParents.dart';
 import 'package:vidyaamrutham/Teacher/controls/SubjectsListing.dart';
 import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendanceSelection.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -154,7 +155,13 @@ class Teacher1 extends StatelessWidget {
                       iconSize: 60,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LetterFromParent()));
+                        },
                         icon: Container(
                           child: Image.asset("assets/images/Flipboard.png"),
                         ),
@@ -181,7 +188,7 @@ class Teacher1 extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 17),
                       child: Text(
-                        "Notice\nBoard",
+                        "Letters",
                         style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     )
