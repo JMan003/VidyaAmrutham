@@ -59,6 +59,7 @@ class _RemarksState extends State<Remarks> {
                         child: ListView.builder(
                           itemCount: snapshot.data['result'].length,
                           itemBuilder: (BuildContext context, int index) {
+                            var date = snapshot.data?['result'][index]['date'].toString();
                             return Card(
                               margin: const EdgeInsets.all(10),
                               child: ListTile(
@@ -75,7 +76,7 @@ class _RemarksState extends State<Remarks> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  'Announced on ${snapshot.data['result'][index]['date'].toString().substring(0, 10)}',
+                                  'Announced on ${date?[8]}${date?[9]}-${date?[5]}${date?[6]}-${date?[0]}${date?[1]}${date?[2]}${date?[3]}',
                                   style: const TextStyle(fontSize: 15),
                                 ),
                               ),
