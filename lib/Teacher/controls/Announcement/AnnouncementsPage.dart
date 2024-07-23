@@ -22,7 +22,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   }
 
   Future<Map<String, dynamic>> fetchAnnouncements() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     final response = await http.get(Uri.parse('https://$url/announcements'));
     return json.decode(response.body);
@@ -166,7 +166,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   }
 
   Future<void> deleteAnnouncement(int announcementId) async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var link = Uri.parse('https://$url/announcement/delete/$announcementId');
     var response = await http.delete(link);

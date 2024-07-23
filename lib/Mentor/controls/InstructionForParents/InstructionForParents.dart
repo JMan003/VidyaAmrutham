@@ -87,7 +87,7 @@ class InstructionForParents extends StatelessWidget {
   }
 
   void grievance_of_Student(context) async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var mentor_id = prefs.getString('username');

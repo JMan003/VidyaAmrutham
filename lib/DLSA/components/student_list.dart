@@ -8,7 +8,7 @@ class StudentList extends StatelessWidget {
 
   Future<Map<String, dynamic>> getStudentList() async {
     try {
-      var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+      var url = "dlsatestserver.serveo.net";
       var response =
           await http.get(Uri.parse('https://$url/dlsa/student/list'));
 

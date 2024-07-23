@@ -14,7 +14,7 @@ class StudentGrievanceSelection extends StatefulWidget {
 
 class _StudentGrievanceSelectionState extends State<StudentGrievanceSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);

@@ -23,7 +23,7 @@ class _PublishResultState extends State<PublishResult> {
   final Map<String, String> _marks = {};
 
   Future getStudents() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var link = Uri.parse(
         'http://${url}/teacher/students/${widget.examClass}/${widget.examDivision}');
@@ -134,8 +134,7 @@ class _PublishResultState extends State<PublishResult> {
                       SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () async {
-                          String? url =
-                              "387df06823a93fd406892e1c452f4b74.serveo.net";
+                          String? url = "dlsatestserver.serveo.net";
 
                           var link = Uri.parse(
                               'https://${url}/teacher/exams/${widget.exam_id}/result');

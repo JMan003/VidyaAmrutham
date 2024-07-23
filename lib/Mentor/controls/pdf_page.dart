@@ -13,7 +13,7 @@ class PDFPage extends StatelessWidget {
   Future<dynamic> fetchContentFromServer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var url = "dlsatestserver.serveo.net";
     final response =
         await http.get(Uri.parse('http://$url/mentor/content/$username'));
     if (response.statusCode == 200) {

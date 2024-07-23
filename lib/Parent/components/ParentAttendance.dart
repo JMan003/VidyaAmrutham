@@ -23,7 +23,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
     String studentId = prefs.getString('student_id') ?? '';
     print("Student ID: $studentId");
 
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
 
     String url = 'https://$link/parent/attendance/$studentId';
     var response = await http.get(

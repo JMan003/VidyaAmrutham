@@ -15,7 +15,7 @@ class MeetingTeacher extends StatefulWidget {
 
 class _MeetingTeacherState extends State<MeetingTeacher> {
   Future<Map<String, dynamic>> getMentorDetails(BuildContext context) async {
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
 
     var url = Uri.parse('http://$link/mentor/teacher');
     var response = await http.get(url);
