@@ -15,7 +15,7 @@ class _InstructionsFromMentorState extends State<InstructionsFromMentor> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
 
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
 
     String url = 'https://$link/parent/instructions/$username';
 

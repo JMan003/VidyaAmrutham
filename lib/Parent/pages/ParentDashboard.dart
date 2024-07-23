@@ -32,7 +32,7 @@ class DashboardState extends State<ParentDashboard> {
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var username = prefs.getString('username');
     print(username);
     var data =

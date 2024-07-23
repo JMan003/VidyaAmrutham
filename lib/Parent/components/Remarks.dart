@@ -16,7 +16,7 @@ class _RemarksState extends State<Remarks> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final studentId = prefs.getString('student_id')!;
 
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
 
     var url = Uri.parse('http://$link/parent/remarks/${studentId}');
     var response = await http.get(url);

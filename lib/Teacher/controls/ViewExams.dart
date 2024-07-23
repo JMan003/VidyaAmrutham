@@ -11,7 +11,7 @@ class ViewExams extends StatefulWidget {
 
 class _ViewExamsState extends State<ViewExams> {
   Future getExams() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var link = Uri.parse('http://$url/exams');
     var response = await http.get(link);
@@ -19,7 +19,7 @@ class _ViewExamsState extends State<ViewExams> {
   }
 
   Future deleteExam(String examId) async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var link = Uri.parse('http://$url/exams/$examId');
     var response = await http.delete(link);
