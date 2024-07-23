@@ -21,7 +21,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
   late Map<String, dynamic> data;
 
   Future<Map<String, dynamic>> getStudents() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http.get(
       Uri.parse(
           'https://$url/teacher/students/${widget.grade}/${widget.section}'),
@@ -137,7 +137,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
         _attendance[data['result'][i]['username'].toString()] = false;
       }
     }
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http.post(
       Uri.parse('https://$url/teacher/attendance'),
       body: json.encode({

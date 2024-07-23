@@ -20,7 +20,7 @@ class MentorHome extends StatelessWidget {
   Future<Map<String, dynamic>> getMentorData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
-    var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var url = "dlsatestserver.serveo.net";
 
     print(url);
     print(username);

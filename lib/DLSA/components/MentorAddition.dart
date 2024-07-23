@@ -207,7 +207,7 @@ class _MentorAdditionState extends State<MentorAddition> {
   }
 
   void registerStudent() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var data = {
       'username': sUserController.text,

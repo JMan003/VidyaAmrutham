@@ -10,7 +10,7 @@ class PublishExam extends StatefulWidget {
 }
 
 class _PublishExamState extends State<PublishExam> {
-  String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+  String? url = "dlsatestserver.serveo.net";
   TextEditingController examName = TextEditingController();
   TextEditingController examDate = TextEditingController();
   TextEditingController examTime = TextEditingController();

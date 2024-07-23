@@ -25,7 +25,7 @@ class _GrievanceStudentState extends State<GrievanceStudent> {
   }
 
   Future<Map<String, dynamic>> getStudents() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http.get(Uri.parse(
         'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);

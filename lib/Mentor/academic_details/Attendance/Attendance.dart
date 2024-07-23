@@ -27,7 +27,7 @@ class _MentorAttendanceState extends State<MentorAttendance> {
 
   Future<Map<String, dynamic>> getAttendance() async {
     print("Student ID: $studentId");
-    var link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var link = "dlsatestserver.serveo.net";
     String url = 'https://$link/mentor/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),

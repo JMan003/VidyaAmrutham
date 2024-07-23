@@ -107,7 +107,7 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
   }
 
   Future<void> handleNoteSubmission(String text) async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
 
