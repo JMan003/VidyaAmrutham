@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:vidyaamrutham/Teacher/controls/Grievances/Grievances.dart';
-import 'package:vidyaamrutham/Teacher/controls/UpdateStudent/UpdateStudentRegister.dart';
-import 'package:vidyaamrutham/Teacher/pages/teacher_home.dart';
 
 class GrievanceStudent extends StatefulWidget {
   final String grade, section;
@@ -14,15 +12,20 @@ class GrievanceStudent extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<GrievanceStudent> createState() => GrievanceStudentState();
+  State<GrievanceStudent> createState() => _GrievanceStudentState();
 }
 
-class GrievanceStudentState extends State<GrievanceStudent> {
-  final Map<String, bool> _attendance = {};
-  late Map<String, dynamic> data;
+class _GrievanceStudentState extends State<GrievanceStudent> {
+  late Future<Map<String, dynamic>> _futureStudents;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureStudents = getStudents();
+  }
 
   Future<Map<String, dynamic>> getStudents() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.get(Uri.parse(
         'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
@@ -33,53 +36,58 @@ class GrievanceStudentState extends State<GrievanceStudent> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Student'),
+        backgroundColor: Colors.blue.shade400,
       ),
-      body: FutureBuilder(
-        future: getStudents(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              data = snapshot.data as Map<String, dynamic>;
-              print(data);
+      body: Container(
+        color: Colors.grey.shade200, // Background color for the page
+        child: FutureBuilder(
+          future: _futureStudents,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (snapshot.hasData) {
+              Map<String, dynamic> data = snapshot.data as Map<String, dynamic>;
 
-              return Scrollable(viewportBuilder: (context, offset) {
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: data['result'].length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(data['result'][index]['name']),
-                            subtitle: Text(
-                                'Roll Number: ${data['result'][index]['roll_no']}'),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.edit),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Grievance(
-                                          roll_no: data['result'][index]['username'],
-                                          mentor_id : data['result'][index]['mentor_id'],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+              return ListView.builder(
+                itemCount: data['result'].length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: ListTile(
+                      title: Text(
+                        data['result'][index]['name'],
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        'Roll Number: ${data['result'][index]['roll_no']}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Grievance(
+                                roll_no: data['result'][index]['username'],
+                                mentor_id: data['result'][index]['mentor_id'],
+                              ),
+                            ),
                           );
                         },
                       ),
                     ),
-                  ],
-                );
-              });
+                  );
+                },
+              );
+            } else {
+              return const Center(child: Text('No data available'));
             }
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+          },
+        ),
       ),
     );
   }

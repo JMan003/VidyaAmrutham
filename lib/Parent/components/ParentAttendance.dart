@@ -23,7 +23,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
     String studentId = prefs.getString('student_id') ?? '';
     print("Student ID: $studentId");
 
-    String? link = dotenv.env['SERVER'];
+    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     String url = 'https://$link/parent/attendance/$studentId';
     var response = await http.get(
@@ -35,7 +35,7 @@ class _ParentAttendanceState extends State<ParentAttendance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Attendance'),
         ),
@@ -49,62 +49,63 @@ class _ParentAttendanceState extends State<ParentAttendance> {
                 return Column(
                   children: [
                     Scrollable(
-                      viewportBuilder: (BuildContext context, ViewportOffset position) {
+                      viewportBuilder:
+                          (BuildContext context, ViewportOffset position) {
                         return Column(
                           children: [
                             Container(
-                      padding: const EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      child: DataTable(
-                        columns: const <DataColumn>[
-                          DataColumn(
-                            label: Text(
-                              'Date',
-                              style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black
-                              ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Status',
-                              style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black
+                              padding: const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: DataTable(
+                                columns: const <DataColumn>[
+                                  DataColumn(
+                                    label: Text(
+                                      'Date',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
                                   ),
-                            ),
-                          ),
-                        ],
-                        rows: List<DataRow>.generate(
-                          data['result'].length,
-                          (index) => DataRow(
-                            cells: <DataCell>[
-                              DataCell(
-                                Text(data['result'][index]['date'].toString().substring(0, 10),
-                                  style: const TextStyle(
-                                    color: Colors.black
+                                  DataColumn(
+                                    label: Text(
+                                      'Status',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                rows: List<DataRow>.generate(
+                                  data['result'].length,
+                                  (index) => DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(
+                                        Text(
+                                          data['result'][index]['date']
+                                              .toString()
+                                              .substring(0, 10),
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                          data['result'][index]['status'],
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              DataCell(
-                                Text(data['result'][index]['status'],
-                                  style: const TextStyle(
-                                    color: Colors.black
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                            ),
                           ],
                         );
-                      }, 
-                      )
+                      },
+                    )
                   ],
                 );
               } else {

@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Exams extends StatefulWidget {
-  final id;
+  final String id;
   const Exams({Key? key, required this.id}) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class Exams extends StatefulWidget {
 
 class _ExamsState extends State<Exams> {
   Future getExams() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var link = Uri.parse('https://$url/mentor/exams/${widget.id}');
     var response = await http.get(link);
@@ -23,31 +23,66 @@ class _ExamsState extends State<Exams> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Exams'),
+      appBar: AppBar(
+        title: const Text('Exams'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.cyan, Colors.deepPurple],
+          ),
         ),
-        body: FutureBuilder(
+        child: FutureBuilder(
           future: getExams(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else {
-              print(snapshot.data);
+            } else if (snapshot.data['result'].length != 0) {
               return ListView.builder(
+                padding: const EdgeInsets.all(20),
                 itemCount: snapshot.data['result'].length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                        "${snapshot.data['result'][index]['name']} - ${snapshot.data['result'][index]['subject']}"),
-                    subtitle: Text(
-                        "${snapshot.data['result'][index]['date'].toString().substring(0, 10)} :- Class ${snapshot.data['result'][index]['class']} ${snapshot.data['result'][index]['division']}"),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 5,
+                      child: ListTile(
+                        title: Text(
+                          "${snapshot.data['result'][index]['name']} - ${snapshot.data['result'][index]['subject']}",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${snapshot.data['result'][index]['date'].toString().substring(0, 10)} :- Class ${snapshot.data['result'][index]['class']} ${snapshot.data['result'][index]['division']}",
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
                   );
                 },
               );
+            } else {
+              return const Center(
+                child: Text(
+                  'No data found',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              );
             }
           },
-        ));
+        ),
+      ),
+    );
   }
 }

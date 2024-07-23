@@ -11,7 +11,13 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
-String studentName= "", fatherName= "", motherName= "", fatherMobile= "", motherMobile= "", email= "", address= "";
+String studentName = "",
+    fatherName = "",
+    motherName = "",
+    fatherMobile = "",
+    motherMobile = "",
+    email = "",
+    address = "";
 
 class ParentProfile extends StatefulWidget {
   const ParentProfile({Key? key}) : super(key: key);
@@ -23,9 +29,9 @@ class ProfileState extends State<ParentProfile> {
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
-    String? url = dotenv.env['SERVER'];
-    var data = await http
-        .get(Uri.parse('http://$url/parent/student/$username'));
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var data =
+        await http.get(Uri.parse('http://$url/parent/student/$username'));
     var jsonData = json.decode(data.body);
 
     print(jsonData['result']['name']);

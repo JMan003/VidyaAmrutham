@@ -23,7 +23,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     String studentId = prefs.getString('username') ?? '';
     print("Student ID: $studentId");
 
-    String? link = dotenv.env['SERVER'];
+    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     String url = 'https://$link/parent/attendance/$studentId';
     var response = await http.get(

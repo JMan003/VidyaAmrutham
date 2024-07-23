@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-double? containerHeight,
-    containerWidth,
-    innerContainerWidth,
-    innerContainerHeight,
-    controllerContainerWidth,
-    controllerContainerHeight;
-
 class Grievance extends StatelessWidget {
-  final roll_no;
-  final mentor_id;
+  final String roll_no;
+  final String mentor_id;
 
   Grievance({
     Key? key,
@@ -21,93 +11,96 @@ class Grievance extends StatelessWidget {
     required this.mentor_id,
   }) : super(key: key);
 
-  final myController = TextEditingController();
+  final TextEditingController myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    containerHeight = screenHeight * 0.67;
-    double screenWidth = MediaQuery.of(context).size.width;
-    containerWidth = screenWidth * 0.9;
-    innerContainerWidth = screenWidth * 0.9;
-    innerContainerHeight = screenHeight * 0.35;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Grievance'),
+      appBar: AppBar(
+        title: const Text('Grievance'),
+        backgroundColor: Colors.blue.shade400,
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200, // Background color for the page
         ),
-        body: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: double.infinity,
-                child: Column(children: [
-                  const SizedBox(
-                    height: 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Card(
+                elevation: 0.5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    maxLength: 1000,
+                    maxLines: null,
+                    controller: myController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your text',
+                      border: InputBorder.none,
+                    ),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                  Scrollable(viewportBuilder:
-                      (BuildContext context, ViewportOffset position) {
-                    // Remove the 'Set<MaterialState> states' parameter
-                    return Column(
-                      children: [
-                        Card(
-                          elevation: 0.5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                              height: innerContainerHeight,
-                              width: innerContainerWidth,
-                              //color: Colors.white,
-                              child: TextField(
-                                maxLength: 1000,
-                                maxLines: null,
-                                controller: myController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter your text',
-                                  border: InputBorder.none,
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Color.fromARGB(255, 198, 191, 191),
-                                ),
-                              )),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              grievance_of_Student(context);
-                            },
-                            child: const Text('Save')),
-                      ],
-                    );
-                  }),
-                ]))));
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                grievanceOfStudent(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade400,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                'Save',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  void grievance_of_Student(context) async {
-    String? url = dotenv.env['SERVER'];
+  void grievanceOfStudent(BuildContext context) async {
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var data = {
       'mentor_id': mentor_id,
       'grievance': myController.text,
-      'id': roll_no
+      'id': roll_no,
     };
 
-    var response = await http
-        .post(Uri.parse('https://${url}/teacher/grievance'), body: data);
+    var response = await http.post(
+      Uri.parse('https://$url/teacher/grievance'),
+      body: data,
+    );
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Successful'),
+        const SnackBar(
+          content: Text('Grievance saved successfully'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to add to grievance'),
+        const SnackBar(
+          content: Text('Failed to save grievance'),
         ),
       );
     }

@@ -1,11 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:vidyaamrutham/Mentor/pages/profile.dart';
 
 class UpdateStudentRegistration extends StatefulWidget {
   final roll_no;
@@ -40,7 +36,7 @@ class _UpdateStudentRegistrationState extends State<UpdateStudentRegistration> {
   final today = DateTime.now();
 
   Future<Map<String, dynamic>> getStudentDetails() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http
         .get(Uri.parse('https://$url/teacher/update/${widget.roll_no}'));
 
@@ -94,250 +90,295 @@ class _UpdateStudentRegistrationState extends State<UpdateStudentRegistration> {
   late TextEditingController emailController;
 
   @override
+  void initState() {
+    super.initState();
+    dobController = TextEditingController();
+    nameController = TextEditingController();
+    classController = TextEditingController();
+    divisionController = TextEditingController();
+    rollNumberController = TextEditingController();
+    addressController = TextEditingController();
+    bloodGroupController = TextEditingController();
+    genderController = TextEditingController();
+    admissionNumberController = TextEditingController();
+    fatherController = TextEditingController();
+    motherController = TextEditingController();
+    fNumberController = TextEditingController();
+    mNumberController = TextEditingController();
+    emailController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    dobController.dispose();
+    nameController.dispose();
+    classController.dispose();
+    divisionController.dispose();
+    rollNumberController.dispose();
+    addressController.dispose();
+    bloodGroupController.dispose();
+    genderController.dispose();
+    admissionNumberController.dispose();
+    fatherController.dispose();
+    motherController.dispose();
+    fNumberController.dispose();
+    mNumberController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Update Student Details'),
-      ),
-      body: FutureBuilder(
-          future: getStudentDetails(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData) {
-                Map<String, dynamic>? data = (snapshot.data);
-                print(data);
-                return SingleChildScrollView(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                children: <Widget>[
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Student's Details",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
-                                    controller: nameController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["name"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the name',
+        appBar: AppBar(
+          title: Text('Update Student Details'),
+          backgroundColor: Colors.blue, // Customize app bar color
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.blue,
+                Colors.cyan,
+                Colors.purple,
+              ],
+            ),
+          ),
+          child: FutureBuilder(
+            future: getStudentDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  Map<String, dynamic>? data =
+                      (snapshot.data as Map<String, dynamic>);
+                  print(data);
+                  return SingleChildScrollView(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    const SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: classController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["class"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the class',
+                                    Text(
+                                      "Student's Details",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: divisionController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["section"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the Division',
+                                    const SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: rollNumberController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText:
-                                          data?["result"]["roll_no"].toString(),
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the Roll Number',
+                                    TextFormField(
+                                      controller: nameController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Name',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["dob"]
-                                          .toString()
-                                          .substring(0, 10),
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the date of birth',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: classController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Class',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                    controller: dobController,
-                                    onTap: () {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: today,
-                                        firstDate: DateTime(1900),
-                                        lastDate: today,
-                                      ).then((value) {
-                                        dobController.text =
-                                            value.toString().substring(0, 10);
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: bloodGroupController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["blood_group"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the Blood Group',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: divisionController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Division',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: genderController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["gender"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the Gender',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: rollNumberController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Roll Number',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: admissionNumberController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["admission_no"]
-                                          .toString(),
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the Admission number',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Date of Birth',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                      controller: dobController,
+                                      onTap: () {
+                                        showDatePicker(
+                                          context: context,
+                                          initialDate: today,
+                                          firstDate: DateTime(1900),
+                                          lastDate: today,
+                                        ).then((value) {
+                                          dobController.text =
+                                              value.toString().substring(0, 10);
+                                        });
+                                      },
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: bloodGroupController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Blood Group',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: genderController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Gender',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: admissionNumberController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Admission Number',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 20),
-                          Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                children: <Widget>[
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Parent's Details",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
-                                    controller: fatherController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["father_name"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter Father name',
+                            SizedBox(height: 20),
+                            Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    const SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: fNumberController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["father_phone"]
-                                          .toString(),
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter Father Number',
+                                    Text(
+                                      "Parent's Details",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: motherController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["mother_name"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter Mother name',
+                                    const SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: mNumberController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["mother_phone"]
-                                          .toString(),
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter Mother Number',
+                                    TextFormField(
+                                      controller: fatherController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Father\'s Name',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: addressController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: 'Address',
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter the address',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: fNumberController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Father\'s Number',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
-                                    controller: emailController,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      labelText: data?["result"]["email"],
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Enter email address',
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: motherController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Mother\'s Name',
+                                        border: OutlineInputBorder(),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: mNumberController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Mother\'s Number',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: addressController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Address',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    TextFormField(
+                                      controller: emailController,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        labelText: 'Email Address',
+                                        border: OutlineInputBorder(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              registerStudent();
-                            },
-                            child: Text('Update'),
-                          ),
-                        ],
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                registerStudent();
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
+                              ),
+                              child: Text(
+                                'Update',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              } else {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
-                );
+                  );
+                } else {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                }
               }
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }),
-    );
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        ));
   }
 
   void registerStudent() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var data = {
       'name': nameController.text,
@@ -345,7 +386,7 @@ class _UpdateStudentRegistrationState extends State<UpdateStudentRegistration> {
       'division': divisionController.text,
       'rollNumber': rollNumberController.text,
       'address': addressController.text,
-      'dob': dobController.text.substring(0,10),
+      'dob': dobController.text.substring(0, 10),
       'bloodGroup': bloodGroupController.text,
       'gender': genderController.text,
       'admissionNumber': admissionNumberController.text,

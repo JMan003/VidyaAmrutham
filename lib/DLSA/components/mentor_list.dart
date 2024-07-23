@@ -8,7 +8,7 @@ class MentorList extends StatelessWidget {
 
   Future<Map<String, dynamic>> getMentorList() async {
     try {
-      var url = dotenv.env['SERVER'];
+      var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
       var response = await http.get(Uri.parse('http://$url/dlsa/mentor/list'));
 
       if (response.statusCode == 200) {
@@ -45,11 +45,13 @@ class MentorList extends StatelessWidget {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: ListTile(
-                        title: Text(data['result'][index]['mentor_name'],
-                        //style: TextStyle(color: Colors.black)
+                        title: Text(
+                          data['result'][index]['mentor_name'],
+                          //style: TextStyle(color: Colors.black)
                         ),
-                        subtitle: Text(data['result'][index]['phone'],
-                        //style: TextStyle(color: Colors.black),
+                        subtitle: Text(
+                          data['result'][index]['phone'],
+                          //style: TextStyle(color: Colors.black),
                         ),
                         onTap: () {
                           showDialog(

@@ -16,9 +16,8 @@ class StudentRemovalSelection extends StatefulWidget {
 
 class RemoveStudentSelection extends State<StudentRemovalSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env['SERVER'];
-    var response =
-        await http.get(Uri.parse('https://$url/teacher/classes'));
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var response = await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -29,7 +28,19 @@ class RemoveStudentSelection extends State<StudentRemovalSelection> {
         appBar: AppBar(
           title: const Text('Remove Student'),
         ),
-        body: FutureBuilder(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.blue,
+                Colors.cyan,
+                Colors.purple,
+              ],
+            ),
+          ),
+          child: FutureBuilder(
             future: getClasses(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
@@ -38,32 +49,39 @@ class RemoveStudentSelection extends State<StudentRemovalSelection> {
                       snapshot.data as Map<String, dynamic>;
                   print(data);
                   return ListView.builder(
-                      itemCount: data['result'].length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: ElevatedButton(
-                            // ignore: prefer_interpolation_to_compose_strings
-                            child: Text("${data['result'][index]['class']} " +
-                                data['result'][index]['section']),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RemoveStudent(
-                                          grade : data['result'][index]['class'],
-                                          section : data['result'][index]['section']
-                                        )
-                                  )
-                              );
-                            },
-                          ),
-                        );
-                      });
+                    itemCount: data['result'].length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: ElevatedButton(
+                          // ignore: prefer_interpolation_to_compose_strings
+                          child: Text("${data['result'][index]['class']} " +
+                              data['result'][index]['section']),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RemoveStudent(
+                                          grade: data['result'][index]['class'],
+                                          section: data['result'][index]
+                                              ['section'],
+                                        )));
+                          },
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(
+                    child: Text('No Data'),
+                  );
                 }
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }));
+            },
+          ),
+        ));
   }
 }

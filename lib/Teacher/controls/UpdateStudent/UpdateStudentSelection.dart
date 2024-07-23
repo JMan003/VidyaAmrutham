@@ -16,7 +16,7 @@ class StudentUpdateSelection extends StatefulWidget {
 
 class UpdateStudentSelection extends State<StudentUpdateSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.get(Uri.parse('https://$url/teacher/classes'));
 
     return json.decode(response.body);
@@ -25,42 +25,60 @@ class UpdateStudentSelection extends State<StudentUpdateSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Update Student'),
+      appBar: AppBar(
+        title: const Text('Update Student'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.blue,
+              Colors.cyan,
+              Colors.purple,
+            ],
+          ),
         ),
-        body: FutureBuilder(
-            future: getClasses(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  Map<String, dynamic> data =
-                      snapshot.data as Map<String, dynamic>;
-                  print(data);
-                  return ListView.builder(
-                      itemCount: data['result'].length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: ElevatedButton(
-                            // ignore: prefer_interpolation_to_compose_strings
-                            child: Text("${data['result'][index]['class']} " +
-                                data['result'][index]['section']),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => UpdateStudent(
-                                          grade: data['result'][index]['class'],
-                                          section: data['result'][index]
-                                              ['section'])));
-                            },
-                          ),
-                        );
-                      });
-                }
+        child: FutureBuilder(
+          future: getClasses(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                Map<String, dynamic> data =
+                    snapshot.data as Map<String, dynamic>;
+                print(data);
+                return ListView.builder(
+                  itemCount: data['result'].length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: ElevatedButton(
+                        // ignore: prefer_interpolation_to_compose_strings
+                        child: Text("${data['result'][index]['class']} " +
+                            data['result'][index]['section']),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateStudent(
+                                grade: data['result'][index]['class'],
+                                section: data['result'][index]['section'],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
               }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }));
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

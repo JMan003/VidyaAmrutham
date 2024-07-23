@@ -15,9 +15,8 @@ class ContactMentorSelection extends StatefulWidget {
 
 class MentorSelection extends State<ContactMentorSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env['SERVER'];
-    var response =
-        await http.get(Uri.parse('http://$url/teacher/classes'));
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var response = await http.get(Uri.parse('http://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -49,11 +48,9 @@ class MentorSelection extends State<ContactMentorSelection> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ContactMentor(
-                                          grade : data['result'][index]['class'],
-                                          section : data['result'][index]['section']
-                                        )
-                                  )
-                              );
+                                          grade: data['result'][index]['class'],
+                                          section: data['result'][index]
+                                              ['section'])));
                             },
                           ),
                         );

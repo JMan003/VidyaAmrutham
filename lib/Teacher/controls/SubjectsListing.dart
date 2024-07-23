@@ -48,7 +48,7 @@ class _SubjectsListingState extends State<SubjectsListing> {
   }
 
   Future<Map<String, dynamic>> getSubjects() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var response = await http.get(Uri.parse('https://$url/subjects'));
     return jsonDecode(response.body);

@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Achievements/SelectStudentAchievement.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Assignments.dart';
+import 'package:vidyaamrutham/Mentor/academic_details/assignments.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Exams/SelectStudentExam.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Attendance/SelectStudentAttendance.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Remarks/Remarks_Student_Selection.dart';
@@ -20,7 +20,7 @@ class MentorHome extends StatelessWidget {
   Future<Map<String, dynamic>> getMentorData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
-    var url = dotenv.env['SERVER'];
+    var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     print(url);
     print(username);
@@ -113,7 +113,9 @@ class MentorHome extends StatelessWidget {
                                                   .toString()),
                                           buildDetailRow(
                                               "DOB",
-                                              students[index]['dob'].substring(0, 10).toString()),
+                                              students[index]['dob']
+                                                  .substring(0, 10)
+                                                  .toString()),
                                           buildDetailRow(
                                               "Admission Number",
                                               students[index]['admission_no']
@@ -230,13 +232,13 @@ class MentorHome extends StatelessWidget {
                                   children: [
                                     IconButton(
                                       onPressed: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         const Assignments(),
-                                        //   ),
-                                        // );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Assignments(),
+                                          ),
+                                        );
                                       },
                                       icon: Image.asset(
                                           "assets/images/Assignments.png"),

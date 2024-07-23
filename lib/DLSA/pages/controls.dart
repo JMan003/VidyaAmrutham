@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vidyaamrutham/DLSA/components/AssignMentor.dart';
+import 'package:vidyaamrutham/DLSA/components/MentorAddition.dart';
+import 'package:vidyaamrutham/DLSA/components/UpdateMentor.dart';
 import 'package:vidyaamrutham/Teacher/controls/Announcement/AnnouncementsPage.dart';
 
 class ControlPage extends StatelessWidget {
@@ -68,29 +71,39 @@ class ControlPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              // Column(
+                              //   children: <Widget>[
+                              //     SizedBox(
+                              //       width: 60, // Set this to your desired width
+                              //       height:
+                              //           60, // Set this to your desired height
+                              //       child: Image.asset(
+                              //           'assets/images/meeting.png'),
+                              //     ),
+                              //     const Text(
+                              //       'Meetings',
+                              //       style: TextStyle(color: Colors.black),
+                              //     ),
+                              //   ],
+                              // ),
                               Column(
                                 children: <Widget>[
-                                  SizedBox(
-                                    width: 60, // Set this to your desired width
-                                    height:
-                                        60, // Set this to your desired height
-                                    child: Image.asset(
-                                        'assets/images/meeting.png'),
-                                  ),
-                                  const Text(
-                                    'Meetings',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: 60, // Set this to your desired width
-                                    height:
-                                        60, // Set this to your desired height
-                                    child: Image.asset(
-                                        'assets/images/add_mentor.png'),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MentorAddition()));
+                                    },
+                                    child: SizedBox(
+                                      width:
+                                          60, // Set this to your desired width
+                                      height:
+                                          60, // Set this to your desired height
+                                      child: Image.asset(
+                                          'assets/images/add_mentor.png'),
+                                    ),
                                   ),
                                   const Text(
                                     'Add Mentor',
@@ -100,27 +113,47 @@ class ControlPage extends StatelessWidget {
                               ),
                               Column(
                                 children: <Widget>[
-                                  SizedBox(
-                                    width: 60, // Set this to your desired width
-                                    height:
-                                        60, // Set this to your desired height
-                                    child: Image.asset(
-                                        'assets/images/change_mentor.png'),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const UpdateMentor()));
+                                    },
+                                    child: SizedBox(
+                                      width:
+                                          60, // Set this to your desired width
+                                      height:
+                                          60, // Set this to your desired height
+                                      child: Image.asset(
+                                          'assets/images/change_mentor.png'),
+                                    ),
                                   ),
                                   const Text(
-                                    'Change Mentor',
+                                    'Update Mentor',
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ],
                               ),
                               Column(
                                 children: <Widget>[
-                                  SizedBox(
-                                    width: 60, // Set this to your desired width
-                                    height:
-                                        60, // Set this to your desired height
-                                    child: Image.asset(
-                                        'assets/images/assign_mentor.png'),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const AssignMentor()));
+                                    },
+                                    child: SizedBox(
+                                      width:
+                                          60, // Set this to your desired width
+                                      height:
+                                          60, // Set this to your desired height
+                                      child: Image.asset(
+                                          'assets/images/assign_mentor.png'),
+                                    ),
                                   ),
                                   const Text(
                                     'Assign Mentor',
@@ -128,21 +161,21 @@ class ControlPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: 60, // Set this to your desired width
-                                    height:
-                                        60, // Set this to your desired height
-                                    child:
-                                        Image.asset('assets/images/Print.png'),
-                                  ),
-                                  const Text(
-                                    'Print Report',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ],
-                              ),
+                              // Column(
+                              //   children: <Widget>[
+                              //     SizedBox(
+                              //       width: 60, // Set this to your desired width
+                              //       height:
+                              //           60, // Set this to your desired height
+                              //       child:
+                              //           Image.asset('assets/images/Print.png'),
+                              //     ),
+                              //     const Text(
+                              //       'Print Report',
+                              //       style: TextStyle(color: Colors.black),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         ),

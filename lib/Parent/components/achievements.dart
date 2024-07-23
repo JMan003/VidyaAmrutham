@@ -13,14 +13,13 @@ class Achievements extends StatefulWidget {
 }
 
 class _AchievementsState extends State<Achievements> {
-  Future<Map<String, dynamic>> getAchivements() async {
+  Future<Map<String, dynamic>> getAchievements() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final studentId = prefs.getString('student_id')!;
 
-    String? link = dotenv.env['SERVER'];
+    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
-    var url =
-        Uri.parse('http://$link/parent/achievements/${studentId}');
+    var url = Uri.parse('http://$link/parent/achievements/$studentId');
     var response = await http.get(url);
     print(response.body);
     return json.decode(response.body);
@@ -32,100 +31,94 @@ class _AchievementsState extends State<Achievements> {
       appBar: AppBar(
         title: const Text('Achievements'),
       ),
-      body: Scrollable(
-        viewportBuilder: (BuildContext context, ViewportOffset position) {
-          return FutureBuilder(
-              future: getAchivements(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasError) {
-                  return const Text('Error');
-                }
-                if (snapshot.hasData) {
-                  int length = snapshot.data['result'].length;
-                  if (length != 0) {
-                    return ListView.builder(
-                      itemCount: snapshot.data['result'].length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          // Define how the card's content should be clipped
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          // Define the child widget of the card
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // Add padding around the row widget
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    // Add an image widget to display an image
-                                    Image.asset(
-                                      'assets/images/Contest.png',
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.purple],
+          ),
+        ),
+        child: FutureBuilder(
+          future: getAchievements(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+            if (snapshot.hasData) {
+              int length = snapshot.data['result'].length;
+              if (length != 0) {
+                return ListView.builder(
+                  itemCount: snapshot.data['result'].length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      color: Colors.white.withOpacity(0.9),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      elevation: 5,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/images/Contest.png',
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Position: ${snapshot.data['result'][index]['position']}",
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    // Add some spacing between the image and the text
-                                    Container(width: 20),
-                                    // Add an expanded widget to take up the remaining horizontal space
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          // Add some spacing between the top of the card and the title
-                                          Container(height: 5),
-                                          // Add a title widget
-                                          Text(
-                                            "Position: ${snapshot.data['result'][index]['position']}",
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          // Add some spacing between the title and the subtitle
-                                          Container(height: 5),
-                                          // Add a subtitle widget
-                                          Text(
-                                            "Date: ${snapshot.data['result'][index]['date'].toString().substring(0, 10)}",
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey[700],
-                                            ),
-                                          ),
-                                          // Add some spacing between the subtitle and the text
-                                          Container(height: 10),
-                                          // Add a text widget to display some text
-                                          Text(
-                                            "Description: ${snapshot.data['result'][index]['achievement']}",
-                                          ),
-                                        ],
-                                      ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Date: ${snapshot.data['result'][index]['date'].toString().substring(0, 10)}",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey[700],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    "Description: ${snapshot.data['result'][index]['achievement']}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
+                            ),
+                          ],
+                        ),
+                      ),
                     );
-                  } else {
-                    return const Center(
-                      child: Text('No Achievements'),
-                    );
-                  }
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
+                  },
                 );
-              });
-        },
+              } else {
+                return const Center(
+                  child: Text('No Achievements'),
+                );
+              }
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
       ),
     );
   }

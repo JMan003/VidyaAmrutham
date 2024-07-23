@@ -33,7 +33,7 @@ class StudentProfile extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     print(username);
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     print(url);
     var data = await http.get(Uri.parse('https://$url/student/$username'));
     var jsonData = json.decode(data.body);
@@ -716,7 +716,6 @@ class StudentProfile extends StatelessWidget {
                           ],
                         ),
                       ),
-
                       Padding(
                           padding: const EdgeInsets.only(
                             top: 2,
@@ -749,12 +748,9 @@ class StudentProfile extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                              )
-                              ),
+                              )),
                             ],
-                          )
-                          ),
-
+                          )),
                     ],
                   ),
                 ),

@@ -13,10 +13,8 @@ class ResultView extends StatefulWidget {
 }
 
 class _ResultViewState extends State<ResultView> {
-
   Future getResults() async {
-
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? id = prefs.getString('student_id');
 
@@ -31,28 +29,30 @@ class _ResultViewState extends State<ResultView> {
       appBar: AppBar(
         title: const Text('Results'),
       ),
-      body: FutureBuilder(future: getResults(), builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          print(snapshot.data);
-          return ListView.builder(
-            itemCount: snapshot.data['result'].length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                    "${snapshot.data['result'][index]['name']} - ${snapshot.data['result'][index]['subject']}"),
-                subtitle: Text(
-                    "${snapshot.data['result'][index]['date'].toString().substring(0,10)} :- Class ${snapshot.data['result'][index]['class']} ${snapshot.data['result'][index]['division']}"),
-                trailing: Text(
-                    "${snapshot.data['result'][index]['mark']} / ${snapshot.data['result'][index]['marks']}"),
+      body: FutureBuilder(
+          future: getResults(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            },
-          );
-        }
-      }),
+            } else {
+              print(snapshot.data);
+              return ListView.builder(
+                itemCount: snapshot.data['result'].length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                        "${snapshot.data['result'][index]['name']} - ${snapshot.data['result'][index]['subject']}"),
+                    subtitle: Text(
+                        "${snapshot.data['result'][index]['date'].toString().substring(0, 10)} :- Class ${snapshot.data['result'][index]['class']} ${snapshot.data['result'][index]['division']}"),
+                    trailing: Text(
+                        "${snapshot.data['result'][index]['mark']} / ${snapshot.data['result'][index]['marks']}"),
+                  );
+                },
+              );
+            }
+          }),
     );
   }
 }

@@ -1,23 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/Teacher/controls/Attendance/TeacherAttendance.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class TeacherAttendanceSelection extends StatefulWidget {
   const TeacherAttendanceSelection({Key? key}) : super(key: key);
+
   @override
-  State<TeacherAttendanceSelection> createState() => AttendanceSelection();
+  State<TeacherAttendanceSelection> createState() =>
+      _AttendanceSelectionState();
 }
 
-class AttendanceSelection extends State<TeacherAttendanceSelection> {
+class _AttendanceSelectionState extends State<TeacherAttendanceSelection> {
   Future<Map<String, dynamic>> getClasses() async {
-    String? url = dotenv.env['SERVER'];
-    var response =
-        await http.get(Uri.parse('http://$url/teacher/classes'));
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    var response = await http.get(Uri.parse('http://$url/teacher/classes'));
 
     return json.decode(response.body);
   }
@@ -25,44 +24,77 @@ class AttendanceSelection extends State<TeacherAttendanceSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Take Attendance'),
+      appBar: AppBar(
+        title: const Text('Take Attendance'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue.shade400, Colors.cyan.shade400],
+          ),
         ),
-        body: FutureBuilder(
-            future: getClasses(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  Map<String, dynamic> data =
-                      snapshot.data as Map<String, dynamic>;
-                  print(data);
-                  return ListView.builder(
-                      itemCount: data['result'].length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: ElevatedButton(
-                            // ignore: prefer_interpolation_to_compose_strings
-                            child: Text("${data['result'][index]['class']} " +
-                                data['result'][index]['section']),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TeacherAttendance(
-                                          grade : data['result'][index]['class'],
-                                          section : data['result'][index]['section']
-                                        )
-                                  )
-                              );
-                            },
-                          ),
-                        );
-                      });
-                }
-              }
+        child: FutureBuilder<Map<String, dynamic>>(
+          future: getClasses(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            }));
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else if (snapshot.hasData &&
+                snapshot.data!.containsKey('result')) {
+              List<dynamic> data = snapshot.data!['result'];
+              return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TeacherAttendance(
+                              grade: data[index]['class'],
+                              section: data[index]['section'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "${data[index]['class']} ${data[index]['section']}",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            const EdgeInsets.all(12)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  );
+                },
+              );
+            } else {
+              return const Center(
+                child: Text('No classes available.'),
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 }

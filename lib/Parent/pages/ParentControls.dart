@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vidyaamrutham/Parent/components/ContactMentor.dart';
+import 'package:vidyaamrutham/Parent/components/InstructionsFromMentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_mentor.dart';
 import 'package:vidyaamrutham/Parent/components/note_to_teacher.dart';
+import 'package:vidyaamrutham/Parent/components/Announcements.dart';
 
 int _selectedIndex = 3;
 double? containerHeight, innerContainerWidth, innerContainerHeight;
@@ -100,12 +102,12 @@ class ParentControls extends StatelessWidget {
                           'Announcements',
                           'assets/images/Megaphone.png',
                           () {
-                            // Navigator.push(
-                              // context,
-                              // MaterialPageRoute(
-                                // builder: (context) => AnnouncementsPage(),
-                              // ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AnnouncementsPage(),
+                              ),
+                            );
                           },
                         ),
                         _buildGridItem(
@@ -116,6 +118,18 @@ class ParentControls extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const ContactMentor(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildGridItem(
+                          'Instructions',
+                          'assets/images/Todo.png',
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const InstructionsFromMentor(),
                               ),
                             );
                           },
