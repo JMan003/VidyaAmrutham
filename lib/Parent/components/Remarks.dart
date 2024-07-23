@@ -16,7 +16,7 @@ class _RemarksState extends State<Remarks> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final studentId = prefs.getString('student_id')!;
 
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
 
     var url = Uri.parse('http://$link/parent/remarks/${studentId}');
     var response = await http.get(url);
@@ -59,6 +59,7 @@ class _RemarksState extends State<Remarks> {
                         child: ListView.builder(
                           itemCount: snapshot.data['result'].length,
                           itemBuilder: (BuildContext context, int index) {
+                            var date = snapshot.data?['result'][index]['date'].toString();
                             return Card(
                               margin: const EdgeInsets.all(10),
                               child: ListTile(
@@ -75,7 +76,7 @@ class _RemarksState extends State<Remarks> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  'Announced on ${snapshot.data['result'][index]['date'].toString().substring(0, 10)}',
+                                  'Announced on ${date?[8]}${date?[9]}-${date?[5]}${date?[6]}-${date?[0]}${date?[1]}${date?[2]}${date?[3]}',
                                   style: const TextStyle(fontSize: 15),
                                 ),
                               ),

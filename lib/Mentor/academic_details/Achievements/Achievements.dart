@@ -14,7 +14,7 @@ class Achievements extends StatefulWidget {
 
 class _AchievementsState extends State<Achievements> {
   Future<Map<String, dynamic>> getAchievements() async {
-    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? link = "dlsatestserver.serveo.net";
     var url = Uri.parse('http://$link/parent/achievements/${widget.id}');
     var response = await http.get(url);
     print(response.body);

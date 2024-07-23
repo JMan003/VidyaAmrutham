@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
 
   Future<Map<String, dynamic>> getCount() async {
     print("Fetching data");
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http.get(Uri.parse('https://$url/dlsa/count'));
     print(response.body);
     number_of_students =

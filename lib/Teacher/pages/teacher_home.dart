@@ -10,7 +10,7 @@ import 'package:vidyaamrutham/Teacher/controls/TeacherExam.dart';
 import 'package:vidyaamrutham/Teacher/controls/TeacherResult.dart';
 
 class Teacher1 extends StatelessWidget {
-  String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+  String? url = "dlsatestserver.serveo.net";
 
   Teacher1({super.key});
 

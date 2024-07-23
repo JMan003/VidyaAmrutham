@@ -36,7 +36,7 @@ class _UpdateStudentRegistrationState extends State<UpdateStudentRegistration> {
   final today = DateTime.now();
 
   Future<Map<String, dynamic>> getStudentDetails() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
     var response = await http
         .get(Uri.parse('https://$url/teacher/update/${widget.roll_no}'));
 
@@ -378,7 +378,7 @@ class _UpdateStudentRegistrationState extends State<UpdateStudentRegistration> {
   }
 
   void registerStudent() async {
-    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    String? url = "dlsatestserver.serveo.net";
 
     var data = {
       'name': nameController.text,

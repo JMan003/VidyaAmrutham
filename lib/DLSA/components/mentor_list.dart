@@ -8,7 +8,7 @@ class MentorList extends StatelessWidget {
 
   Future<Map<String, dynamic>> getMentorList() async {
     try {
-      var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+      var url = "dlsatestserver.serveo.net";
       var response = await http.get(Uri.parse('http://$url/dlsa/mentor/list'));
 
       if (response.statusCode == 200) {

@@ -15,7 +15,7 @@ class AssignMentorII extends StatefulWidget {
 class _AssignMentorIIState extends State<AssignMentorII> {
   Future<Map<String, dynamic>> getMentorList() async {
     try {
-      var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+      var url = "dlsatestserver.serveo.net";
       var response = await http.get(Uri.parse('https://$url/dlsa/mentors/'));
 
       if (response.statusCode == 200) {
@@ -113,8 +113,7 @@ class _AssignMentorIIState extends State<AssignMentorII> {
                                   onPressed: () {
                                     var mentor = mentors[index]['username'];
                                     var student = widget.username;
-                                    var url =
-                                        "387df06823a93fd406892e1c452f4b74.serveo.net";
+                                    var url = "dlsatestserver.serveo.net";
 
                                     showDialog(
                                       context: context,
