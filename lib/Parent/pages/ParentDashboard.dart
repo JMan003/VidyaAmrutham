@@ -32,7 +32,7 @@ class DashboardState extends State<ParentDashboard> {
   Future<Map<String, dynamic>> getStudentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var username = prefs.getString('username');
     print(username);
     var data =
@@ -73,9 +73,9 @@ class DashboardState extends State<ParentDashboard> {
             return Scrollable(viewportBuilder:
                 (BuildContext context, ViewportOffset position) {
               return SingleChildScrollView(
-              child: Column(
-                children: [
-                     Container(
+                child: Column(
+                  children: [
+                    Container(
                       //height: containerHeight,
                       width: double.infinity,
                       decoration: const ShapeDecoration(
@@ -424,7 +424,8 @@ class DashboardState extends State<ParentDashboard> {
                                     height: 20,
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Align(
                                         child: Column(
@@ -462,7 +463,11 @@ class DashboardState extends State<ParentDashboard> {
                                           children: [
                                             GestureDetector(
                                               onTap: () {
-                                                // Add the required functionality here
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const Remarks()));
                                               },
                                               child: const Column(
                                                 children: [
@@ -495,12 +500,9 @@ class DashboardState extends State<ParentDashboard> {
                           ),
                         ],
                       ),
-                    
                     ),
-                  
-                ],
-              
-              ),
+                  ],
+                ),
               );
             });
           }),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class AddAnnouncement extends StatefulWidget {
@@ -19,56 +18,83 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Announcement'),
+        backgroundColor: Colors.blue.shade400,
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 20,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue.shade400, Colors.cyan.shade400],
           ),
-          const Text(
-            'Announcement',
-            style: TextStyle(fontSize: 20),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: const Color.fromARGB(255, 255, 255, 255)),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              decoration: const InputDecoration(
-                hintText: 'Enter announcement here',
-                border: InputBorder.none,
-                fillColor: Color.fromARGB(255, 255, 255, 255),
-                hintStyle: TextStyle(color: Colors.grey),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'Enter Your Announcement',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
-              style: const TextStyle(color: Colors.white),
-              controller: _announcement,
-              maxLines: 5,
-            ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  decoration: const InputDecoration(
+                    hintText: 'Write your announcement here...',
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                  controller: _announcement,
+                  maxLines: 5,
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  publishAnnouncement();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 39, 120, 186),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Publish',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              publishAnnouncement();
-            },
-            child: const Text('Publish'),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Future<void> publishAnnouncement() async {
-    // Implement the logic to publish the announcement
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var link = Uri.parse('https://$url/teacher/announcement');
     var response = await http.post(

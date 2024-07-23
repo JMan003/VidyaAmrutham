@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,10 +16,19 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Note to teacher'),
+      appBar: AppBar(
+        title: const Text('Note to Teacher'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.cyan],
+          ),
         ),
-        body: Scrollable(
+        child: Scrollable(
           viewportBuilder: (BuildContext context, ViewportOffset position) {
             return Column(
               children: [
@@ -28,13 +36,11 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.67,
                   width: double.infinity,
-                  decoration: const ShapeDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                   ),
                   child: Column(
@@ -42,10 +48,11 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
                       const Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Text(
-                          'Note to teacher',
+                          'Note to Teacher',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -61,13 +68,32 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
                               color: Colors.grey,
                             ),
                           ),
+                          style: const TextStyle(color: Colors.black),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () {
+                          if (noteController.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please enter a note'),
+                              ),
+                            );
+                            return;
+                          }
                           handleNoteSubmission(noteController.text);
                         },
                         child: const Text('Submit'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 15),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -75,23 +101,24 @@ class _NoteToTeacherState extends State<NoteToTeacher> {
               ],
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 
-  void handleNoteSubmission(String text) async {
-    String? url = dotenv.env['SERVER'];
+  Future<void> handleNoteSubmission(String text) async {
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
 
-    final response = await http
-        .post(
-          Uri.parse('https://$url/parent/note/teacher'), 
-        body: {
-          'note': text,
-          'username': username,
-        }
-        );
-    
+    final response = await http.post(
+      Uri.parse('https://$url/parent/note/teacher'),
+      body: {
+        'note': text,
+        'username': username,
+      },
+    );
+
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

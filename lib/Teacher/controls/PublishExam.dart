@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 
 class PublishExam extends StatefulWidget {
   const PublishExam({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class PublishExam extends StatefulWidget {
 }
 
 class _PublishExamState extends State<PublishExam> {
-  String? url = dotenv.env['SERVER'];
+  String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
   TextEditingController examName = TextEditingController();
   TextEditingController examDate = TextEditingController();
   TextEditingController examTime = TextEditingController();
@@ -28,132 +27,123 @@ class _PublishExamState extends State<PublishExam> {
       appBar: AppBar(
         title: const Text('Publish Exam'),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFormField(
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Exam Name',
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the exam name',
-                  ),
-                  controller: examName,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue.shade400, Colors.cyan.shade400],
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Exam Name',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the exam name',
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Class',
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the class',
-                  ),
-                  controller: examClass,
+                controller: examName,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Class',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the class',
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.white
-                  ),
-                  decoration: const InputDecoration(
-                    labelText: 'Division',
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter class division',
-                  ),
-                  controller: division,
+                controller: examClass,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Division',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter class division',
                 ),
-                SizedBox(
-                  height: 200,
-                  child: CupertinoDatePicker(
-                    mode: CupertinoDatePickerMode.dateAndTime,
-                    initialDateTime: DateTime(today.year, today.month, today.day,
-                        today.hour, today.minute),
-                    onDateTimeChanged: (DateTime newDateTime) {
-                      examDate.text = newDateTime.toString();
-                    },
-                    use24hFormat: false,
-                    minuteInterval: 1,
-                  ),
+                controller: division,
+              ),
+              SizedBox(
+                height: 200,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  initialDateTime: DateTime(today.year, today.month, today.day,
+                      today.hour, today.minute),
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    examDate.text = newDateTime.toString();
+                  },
+                  use24hFormat: false,
+                  minuteInterval: 1,
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Total Marks',
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the total marks',
-                  ),
-                  controller: marks,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Total Marks',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the total marks',
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Subject',
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter the exam subject',
-                  ),
-                  controller: subject,
+                controller: marks,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: 'Subject',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter the exam subject',
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      print(examDate.text);
-                      print(examTime.text);
-                      print(examName.text);
-                      print(examClass.text);
-                      print(marks.text);
-                      print(subject.text);
+                controller: subject,
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    var response = await http.post(
+                      Uri.parse('https://$url/teacher/publish/exam'),
+                      body: {
+                        'name': examName.text,
+                        'examClass': examClass.text,
+                        'division': division.text,
+                        'date': examDate.text,
+                        'marks': marks.text,
+                        'subject': subject.text,
+                      },
+                    );
 
-                      var response = await http.post(
-                          Uri.parse('https://$url/teacher/publish/exam'),
-                          body: {
-                            'name': examName.text,
-                            'examClass': examClass.text,
-                            'division': division.text,
-                            'date': examDate.text,
-                            'marks': marks.text,
-                            'subject': subject.text,
-                          });
-                      if (response.statusCode == 200) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Exam Published Successfully'),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Failed to publish exam'),
-                          ),
-                        );
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
-                      textStyle: MaterialStateProperty.all<TextStyle>(
-                        const TextStyle(
-                          fontSize: 18,
+                    if (response.statusCode == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Exam Published Successfully'),
                         ),
-                      ),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Failed to publish exam'),
                         ),
-                      ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Text('Publish Exam'),
                   ),
+                  child: const Text('Publish Exam',
+                      style: TextStyle(fontSize: 18)),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

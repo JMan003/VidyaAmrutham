@@ -15,7 +15,7 @@ class MeetingTeacher extends StatefulWidget {
 
 class _MeetingTeacherState extends State<MeetingTeacher> {
   Future<Map<String, dynamic>> getMentorDetails(BuildContext context) async {
-    String? link = dotenv.env['SERVER'];
+    String? link = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var url = Uri.parse('http://$link/mentor/teacher');
     var response = await http.get(url);
@@ -39,25 +39,22 @@ class _MeetingTeacherState extends State<MeetingTeacher> {
               return ListView(
                 children: <Widget>[
                   ListTile(
-                    title: Text(
-                        "Name: ${snapshot.data['result'][0]['name']}"),
+                    title: Text("Name: ${snapshot.data['result'][0]['name']}"),
                   ),
-
                   ListTile(
-                    title: Text('Email: ${snapshot.data['result'][0]['email']}'),
+                    title:
+                        Text('Email: ${snapshot.data['result'][0]['email']}'),
                   ),
                   ListTile(
                       title: Text(
                           "Father's Phone: ${snapshot.data['result'][0]['phone']}"),
                       onTap: () {
-                        launch(
-                            'tel:${snapshot.data['result'][0]['phone']}');
+                        launch('tel:${snapshot.data['result'][0]['phone']}');
                       },
                       trailing: const Icon(
                         Icons.phone,
                         color: Colors.blue,
                       )),
-                  
                 ],
               );
             }

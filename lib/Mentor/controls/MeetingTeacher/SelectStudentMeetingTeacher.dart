@@ -17,7 +17,7 @@ class SelectTeacherState extends State<SelectTeacher> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    var link = dotenv.env['SERVER'];
+    var link = "387df06823a93fd406892e1c452f4b74.serveo.net";
     String url = 'http://$link/mentor/student/$username';
     var data = await http.get(
       Uri.parse(url),

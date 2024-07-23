@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddAssignment extends StatefulWidget {
@@ -26,64 +25,95 @@ class _AddAssignmentState extends State<AddAssignment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Add Assignment'),
-        ),
-        body: SingleChildScrollView(
-          child: Form(
+      appBar: AppBar(
+        title: const Text('Add Assignment'),
+        backgroundColor: Colors.blue.shade400,
+      ),
+      body: Container(
+        color: Colors.grey.shade200, // Background color for the page
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const SizedBox(height: 20),
+                Text(
+                  'Enter Assignment Details',
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 30),
                 TextFormField(
                   controller: titleController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Title',
                     border: OutlineInputBorder(),
                     hintText: 'Enter title',
-                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: descriptionController,
-                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                      labelText: 'Description', border: OutlineInputBorder()),
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: classController,
+                        decoration: const InputDecoration(
+                          labelText: 'Class',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: TextFormField(
+                        controller: divisionController,
+                        decoration: const InputDecoration(
+                          labelText: 'Division',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: classController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                      labelText: 'Class', border: OutlineInputBorder()),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: divisionController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                      labelText: 'Division', border: OutlineInputBorder()),
-                ),
-                const SizedBox(height: 20),
-                TextField(
                   controller: subjectController,
-                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                      labelText: 'Subject', border: OutlineInputBorder()),
+                    labelText: 'Subject',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
                   height: 200,
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.dateAndTime,
-                    initialDateTime: DateTime(today.year, today.month, today.day,
-                        today.hour, today.minute),
+                    initialDateTime: DateTime(
+                      today.year,
+                      today.month,
+                      today.day,
+                      today.hour,
+                      today.minute,
+                    ),
                     onDateTimeChanged: (DateTime newDateTime) {
                       deadlineController.text = newDateTime.toString();
                     },
                     use24hFormat: false,
                     minuteInterval: 1,
+                    backgroundColor: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -91,16 +121,28 @@ class _AddAssignmentState extends State<AddAssignment> {
                   onPressed: () {
                     addAssignment();
                   },
-                  child: const Text('Add Assignment'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade400,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'Add Assignment',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void addAssignment() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     final prefs = await SharedPreferences.getInstance();
     final teacherId = prefs.getString('username');
 
@@ -120,9 +162,11 @@ class _AddAssignmentState extends State<AddAssignment> {
       body: jsonEncode(data),
       headers: {'Content-Type': 'application/json'},
     );
+
     if (response.statusCode == 200) {
-      const ScaffoldMessenger(
-          child: SnackBar(content: Text('Assignment added successfully')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Assignment added successfully')),
+      );
       setState(() {
         titleController.clear();
         descriptionController.clear();
@@ -132,8 +176,9 @@ class _AddAssignmentState extends State<AddAssignment> {
         subjectController.clear();
       });
     } else {
-      const ScaffoldMessenger(
-          child: SnackBar(content: Text('Failed to add assignment')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to add assignment')),
+      );
     }
   }
 }

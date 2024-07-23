@@ -15,7 +15,7 @@ class ResultView extends StatefulWidget {
 
 class _ResultViewState extends State<ResultView> {
   Future getResults() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var link = Uri.parse('https://${url}/parent/result/${widget.id}');
     var response = await http.get(link);
@@ -28,31 +28,78 @@ class _ResultViewState extends State<ResultView> {
       appBar: AppBar(
         title: const Text('Results'),
       ),
-      body: FutureBuilder(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.cyan, Colors.deepPurple],
+          ),
+        ),
+        child: FutureBuilder(
           future: getResults(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else {
-              print(snapshot.data);
+            } else if (snapshot.data['result'].length > 0) {
               return ListView.builder(
+                padding: const EdgeInsets.all(20),
                 itemCount: snapshot.data['result'].length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Text(snapshot.data['result'][index]['subject'][0]),
-                    title: Text(
-                        "${snapshot.data['result'][index]['name']} - ${snapshot.data['result'][index]['subject']}"),
-                    subtitle: Text(
-                        "${snapshot.data['result'][index]['date'].toString().substring(0, 10)} :- Class ${snapshot.data['result'][index]['class']} ${snapshot.data['result'][index]['division']}"),
-                    trailing: Text(
-                        "${snapshot.data['result'][index]['mark']} / ${snapshot.data['result'][index]['marks']}"),
+                  var result = snapshot.data['result'][index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 5,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          child: Text(
+                            result['subject'][0],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          "${result['name']} - ${result['subject']}",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${result['date'].toString().substring(0, 10)} :- Class ${result['class']} ${result['division']}",
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                        trailing: Text(
+                          "${result['mark']} / ${result['marks']}",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   );
                 },
               );
+            } else {
+              return const Center(
+                child: Text(
+                  'No data found',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              );
             }
-          }),
+          },
+        ),
+      ),
     );
   }
 }

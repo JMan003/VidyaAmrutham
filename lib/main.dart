@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vidyaamrutham/DLSA/dlsa.dart';
+import 'package:vidyaamrutham/Login/AboutPage.dart';
 import 'package:vidyaamrutham/Login/login.dart';
 import 'package:vidyaamrutham/Login/role.dart';
 import 'package:vidyaamrutham/Mentor/mentor.dart';
@@ -20,7 +21,7 @@ class Vidyaamrutham extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vidyaamrutham',
+      title: 'Vidhyamritham',
       theme: ThemeData(
         primaryColor: const Color(0x001a1c29), // Adjusted primary color
         scaffoldBackgroundColor:
@@ -89,7 +90,7 @@ class _AppLoaderState extends State<AppLoader> {
         ),
       );
     } else {
-      return _isLoggedIn ? choosePage(role) : const RoleChoose();
+      return _isLoggedIn ? choosePage(role) : const AboutPage();
     }
   }
 

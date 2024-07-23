@@ -25,262 +25,265 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Future<Map<String,dynamic>> getCount() async {
+  Future<Map<String, dynamic>> getCount() async {
     print("Fetching data");
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.get(Uri.parse('https://$url/dlsa/count'));
     print(response.body);
-    number_of_students = json.decode(response.body)['result'][0]['COUNT(username)'].toString();
-    number_of_mentors = json.decode(response.body)['result'][1]['COUNT(username)'].toString();
+    number_of_students =
+        json.decode(response.body)['result'][0]['COUNT(username)'].toString();
+    number_of_mentors =
+        json.decode(response.body)['result'][1]['COUNT(username)'].toString();
     return json.decode(response.body);
   }
 
   Widget buildElevatedListTile(double width1, double height1) {
-    return FutureBuilder<Map<String,dynamic>>(
-      future: getCount(), 
+    return FutureBuilder<Map<String, dynamic>>(
+      future: getCount(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(40.0),
-          ),
-          color: Colors.grey[200],
-        ),
-        child: Column(
-          children: [
-            const SizedBox(height: 15.0), // Add some space at the top
-            SizedBox(
-              height: height1 * 0.23,
-              width: width1 * 0.90,
-              child: Card(
-                color: const Color(0xFFF3EDF7),
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(40.0),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: const Text(
-                          'Number of \nStudents',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
-                            //fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Container(
-                          height: 67.5,
-                          width: 65.17,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: const Color(0xFF9AA2E6),
-                              width:
-                                  7, // Adjust the width of the circular border as needed
+                color: Colors.grey[200],
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 15.0), // Add some space at the top
+                  SizedBox(
+                    height: height1 * 0.23,
+                    width: width1 * 0.90,
+                    child: Card(
+                      color: const Color(0xFFF3EDF7),
+                      elevation: 5.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              title: const Text(
+                                'Number of \nStudents',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                  //fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Container(
+                                height: 67.5,
+                                width: 65.17,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: const Color(0xFF9AA2E6),
+                                    width:
+                                        7, // Adjust the width of the circular border as needed
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(
+                                        8.0), // Adjust padding as needed
+                                    child: Text(
+                                      number_of_students,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            15, // Customize the text color inside the circular border
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              //leading:Icon(Icons.star), // Replace with your desired leading icon
+                              //trailing: Icon(Icons.arrow_forward), // Replace with your desired trailing icon
+                              onTap: () {
+                                // Handle onTap action
+                              },
                             ),
                           ),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(
-                                  8.0), // Adjust padding as needed
-                              child: Text(
-                                number_of_students,
+
+                          //Vertical Divider
+                          //VerticalDivider(
+                          //  width: 1,
+                          //  color: Colors.black,
+                          //),
+
+                          Expanded(
+                            child: ListTile(
+                              title: const Text(
+                                'Number of \nMentors',
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: "Poppins",
                                   color: Colors.black,
-                                  fontSize:
-                                      15, // Customize the text color inside the circular border
+                                  //fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                              subtitle: Container(
+                                height: 67.5,
+                                width: 65.17,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: const Color(0xFF9AA2E6),
+                                    width:
+                                        7, // Adjust the width of the circular border as needed
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(
+                                        8.0), // Adjust padding as needed
+                                    child: Text(
+                                      number_of_mentors,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            15, // Customize the text color inside the circular border
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              onTap: () {
+                                // Handle onTap action
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  //Student and Mentor List Card
+                  const SizedBox(height: 15.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Card(
+                        color: const Color(0xFFF3EDF7),
+                        elevation: 5.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Container(
+                          width: width1 * 0.4,
+                          height: height1 *
+                              0.18, // Adjust the width of each card as needed
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const StudentList()));
+                              },
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Students List',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      //fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Icon(Icons.list_alt,
+                                      size: 50, color: Colors.black),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Icon(Icons.arrow_forward,
+                                        color: Colors.black),
+                                  )
+                                ],
                               ),
                             ),
                           ),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 8.0),
-                        //leading:Icon(Icons.star), // Replace with your desired leading icon
-                        //trailing: Icon(Icons.arrow_forward), // Replace with your desired trailing icon
-                        onTap: () {
-                          // Handle onTap action
-                        },
                       ),
-                    ),
-
-                    //Vertical Divider
-                    //VerticalDivider(
-                    //  width: 1,
-                    //  color: Colors.black,
-                    //),
-
-                    Expanded(
-                      child: ListTile(
-                        title: const Text(
-                          'Number of \nMentors',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: "Poppins",
-                            color: Colors.black,
-                            //fontWeight: FontWeight.bold,
-                          ),
+                      Card(
+                        color: const Color(0xFFF3EDF7),
+                        elevation: 5.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        subtitle: Container(
-                          height: 67.5,
-                          width: 65.17,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: const Color(0xFF9AA2E6),
-                              width:
-                                  7, // Adjust the width of the circular border as needed
-                            ),
-                          ),
+                        child: Container(
+                          width: width1 * 0.4,
+                          height: height1 *
+                              0.18, // Adjust the width of each card as needed
+                          padding: const EdgeInsets.all(15.0),
                           child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(
-                                  8.0), // Adjust padding as needed
-                              child: Text(
-                                number_of_mentors,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize:
-                                      15, // Customize the text color inside the circular border
-                                ),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MentorList()));
+                              },
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Mentors List',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      //fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Icon(Icons.list_alt,
+                                      size: 50, color: Colors.black),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 8.0),
-                        onTap: () {
-                          // Handle onTap action
-                        },
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+
+                  //Functions tile
+                  const SizedBox(height: 15.0),
+                  const Row(),
+                ],
               ),
             ),
-
-            //Student and Mentor List Card
-            const SizedBox(height: 15.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Card(
-                  color: const Color(0xFFF3EDF7),
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    width: width1 * 0.4,
-                    height: height1 *
-                        0.18, // Adjust the width of each card as needed
-                    padding: const EdgeInsets.all(16.0),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const StudentList()
-                                  )
-                              );
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Students List',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8.0),
-                            Icon(Icons.list_alt, size: 50, color: Colors.black),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Icon(Icons.arrow_forward,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  color: const Color(0xFFF3EDF7),
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    width: width1 * 0.4,
-                    height: height1 *
-                        0.18, // Adjust the width of each card as needed
-                    padding: const EdgeInsets.all(15.0),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MentorList()
-                                  )
-                              );
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Mentors List',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                //fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8.0),
-                            Icon(Icons.list_alt, size: 50, color: Colors.black),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            //Functions tile
-            const SizedBox(height: 15.0),
-            const Row(),
-          ],
-        ),
-      ),
-
-      );
-  }
-  return const Center(child: CircularProgressIndicator(),);
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

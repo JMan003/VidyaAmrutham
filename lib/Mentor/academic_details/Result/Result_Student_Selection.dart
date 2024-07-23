@@ -3,7 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vidyaamrutham/Mentor/academic_details/Attendance/Attendance.dart';
 import 'package:vidyaamrutham/Mentor/academic_details/Result/ViewResult.dart';
 
 class ResultSelection extends StatefulWidget {
@@ -17,7 +16,7 @@ class _ResultSelectionState extends State<ResultSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    var link = dotenv.env['SERVER'];
+    var link = "387df06823a93fd406892e1c452f4b74.serveo.net";
     String url = 'http://$link/mentor/student/$username';
     var data = await http.get(
       Uri.parse(url),
@@ -33,56 +32,75 @@ class _ResultSelectionState extends State<ResultSelection> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
-    return FutureBuilder(
-        future: getStudents(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              var data = snapshot.data;
-              var count = data!['count'];
-              var students = data['data'];
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text('Select Student'),
-                ),
-                body: Align(
-                  alignment: Alignment.center,
-                  child: ListView.builder(
-                    itemCount: students.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Container(
-                          //height: screenHeight * 0.1,
-                          width: screenWidth * 0.6,
-                          color: const Color.fromARGB(255, 54, 120, 244),
-                          padding: const EdgeInsets.all(10),
-                          alignment: Alignment.center,
-                          child: Text(students[index]['name'],
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20)),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultView(
-                                  id: students[index]['username'].toString()),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select Student'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.cyan, Colors.deepPurple],
+          ),
+        ),
+        child: FutureBuilder(
+          future: getStudents(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                var data = snapshot.data;
+                var count = data!['count'];
+                var students = data['data'];
+                return ListView.builder(
+                  padding: const EdgeInsets.all(20),
+                  itemCount: students.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 5,
+                        child: ListTile(
+                          title: Text(
+                            students[index]['name'],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
-                          );
-                        },
-                      );
-                    },
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResultView(
+                                  id: students[index]['username'].toString(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'No data found',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
-                ),
-              );
+                );
+              }
             } else {
-              return const Text('No data found');
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+          },
+        ),
+      ),
+    );
   }
 }

@@ -21,7 +21,7 @@ class UpdateStudentState extends State<UpdateStudent> {
   late Map<String, dynamic> data;
 
   Future<Map<String, dynamic>> getStudents() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.get(Uri.parse(
         'https://$url/teacher/students/${widget.grade}/${widget.section}'));
     return json.decode(response.body);
@@ -31,53 +31,92 @@ class UpdateStudentState extends State<UpdateStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Student'),
+        title: Text(
+          'Update Student',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue, // Customize app bar color
       ),
-      body: FutureBuilder(
-        future: getStudents(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              data = snapshot.data as Map<String, dynamic>;
-              print(data);
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.blue.shade50,
+              Colors.blue.shade100,
+            ],
+          ),
+        ),
+        child: FutureBuilder(
+          future: getStudents(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                data = snapshot.data as Map<String, dynamic>;
+                print(data);
 
-              return Scrollable(viewportBuilder: (context, offset) {
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: data['result'].length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(data['result'][index]['name']),
-                            subtitle: Text(
-                                'Roll Number: ${data['result'][index]['roll_no']}'),
+                return Scrollable(viewportBuilder: (context, offset) {
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: data['result'].length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 3,
+                              margin: EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 16,
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  data['result'][index]['name'],
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  'Roll Number: ${data['result'][index]['roll_no']}',
+                                ),
                                 trailing: IconButton(
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => UpdateStudentRegistration(
-                                          roll_no: data['result'][index]['username'],
+                                        builder: (context) =>
+                                            UpdateStudentRegistration(
+                                          roll_no: data['result'][index]
+                                              ['username'],
                                         ),
                                       ),
                                     );
                                   },
                                 ),
-                          );
-                        },
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              });
+                    ],
+                  );
+                });
+              }
             }
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: submitAttendance,
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.check),
       ),
     );
   }
@@ -88,7 +127,7 @@ class UpdateStudentState extends State<UpdateStudent> {
         _attendance[data['result'][i]['id'].toString()] = false;
       }
     }
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.post(
       Uri.parse('http://$url/teacher/attendance'),
       body: json.encode({
@@ -105,49 +144,59 @@ class UpdateStudentState extends State<UpdateStudent> {
     print(result);
 
     if (result['result'] == "Success") {
-      // ignore: use_build_context_synchronously
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Success'),
-              content: const Text('Attendance Submitted'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Teacher1()),
-                        (route) => false);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Success',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text('Attendance Submitted'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Teacher1()),
+                    (route) => false,
+                  );
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     } else {
-      // ignore: use_build_context_synchronously
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Failed'),
-              content: const Text('Attendance Submission Failed'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Teacher1()),
-                        (route) => false);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Failed',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text('Attendance Submission Failed'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Teacher1()),
+                    (route) => false,
+                  );
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 }

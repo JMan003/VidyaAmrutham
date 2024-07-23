@@ -16,7 +16,7 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
   Future<Map<String, dynamic>> getStudents() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
-    var link = dotenv.env['SERVER'];
+    var link = "387df06823a93fd406892e1c452f4b74.serveo.net";
     String url = 'http://$link/mentor/student/$username';
     var data = await http.get(
       Uri.parse(url),
@@ -44,41 +44,60 @@ class _AttendanceSelectionState extends State<AttendanceSelection> {
                 appBar: AppBar(
                   title: const Text('Select Student'),
                 ),
-                body: Align(
-                  alignment: Alignment.center,
-                  child: ListView.builder(
-                    itemCount: students.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Container(
-                          //height: screenHeight * 0.1,
-                          width: screenWidth * 0.6,
-                          color: const Color.fromARGB(255, 54, 120, 244),
-                          padding: const EdgeInsets.all(10),
-                          alignment: Alignment.center,
-                          child: Text(students[index]['name'],
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20)),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MentorAttendance(
-                                  studentId: students[index]['username'].toString()),
+                body: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.blue, Colors.cyan, Colors.deepPurple],
+                    ),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                      itemCount: students.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          color: Colors.white,
+                          elevation: 5,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: ListTile(
+                            title: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                students[index]['name'],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                      );
-                    },
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MentorAttendance(
+                                      studentId: students[index]['username']
+                                          .toString()),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               );
             } else {
-              return const Text('No data found');
+              return Center(
+                child: Text('No data found'),
+              );
             }
           } else {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           }

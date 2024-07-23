@@ -15,7 +15,7 @@ class MentorProfile extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
 
-    var url = dotenv.env['SERVER'];
+    var url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var response = await http.get(
       Uri.parse('http://$url/mentor/profile/$username'),
       headers: <String, String>{
@@ -121,8 +121,7 @@ class MentorProfile extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 20, top: 40),
+                                    padding: EdgeInsets.only(left: 20, top: 40),
                                     child: Text(
                                       "Name :",
                                       style: TextStyle(

@@ -10,11 +10,7 @@ double? containerHeight,
     innerContainerHeight,
     controllerContainerWidth,
     controllerContainerHeight;
-String name = "",
-    phoneNumber = "",
-    emailId = "",
-    address = "",
-    subject = "";
+String name = "", phoneNumber = "", emailId = "", address = "", subject = "";
 
 class Teacher4 extends StatelessWidget {
   const Teacher4({Key? key}) : super(key: key);
@@ -23,7 +19,7 @@ class Teacher4 extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
     print(username);
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
     var data =
         await http.get(Uri.parse('http://$url/teacher/profile/$username'));
     var jsonData = json.decode(data.body);

@@ -1,19 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class PublishResult extends StatefulWidget {
   final exam_id, examClass, examDivision, totalMarks;
 
-  const PublishResult(
-      {Key? key,
-      required this.exam_id,
-      required this.examClass,
-      required this.examDivision,
-      required this.totalMarks})
-      : super(key: key);
+  const PublishResult({
+    Key? key,
+    required this.exam_id,
+    required this.examClass,
+    required this.examDivision,
+    required this.totalMarks,
+  }) : super(key: key);
 
   @override
   _PublishResultState createState() => _PublishResultState();
@@ -24,7 +23,7 @@ class _PublishResultState extends State<PublishResult> {
   final Map<String, String> _marks = {};
 
   Future getStudents() async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
 
     var link = Uri.parse(
         'http://${url}/teacher/students/${widget.examClass}/${widget.examDivision}');
@@ -38,99 +37,140 @@ class _PublishResultState extends State<PublishResult> {
       appBar: AppBar(
         title: Text('Publish Result'),
       ),
-      body: FutureBuilder(
-        future: getStudents(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            data = snapshot.data as Map<String, dynamic>;
-            print(snapshot.data);
-            return Scrollable(viewportBuilder: (context, offset) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: data['result'].length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(data['result'][index]['name']),
-                          subtitle: Text(
-                              'Roll Number: ${data['result'][index]['roll_no']}'),
-                          trailing: Container(
-                            width: 100, // Adjust this value as needed
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Mark/${widget.totalMarks}',
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              onChanged: (value) {
-                                if (int.parse(value) > widget.totalMarks) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Marks cannot be greater than total marks'),
-                                    ),
-                                  );
-                                  value = "";
-                                  return;
-                                }
-
-                                _marks[data['result'][index]['username'].toString()] = value;
-                              },
-                           ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      String? url = dotenv.env['SERVER'];
-
-                      print(widget.exam_id);
-
-                      print(_marks);
-
-                      var link = Uri.parse(
-                          'https://${url}/teacher/exams/${widget.exam_id}/result');
-                      var response = await http.post(
-                        link,
-                        body: jsonEncode({"mark": _marks}),
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                      );
-
-                      if (response.statusCode == 200) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Result published successfully'),
-                          ),
-                        );
-                        setState(() {});
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Failed to publish result'),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Submit'),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  )
-                ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue.shade400, Colors.cyan.shade400],
+          ),
+        ),
+        child: FutureBuilder(
+          future: getStudents(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
               );
-            });
-          }
-        },
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              data = snapshot.data as Map<String, dynamic>;
+              return Scrollbar(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'Enter marks for each student:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      SizedBox(height: 16),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: data['result'].length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            elevation: 3,
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                data['result'][index]['name'],
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              ),
+                              subtitle: Text(
+                                'Roll Number: ${data['result'][index]['roll_no']}',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              trailing: SizedBox(
+                                width: 120,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Marks/${widget.totalMarks}',
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(fontSize: 14),
+                                  onChanged: (value) {
+                                    if (value.isNotEmpty &&
+                                        int.parse(value) > widget.totalMarks) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Marks cannot be greater than total marks',
+                                          ),
+                                        ),
+                                      );
+                                      value = '';
+                                      return;
+                                    }
+                                    _marks[data['result'][index]['username']
+                                            .toString()] =
+                                        value.isNotEmpty ? value : '0';
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () async {
+                          String? url =
+                              "387df06823a93fd406892e1c452f4b74.serveo.net";
+
+                          var link = Uri.parse(
+                              'https://${url}/teacher/exams/${widget.exam_id}/result');
+                          var response = await http.post(
+                            link,
+                            body: jsonEncode({"mark": _marks}),
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                          );
+
+                          if (response.statusCode == 200) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Result published successfully'),
+                              ),
+                            );
+                            setState(() {});
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Failed to publish result'),
+                              ),
+                            );
+                          }
+                        },
+                        child: const Text('Submit'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

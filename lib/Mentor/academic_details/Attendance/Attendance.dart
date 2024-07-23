@@ -27,7 +27,7 @@ class _MentorAttendanceState extends State<MentorAttendance> {
 
   Future<Map<String, dynamic>> getAttendance() async {
     print("Student ID: $studentId");
-    var link = dotenv.env['SERVER'];
+    var link = "387df06823a93fd406892e1c452f4b74.serveo.net";
     String url = 'https://$link/mentor/attendance/$studentId';
     var response = await http.get(
       Uri.parse(url),
@@ -89,13 +89,15 @@ class _MentorAttendanceState extends State<MentorAttendance> {
                                           data['result'][index]['date']
                                               .toString()
                                               .substring(0, 10),
-                                          style: const TextStyle(color: Colors.black),
+                                          style: const TextStyle(
+                                              color: Colors.black),
                                         ),
                                       ),
                                       DataCell(
                                         Text(
                                           data['result'][index]['status'],
-                                          style: const TextStyle(color: Colors.black),
+                                          style: const TextStyle(
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ],

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 double? containerHeight,
     containerWidth,
@@ -86,12 +87,20 @@ class InstructionForParents extends StatelessWidget {
   }
 
   void grievance_of_Student(context) async {
-    String? url = dotenv.env['SERVER'];
+    String? url = "387df06823a93fd406892e1c452f4b74.serveo.net";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    var data = {'note': myController.text};
+    var mentor_id = prefs.getString('username');
+
+    var data = {
+      'note': myController.text,
+      'mentor_id': mentor_id,
+      'student_id': id
+    };
+    print(data);
 
     var response = await http
-        .post(Uri.parse('https://${url}/mentor/parent/$id'), body: data);
+        .post(Uri.parse('https://${url}/mentor/instruction/$id'), body: data);
 
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -102,7 +111,7 @@ class InstructionForParents extends StatelessWidget {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to add to grievance'),
+          content: Text('Failed to add to instruction for parent'),
         ),
       );
     }
